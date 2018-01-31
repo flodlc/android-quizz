@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="user1">Saisissez votre nom d\'utilisateur :</string>
+    <string name="valid">Valider</string>
 </resources>

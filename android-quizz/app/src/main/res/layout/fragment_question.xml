@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/questionText"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:gravity="bottom"
+        android:text="De quel animal est-ce le cri ?"
+        android:textAlignment="center"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:src="@drawable/song" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:progress="60" />
+    </LinearLayout>
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:progress="60" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/response1"
+                android:layout_height="60dp"
+                android:layout_margin="1dp"
+                android:layout_weight="10"
+                android:text="Cheval"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/response2"
+                android:layout_height="60dp"
+                android:layout_margin="1dp"
+                android:layout_weight="10"
+                android:text="Vache"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/response3"
+                android:layout_height="60dp"
+                android:layout_margin="1dp"
+                android:layout_weight="10"
+                android:text="Chien"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/response4"
+                android:layout_height="60dp"
+                android:layout_margin="1dp"
+                android:layout_weight="10"
+                android:text="Chat"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

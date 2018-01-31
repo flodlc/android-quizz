@@ -2,4 +2,6 @@
     <string name="app_name">My Application</string>
     <string name="user1">Saisissez votre nom d\'utilisateur :</string>
     <string name="valid">Valider</string>
+    <string name="online">En ligne</string>
+    <string name="offline">Hors ligne</string>
 </resources>

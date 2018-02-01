@@ -3,6 +3,7 @@
 namespace QuizzBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Round
@@ -14,6 +15,7 @@ class Round
 {
     /**
      * @var int
+     * @Groups({"game"})
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -23,6 +25,7 @@ class Round
 
     /**
      * @var int
+     * @Groups({"game"})
      *
      * @ORM\Column(name="numRound", type="integer")
      */
@@ -37,6 +40,7 @@ class Round
 
     /**
      *
+     * @Groups({"game"})
      *
      * @ORM\ManyToOne(targetEntity="Question", cascade={"persist"})
      */
@@ -45,12 +49,14 @@ class Round
     /**
      *
      * @ORM\ManyToOne(targetEntity="Response", cascade={"persist"})
+     * @ORM\Column(nullable=true)
      */
     private $responseUA;
 
     /**
      *
      * @ORM\ManyToOne(targetEntity="Response", cascade={"persist"})
+     * @ORM\Column(nullable=true)
      */
     private $responseUB;
 

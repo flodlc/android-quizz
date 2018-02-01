@@ -3,6 +3,7 @@
 namespace QuizzBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Question
@@ -14,6 +15,7 @@ class Question
 {
     /**
      * @var int
+     * @Groups({"game"})
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -23,6 +25,7 @@ class Question
 
     /**
      * @var string
+     * @Groups({"game"})
      *
      * @ORM\Column(name="question", type="string", length=255)
      */
@@ -30,6 +33,7 @@ class Question
 
     /**
      * @var string
+     * @Groups({"game"})
      *
      * @ORM\Column(name="responseA", type="string", length=255)
      */
@@ -37,6 +41,7 @@ class Question
 
     /**
      * @var string
+     * @Groups({"game"})
      *
      * @ORM\Column(name="responseB", type="string", length=255)
      */
@@ -44,6 +49,7 @@ class Question
 
     /**
      * @var string
+     * @Groups({"game"})
      *
      * @ORM\Column(name="responseC", type="string", length=255)
      */
@@ -51,6 +57,7 @@ class Question
 
     /**
      * @var string
+     * @Groups({"game"})
      *
      * @ORM\Column(name="responseD", type="string", length=255)
      */
@@ -58,6 +65,7 @@ class Question
 
     /**
      * @var string
+     * @Groups({"game"})
      *
      * @ORM\Column(name="answer", type="string", length=255)
      */

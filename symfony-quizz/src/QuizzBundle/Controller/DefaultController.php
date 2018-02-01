@@ -135,7 +135,7 @@ class DefaultController extends Controller
                 $round->setQuestion($questions[$keyQuestions[$rd]]);
                 $entityManager->persist($round);
                 $entityManager->flush();
-                unset($questions[$rd]);
+                unset($questions[$keyQuestions[$rd]]);
 
                 $rounds[] = $round;
             }

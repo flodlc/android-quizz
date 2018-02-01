@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6cdc01cf-da8a-4725-be8b-b78fb84e7f6e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/DefaultController.php" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Round.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Round.php" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/User.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/User.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,8 +20,8 @@
       <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="161" column="26" lean-forward="false" selection-start-line="161" selection-start-column="16" selection-end-line="161" selection-end-column="26" />
+            <state relative-caret-position="569">
+              <caret line="125" column="0" lean-forward="true" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
               <folding>
                 <element signature="e#42#70#0#PHP" expanded="true" />
               </folding>
@@ -37,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="2282">
+              <first_editor relative-caret-position="4224">
                 <caret line="128" column="34" lean-forward="false" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
                 <folding>
                   <marker date="1517507721572" expanded="true" signature="397:457" ph="[...]" />
@@ -77,7 +73,7 @@
       <file leaf-file-name="Round.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Round.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="891">
+            <state relative-caret-position="2145">
               <caret line="66" column="7" lean-forward="false" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
               <folding>
                 <element signature="e#38#70#0#PHP" expanded="true" />
@@ -89,7 +85,7 @@
       <file leaf-file-name="Question.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Question.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="132">
               <caret line="5" column="51" lean-forward="false" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
               <folding>
                 <element signature="e#38#70#0#PHP" expanded="true" />
@@ -101,7 +97,7 @@
       <file leaf-file-name="Response.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Response.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-363">
+            <state relative-caret-position="924">
               <caret line="28" column="21" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="21" />
               <folding />
             </state>
@@ -121,7 +117,7 @@
       <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="891">
+            <state relative-caret-position="858">
               <caret line="27" column="41" lean-forward="false" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
               <folding>
                 <element signature="e#38#70#0#PHP" expanded="true" />
@@ -133,7 +129,7 @@
       <file leaf-file-name="Game.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1155">
+            <state relative-caret-position="1815">
               <caret line="57" column="21" lean-forward="false" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
               <folding />
             </state>
@@ -164,8 +160,8 @@
         <option value="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Round.php" />
         <option value="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php" />
         <option value="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/User.php" />
-        <option value="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/DefaultController.php" />
       </list>
     </option>
   </component>
@@ -237,6 +233,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -328,7 +325,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -361,18 +357,18 @@
       <option name="presentableId" value="Default" />
       <updated>1517408928835</updated>
       <workItem from="1517408930078" duration="5407000" />
-      <workItem from="1517495604481" duration="11473000" />
+      <workItem from="1517495604481" duration="11570000" />
+      <workItem from="1517513512361" duration="439000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16880000" />
+    <option name="totallyTimeSpent" value="17416000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="3226" height="1746" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2535347" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2570694" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -380,7 +376,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5023601" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5023601" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -403,6 +399,109 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#42#70#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="4224">
+            <caret line="128" column="34" lean-forward="false" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
+            <folding>
+              <marker date="1517507721572" expanded="true" signature="397:457" ph="[...]" />
+              <marker date="1517507721572" expanded="true" signature="403:455" ph="{&quot;id&quot;: 1...}" />
+              <marker date="1517507721572" expanded="true" signature="534:1011" ph="[...]" />
+              <marker date="1517507721572" expanded="true" signature="540:716" ph="{&quot;id&quot;: 4...}" />
+              <marker date="1517507721572" expanded="true" signature="623:666" ph="{&quot;username&quot;: &quot;lucas&quot;...}" />
+              <marker date="1517507721572" expanded="true" signature="722:865" ph="{&quot;id&quot;: 6...}" />
+              <marker date="1517507721572" expanded="true" signature="871:1009" ph="{&quot;id&quot;: 9...}" />
+              <marker date="1517507721572" expanded="true" signature="1109:1219" ph="{&quot;id&quot;: 9...}" />
+              <marker date="1517507721572" expanded="true" signature="1311:2636" ph="{...}" />
+              <marker date="1517507721572" expanded="true" signature="1325:1466" ph="{&quot;id&quot;: 9...}" />
+              <marker date="1517507721572" expanded="true" signature="1482:2634" ph="[...]" />
+              <marker date="1517507721572" expanded="true" signature="1492:1867" ph="{&quot;id&quot;: 17...}" />
+              <marker date="1517507721572" expanded="true" signature="1567:1857" ph="{&quot;id&quot;: 3...}" />
+              <marker date="1517507721572" expanded="true" signature="1877:2245" ph="{&quot;id&quot;: 18...}" />
+              <marker date="1517507721572" expanded="true" signature="1952:2235" ph="{&quot;id&quot;: 5...}" />
+              <marker date="1517507721572" expanded="true" signature="2255:2628" ph="{&quot;id&quot;: 19...}" />
+              <marker date="1517507721572" expanded="true" signature="2330:2618" ph="{&quot;id&quot;: 6...}" />
+              <marker date="1517507721572" expanded="true" signature="2812:4175" ph="{...}" />
+              <marker date="1517507721572" expanded="true" signature="2826:3018" ph="{&quot;id&quot;: 4...}" />
+              <marker date="1517507721572" expanded="true" signature="2904:2968" ph="{&quot;id&quot;: 1...}" />
+              <marker date="1517507721572" expanded="true" signature="3034:4173" ph="[...]" />
+              <marker date="1517507721572" expanded="true" signature="3044:3425" ph="{&quot;id&quot;: 6...}" />
+              <marker date="1517507721572" expanded="true" signature="3118:3415" ph="{&quot;id&quot;: 1...}" />
+              <marker date="1517507721572" expanded="true" signature="3435:3802" ph="{&quot;id&quot;: 7...}" />
+              <marker date="1517507721572" expanded="true" signature="3509:3792" ph="{&quot;id&quot;: 5...}" />
+              <marker date="1517507721572" expanded="true" signature="3812:4167" ph="{&quot;id&quot;: 8...}" />
+              <marker date="1517507721572" expanded="true" signature="3886:4157" ph="{&quot;id&quot;: 2...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Round.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2145">
+          <caret line="66" column="7" lean-forward="false" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
+          <folding>
+            <element signature="e#38#70#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Question.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="5" column="51" lean-forward="false" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
+          <folding>
+            <element signature="e#38#70#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Response.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="924">
+          <caret line="28" column="21" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="3" column="15" lean-forward="false" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="27" column="41" lean-forward="false" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+          <folding>
+            <element signature="e#38#70#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1815">
+          <caret line="57" column="21" lean-forward="false" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -485,7 +584,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -493,9 +591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="18" column="31" lean-forward="false" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-          <folding>
-            <element signature="e#7#66#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -503,7 +598,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -532,7 +626,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Question.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="132">
           <caret line="5" column="51" lean-forward="false" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
           <folding>
             <element signature="e#38#70#0#PHP" expanded="true" />
@@ -542,7 +636,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Response.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-363">
+        <state relative-caret-position="924">
           <caret line="28" column="21" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="21" />
           <folding />
         </state>
@@ -550,7 +644,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Round.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="891">
+        <state relative-caret-position="2145">
           <caret line="66" column="7" lean-forward="false" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
           <folding>
             <element signature="e#38#70#0#PHP" expanded="true" />
@@ -560,7 +654,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="891">
+        <state relative-caret-position="858">
           <caret line="27" column="41" lean-forward="false" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
           <folding>
             <element signature="e#38#70#0#PHP" expanded="true" />
@@ -570,7 +664,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1155">
+        <state relative-caret-position="1815">
           <caret line="57" column="21" lean-forward="false" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
           <folding />
         </state>
@@ -579,7 +673,7 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="2282">
+          <first_editor relative-caret-position="4224">
             <caret line="128" column="34" lean-forward="false" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
             <folding>
               <marker date="1517507721572" expanded="true" signature="397:457" ph="[...]" />
@@ -617,8 +711,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="161" column="26" lean-forward="false" selection-start-line="161" selection-start-column="16" selection-end-line="161" selection-end-column="26" />
+        <state relative-caret-position="569">
+          <caret line="125" column="0" lean-forward="true" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
           <folding>
             <element signature="e#42#70#0#PHP" expanded="true" />
           </folding>

@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle;
+namespace QuizzBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AppBundle extends Bundle
+class QuizzBundle extends Bundle
 {
 }

@@ -1,0 +1,4 @@
+default:
+    resource: '@QuizzBundle/Controller/DefaultController.php'
+    type:     annotation
+    prefix:   /

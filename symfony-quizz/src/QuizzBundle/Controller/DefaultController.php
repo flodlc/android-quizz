@@ -77,10 +77,18 @@ class DefaultController extends Controller
 
         $user = $userRepo->find($userId);
         $gamesA = $gameRepo->findBy(["userA" => $user]);
+        foreach ($gamesA as $game) {
+            if ($game->getState() > 0)
+                $game->setAdv($game->getUserB()->getUsername());
+        }
         $gamesB = $gameRepo->findBy(["userB" => $user]);
+        foreach ($gamesB as $game) {
+            if ($game->getState() > 0)
+                $game->setAdv($game->getUserA()->getUsername());
+        }
         $games_tmp = array_merge($gamesA, $gamesB);
 
-        return new Response($this->serializer->serialize($games_tmp, "json", ["groups" => ["game"]]));
+        return new Response($this->serializer->serialize($games_tmp, "json", ["groups" => ["mygames"]]));
     }
 
     /**
@@ -124,7 +132,7 @@ class DefaultController extends Controller
                 $round->setState(0);
                 $round->setGame($game);
                 $round->setNumRound($i);
-                $round->setQuestion($questions[$rd]);
+                $round->setQuestion($questions[$keyQuestions[$rd]]);
                 $entityManager->persist($round);
                 $entityManager->flush();
                 unset($questions[$rd]);
@@ -151,6 +159,46 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/statusgame", name="game_ready")
+     * @Method({"GET"})
+     *
+     * @return Response
+     */
+    public function getStatusAction(Request $request)
+    {
+        $gameId = $request->get("game");
+        $userId = $request->get("user");
+        if (!$gameId) {
+            throw new HttpException("Pas de partie", 404);
+        }
+        if (!$userId) {
+            throw new HttpException("Pas d'utilisateur", 404);
+        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $userRepo = $entityManager->getRepository(User::class);
+        $gameRepo = $entityManager->getRepository(Game::class);
+        $roundRepo = $entityManager->getRepository(Round::class);
+
+        $game = $gameRepo->find($gameId);
+        $me = $userRepo->find($userId);
+        if (!$game) {
+            throw new HttpException("Pas de partie", 404);
+        }
+        if (!$me) {
+            throw new HttpException("Pas d'utilisateur", 404);
+        }
+        if ($game->getState() == 0) {
+            throw new HttpException("Pas d'adversaire", 404);
+        }
+
+        $rounds = $roundRepo->findBy(["game" => $game]);
+        $gameSeria = $this->serializer->normalize($game, "json", ["groups" => ["game"]]);
+        $roundsSeria = $this->serializer->normalize($rounds, "json", ["groups" => ["game"]]);
+        return new Response(json_encode(["game" => $gameSeria, "rounds" => $roundsSeria]));
+
+    }
+
+    /**
      * @Route("/game", name="answer")
      * @Method({"POST"})
      *
@@ -168,6 +216,9 @@ class DefaultController extends Controller
         $gameId = $data["game"];
         $user = $userRepo->find($userId);
         $game = $gameRepo->find($gameId);
+        if ($game->getState() == 2) {
+            throw new HttpException("Partie terminée", 404);
+        }
         if (!$user)
             throw new HttpException("Pas d'utilisateur", 404);
 
@@ -212,11 +263,11 @@ class DefaultController extends Controller
             $game->setPointsA($myPoints);
             if ($game->getPointsB() != null) {
                 if ($game->getPointsB() > $game->getPointsA()) {
-                    $game->setWinner($game->getUserB()->getUsername());
-                }elseif ($game->getPointsB() < $game->getPointsA()) {
-                    $game->setWinner($game->getUserA()->getUsername());
+                    $game->setWinner($game->getUserB());
+                } elseif ($game->getPointsB() < $game->getPointsA()) {
+                    $game->setWinner($game->getUserA());
                 } else {
-                    $game->setWinner("Nul");
+                    $game->setWinner(null);
                 }
                 $game->setState(2);
             }
@@ -224,11 +275,11 @@ class DefaultController extends Controller
             $game->setPointsB($myPoints);
             if ($game->getPointsA() != null) {
                 if ($game->getPointsB() > $game->getPointsA()) {
-                    $game->setWinner($game->getUserB()->getUsername());
-                }elseif ($game->getPointsB() < $game->getPointsA()) {
-                    $game->setWinner($game->getUserA()->getUsername());
+                    $game->setWinner($game->getUserB());
+                } elseif ($game->getPointsB() < $game->getPointsA()) {
+                    $game->setWinner($game->getUserA());
                 } else {
-                    $game->setWinner("Nul");
+                    $game->setWinner(null);
                 }
                 $game->setState(2);
             }

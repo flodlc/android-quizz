@@ -47,16 +47,17 @@ class Round
     private $question;
 
     /**
+     * @var Response
      *
      * @ORM\ManyToOne(targetEntity="Response", cascade={"persist"})
-     * @ORM\Column(nullable=true)
      */
     private $responseUA;
 
     /**
+     * @var Response
      *
      * @ORM\ManyToOne(targetEntity="Response", cascade={"persist"})
-     * @ORM\Column(nullable=true)
+     *
      */
     private $responseUB;
 
@@ -142,7 +143,7 @@ class Round
     }
 
     /**
-     * @return mixed
+     * @return Response
      */
     public function getResponseUA()
     {
@@ -150,15 +151,15 @@ class Round
     }
 
     /**
-     * @param mixed $responseUA
+     * @param Response $responseUA
      */
-    public function setResponseUA($responseUA)
+    public function setResponseUA(Response $responseUA)
     {
         $this->responseUA = $responseUA;
     }
 
     /**
-     * @return mixed
+     * @return Response
      */
     public function getResponseUB()
     {
@@ -166,9 +167,9 @@ class Round
     }
 
     /**
-     * @param mixed $responseUB
+     * @param Response $responseUB
      */
-    public function setResponseUB($responseUB)
+    public function setResponseUB(Response $responseUB)
     {
         $this->responseUB = $responseUB;
     }

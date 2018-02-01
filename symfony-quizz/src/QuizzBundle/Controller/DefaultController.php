@@ -94,7 +94,7 @@ class DefaultController extends Controller
         $userId = $request->get("user");
         if (!$userId) {
             throw new HttpException("Pas d'utilisateur", 404);
-}
+        }
         $entityManager = $this->getDoctrine()->getManager();
         $userRepo = $entityManager->getRepository(User::class);
         $gameRepo = $entityManager->getRepository(Game::class);
@@ -194,15 +194,47 @@ class DefaultController extends Controller
             $entityManager->flush();
 
             $round = $roundRepo->find($roundId);
+            $question = $round->getQuestion();
+            if ($question->getAnswer() == $answer) {
+                $myPoints++;
+            }
+
             if ($whichUser == "A") {
                 $round->setResponseUA($response);
-            }
-            else {
+            } else {
                 $round->setResponseUB($response);
             }
             $entityManager->persist($round);
             $entityManager->flush();
         }
+
+        if ($whichUser == "A") {
+            $game->setPointsA($myPoints);
+            if ($game->getPointsB() != null) {
+                if ($game->getPointsB() > $game->getPointsA()) {
+                    $game->setWinner($game->getUserB()->getUsername());
+                }elseif ($game->getPointsB() < $game->getPointsA()) {
+                    $game->setWinner($game->getUserA()->getUsername());
+                } else {
+                    $game->setWinner("Nul");
+                }
+                $game->setState(2);
+            }
+        } else {
+            $game->setPointsB($myPoints);
+            if ($game->getPointsA() != null) {
+                if ($game->getPointsB() > $game->getPointsA()) {
+                    $game->setWinner($game->getUserB()->getUsername());
+                }elseif ($game->getPointsB() < $game->getPointsA()) {
+                    $game->setWinner($game->getUserA()->getUsername());
+                } else {
+                    $game->setWinner("Nul");
+                }
+                $game->setState(2);
+            }
+        }
+        $entityManager->merge($game);
+        $entityManager->flush();
 
         return new Response("", 200);
     }

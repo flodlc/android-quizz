@@ -55,6 +55,7 @@ class Game
     /**
      * @var string
      * @Groups({"game"})
+     * @ORM\Column(name="winner", type="string", length=255)
      *
      *
      */
@@ -63,6 +64,7 @@ class Game
     /**
      * @var integer
      * @Groups({"game"})
+     * @ORM\Column(name="pointsA", type="integer", nullable=true)
      *
      *
      */
@@ -71,6 +73,7 @@ class Game
     /**
      * @var integer
      * @Groups({"game"})
+     * @ORM\Column(name="pointsB", type="integer", nullable=true)
      *
      *
      */

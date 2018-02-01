@@ -1,0 +1,4 @@
+services:
+#    quizz.example:
+#        class: QuizzBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

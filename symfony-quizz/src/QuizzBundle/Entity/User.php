@@ -25,7 +25,7 @@ class User
 
     /**
      * @var string
-     * @Groups({"game", "user"})
+     * @Groups({"game", "user", "mygames"})
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      */

@@ -16,7 +16,7 @@ class Game
 {
     /**
      * @var int
-     * @Groups({"game"})
+     * @Groups({"game", "mygames"})
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -26,7 +26,7 @@ class Game
 
     /**
      * @var int
-     * @Groups({"game"})
+     * @Groups({"game", "mygames"})
      *
      * @ORM\Column(name="state", type="integer")
      */
@@ -46,16 +46,16 @@ class Game
 
     /**
      * @var string
-     * @Groups({"game"})
+     * @Groups({"game", "mygames"})
      *
      *
      */
     private $adv;
 
     /**
-     * @var string
-     * @Groups({"game"})
-     * @ORM\Column(name="winner", type="string", length=255)
+     * @var User
+     * @Groups({"game", "mygames"})
+     * @ORM\ManyToOne(targetEntity="User", cascade={"persist"})
      *
      *
      */
@@ -63,7 +63,7 @@ class Game
 
     /**
      * @var integer
-     * @Groups({"game"})
+     * @Groups({"game", "mygames"})
      * @ORM\Column(name="pointsA", type="integer", nullable=true)
      *
      *
@@ -72,7 +72,7 @@ class Game
 
     /**
      * @var integer
-     * @Groups({"game"})
+     * @Groups({"game", "mygames"})
      * @ORM\Column(name="pointsB", type="integer", nullable=true)
      *
      *
@@ -163,7 +163,7 @@ class Game
     }
 
     /**
-     * @return string
+     * @return User
      */
     public function getWinner()
     {
@@ -171,9 +171,9 @@ class Game
     }
 
     /**
-     * @param string $winner
+     * @param User $winner
      */
-    public function setWinner($winner)
+    public function setWinner(User $winner)
     {
         $this->winner = $winner;
     }

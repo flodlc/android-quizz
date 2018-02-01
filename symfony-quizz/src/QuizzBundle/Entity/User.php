@@ -15,7 +15,7 @@ class User
 {
     /**
      * @var int
-     * @Groups({"game"})
+     * @Groups({"game", "user"})
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -25,18 +25,11 @@ class User
 
     /**
      * @var string
-     * @Groups({"game"})
+     * @Groups({"game", "user"})
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="stateSearch", type="boolean")
-     */
-    private $stateSearch;
 
 
     /**
@@ -71,30 +64,6 @@ class User
     public function getUsername()
     {
         return $this->username;
-    }
-
-    /**
-     * Set stateSearch
-     *
-     * @param boolean $stateSearch
-     *
-     * @return User
-     */
-    public function setStateSearch($stateSearch)
-    {
-        $this->stateSearch = $stateSearch;
-
-        return $this;
-    }
-
-    /**
-     * Get stateSearch
-     *
-     * @return bool
-     */
-    public function getStateSearch()
-    {
-        return $this->stateSearch;
     }
 }
 

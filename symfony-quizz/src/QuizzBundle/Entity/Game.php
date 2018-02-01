@@ -34,19 +34,50 @@ class Game
 
     /**
      *
-     * @Groups({"game"})
-     *
      * @ORM\ManyToOne(targetEntity="User", cascade={"persist"})
      */
     private $userA;
 
     /**
      *
-     * @Groups({"game"})
-     *
      * @ORM\ManyToOne(targetEntity="User", cascade={"persist"})
      */
     private $userB;
+
+    /**
+     * @var string
+     * @Groups({"game"})
+     *
+     *
+     */
+    private $adv;
+
+    /**
+     * @var string
+     * @Groups({"game"})
+     * @ORM\Column(name="winner", type="string", length=255)
+     *
+     *
+     */
+    private $winner;
+
+    /**
+     * @var integer
+     * @Groups({"game"})
+     * @ORM\Column(name="pointsA", type="integer", nullable=true)
+     *
+     *
+     */
+    private $pointsA;
+
+    /**
+     * @var integer
+     * @Groups({"game"})
+     * @ORM\Column(name="pointsB", type="integer", nullable=true)
+     *
+     *
+     */
+    private $pointsB;
 
 
     /**
@@ -113,6 +144,70 @@ class Game
     public function setUserB(User $userB)
     {
         $this->userB = $userB;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdv()
+    {
+        return $this->adv;
+    }
+
+    /**
+     * @param string $adv
+     */
+    public function setAdv($adv)
+    {
+        $this->adv = $adv;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWinner()
+    {
+        return $this->winner;
+    }
+
+    /**
+     * @param string $winner
+     */
+    public function setWinner($winner)
+    {
+        $this->winner = $winner;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPointsA()
+    {
+        return $this->pointsA;
+    }
+
+    /**
+     * @param int $pointsA
+     */
+    public function setPointsA($pointsA)
+    {
+        $this->pointsA = $pointsA;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPointsB()
+    {
+        return $this->pointsB;
+    }
+
+    /**
+     * @param int $pointsB
+     */
+    public function setPointsB($pointsB)
+    {
+        $this->pointsB = $pointsB;
     }
 }
 

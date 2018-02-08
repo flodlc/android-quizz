@@ -1,4 +1,32 @@
 services:
-#    quizz.example:
-#        class: QuizzBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    # default configuration for services in *this* file
+    _defaults:
+        # automatically injects dependencies in your services
+        autowire: true
+        # automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+        # this means you cannot fetch services directly from the container via $container->get()
+        # if you need to do this, you can override this setting on individual services
+        public: false
+    quizz.answer:
+        class: QuizzBundle\Service\AnswerManager
+        public: true
+    quizz.user:
+        class: QuizzBundle\Service\UserManager
+        public: true
+    quizz.question:
+        class: QuizzBundle\Service\QuestionManager
+        public: true
+        arguments:
+          $nbRounds: '%nb_rounds%'
+    quizz.round:
+        class: QuizzBundle\Service\RoundManager
+        public: true
+        arguments:
+          $nbRounds: '%nb_rounds%'
+          $questionManager: '@quizz.question'
+    quizz.game:
+        class: QuizzBundle\Service\GameManager
+        public: true
+        arguments:
+          $roundManager: '@quizz.round'

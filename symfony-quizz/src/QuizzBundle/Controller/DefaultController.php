@@ -46,17 +46,8 @@ class DefaultController extends Controller
     public function getMeAction(Request $request)
     {
         $username = $request->get("user");
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $userRepo = $entityManager->getRepository(User::class);
-
-        $me = $userRepo->findBy(["username" => $username]);
-        if (!$me) {
-            $me = new User();
-            $me->setUsername($username);
-            $entityManager->persist($me);
-            $entityManager->flush();
-        }
+        $userManager = $this->container->get("quizz.user");
+        $me = $userManager->getByUsername($username);
 
         return new Response($this->serializer->serialize($me, "json", ["groups" => ["user"]]));
     }
@@ -69,24 +60,12 @@ class DefaultController extends Controller
      */
     public function getGamesAction(Request $request)
     {
+        $userManager = $this->container->get("quizz.user");
+        $gameManager = $this->container->get("quizz.game");
         $userId = $request->get("user");
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $gameRepo = $entityManager->getRepository(Game::class);
-        $userRepo = $entityManager->getRepository(User::class);
-
-        $user = $userRepo->find($userId);
-        $gamesA = $gameRepo->findBy(["userA" => $user]);
-        foreach ($gamesA as $game) {
-            if ($game->getState() > 0)
-                $game->setAdv($game->getUserB()->getUsername());
-        }
-        $gamesB = $gameRepo->findBy(["userB" => $user]);
-        foreach ($gamesB as $game) {
-            if ($game->getState() > 0)
-                $game->setAdv($game->getUserA()->getUsername());
-        }
-        $games_tmp = array_merge($gamesA, $gamesB);
+        $user = $userManager->getById($userId);
+        $games_tmp = $gameManager->getMyGames($user);
 
         return new Response($this->serializer->serialize($games_tmp, "json", ["groups" => ["mygames"]]));
     }
@@ -99,62 +78,19 @@ class DefaultController extends Controller
      */
     public function getSearchAction(Request $request)
     {
-        $userId = $request->get("user");
-        if (!$userId) {
-            throw new HttpException("Pas d'utilisateur", 404);
-        }
         $entityManager = $this->getDoctrine()->getManager();
-        $userRepo = $entityManager->getRepository(User::class);
-        $gameRepo = $entityManager->getRepository(Game::class);
-        $me = $userRepo->find($userId);
-        $games = $gameRepo->findBy(["state" => 0]);
-        if (count($games) > 0 && $games[0]->getUserA() != $me) {
-            $questRepo = $entityManager->getRepository(Question::class);
+        $userManager = $this->container->get("quizz.user");
+        $gameManager = $this->container->get("quizz.game");
 
-            do {
-                $rd = rand(0, sizeof($games) - 1);
-            } while ($games[$rd]->getUserA() == $me);
+        $userId = $request->get("user");
+        $me = $userManager->getById($userId);
 
-            $game = $games[$rd];
-            $game->setUserB($me);
-            $game->setState(1);
-            $entityManager->persist($game);
-            $entityManager->flush();
+        $game_data = $gameManager->getAGameAvailable($me);
 
+        $gameSeria = $this->serializer->normalize($game_data["game"], "json", ["groups" => ["game"]]);
+        $roundsSeria = $this->serializer->normalize($game_data["rounds"], "json", ["groups" => ["game"]]);
 
-            $questions = $questRepo->findAll();
-
-            $rounds = [];
-            for ($i = 1; $i <= 3; $i++) {
-                $keyQuestions = array_keys($questions);
-                $rd = rand(0, sizeof($keyQuestions) - 1);
-                $round = new Round();
-                $round->setState(0);
-                $round->setGame($game);
-                $round->setNumRound($i);
-                $round->setQuestion($questions[$keyQuestions[$rd]]);
-                $entityManager->persist($round);
-                $entityManager->flush();
-                unset($questions[$keyQuestions[$rd]]);
-
-                $rounds[] = $round;
-            }
-
-            $game->setAdv($game->getUserA()->getUsername());
-
-            $gameSeria = $this->serializer->normalize($game, "json", ["groups" => ["game"]]);
-            $roundsSeria = $this->serializer->normalize($rounds, "json", ["groups" => ["game"]]);
-
-            return new Response(json_encode(["game" => $gameSeria, "rounds" => $roundsSeria]));
-
-        } else {
-            $game = new Game();
-            $game->setState(0);
-            $game->setUserA($me);
-            $entityManager->persist($game);
-            $entityManager->flush();
-            return new Response($this->serializer->serialize($game, "json", ["groups" => ["game"]]));
-        }
+        return new Response(json_encode(["game" => $gameSeria, "rounds" => $roundsSeria]));
 
     }
 
@@ -166,26 +102,23 @@ class DefaultController extends Controller
      */
     public function getStatusAction(Request $request)
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        $gameRepo = $entityManager->getRepository(Game::class);
+        $roundRepo = $entityManager->getRepository(Round::class);
         $gameId = $request->get("game");
-        $userId = $request->get("user");
         if (!$gameId) {
             throw new HttpException("Pas de partie", 404);
         }
-        if (!$userId) {
-            throw new HttpException("Pas d'utilisateur", 404);
-        }
-        $entityManager = $this->getDoctrine()->getManager();
-        $userRepo = $entityManager->getRepository(User::class);
-        $gameRepo = $entityManager->getRepository(Game::class);
-        $roundRepo = $entityManager->getRepository(Round::class);
 
         $game = $gameRepo->find($gameId);
-        $me = $userRepo->find($userId);
+
+        $userManager = $this->container->get("quizz.user");
+        $userId = $request->get("user");
+        $me = $userManager->getById($userId);
+
+
         if (!$game) {
             throw new HttpException("Pas de partie", 404);
-        }
-        if (!$me) {
-            throw new HttpException("Pas d'utilisateur", 404);
         }
         if ($game->getState() == 0) {
             throw new HttpException("Pas d'adversaire", 404);
@@ -207,14 +140,16 @@ class DefaultController extends Controller
     public function postAnswerAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $userRepo = $entityManager->getRepository(User::class);
         $gameRepo = $entityManager->getRepository(Game::class);
         $roundRepo = $entityManager->getRepository(Round::class);
+        $userManager = $this->container->get("quizz.user");
 
         $data = json_decode($request->getContent(), true);
         $userId = $data["user"];
         $gameId = $data["game"];
-        $user = $userRepo->find($userId);
+
+        $user = $userManager->getById($userId);
+
         $game = $gameRepo->find($gameId);
         if ($game->getState() == 2) {
             throw new HttpException("Partie terminée", 404);

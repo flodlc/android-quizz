@@ -9,9 +9,12 @@
 namespace QuizzBundle\Service;
 
 
+use ClassesWithParents\G;
 use Doctrine\ORM\EntityManagerInterface;
 use QuizzBundle\Entity\Game;
+use QuizzBundle\Entity\Round;
 use QuizzBundle\Entity\User;
+use SensioLabs\Security\Exception\HttpException;
 
 class GameManager
 {
@@ -61,18 +64,34 @@ class GameManager
             do {
                 $rd = array_rand($index_games);
                 unset($index_games[$rd]);
-            } while ($games[$rd]->getUserA() == $me);
-            $game = $games[$rd];
-            $game->setUserB($me);
-            $game->setState(1);
-            $this->em->persist($game);
-            $this->em->flush();
+                $game = $games[$rd];
+            } while ($game->getUserA() == $me);
 
+            $this->startOnlineGame($me, $game);
             $rounds = $this->roundManager->generateRounds($game);
+
             return ["game" => $game, "rounds" => $rounds];
         }
 
         return ["game" => $this->createGame($me), "rounds" => []];
+    }
+
+    /**
+     * Get the game corresponding to the id and its rounds.
+     * @param $idGame
+     * @return array
+     */
+    public function getGameAndRounds($idGame)
+    {
+        $gameRepo = $this->em->getRepository(Game::class);
+        $roundRepo = $this->em->getRepository(Round::class);
+
+        $game = $gameRepo->find($idGame);
+        if (!$game)
+            throw new HttpException("Partie inexistante", 404);
+        $rounds = $roundRepo->findBy(["game" => $game]);
+
+        return ["game" => $game, "rounds" => $rounds];
     }
 
     /**
@@ -90,13 +109,16 @@ class GameManager
         return $game;
     }
 
-    public function addUserInGame(User $user, Game $game)
+    /**
+     * Set a party, which is waiting a second player, in order to be playable.
+     * @param User $user
+     * @param Game $game
+     */
+    public function startOnlineGame(User $user, Game $game)
     {
-
         $game->setUserB($user);
         $game->setState(1);
         $this->em->persist($game);
         $this->em->flush();
     }
-
 }

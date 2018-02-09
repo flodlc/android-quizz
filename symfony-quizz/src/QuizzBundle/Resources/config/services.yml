@@ -8,9 +8,6 @@ services:
         # this means you cannot fetch services directly from the container via $container->get()
         # if you need to do this, you can override this setting on individual services
         public: false
-    quizz.answer:
-        class: QuizzBundle\Service\AnswerManager
-        public: true
     quizz.user:
         class: QuizzBundle\Service\UserManager
         public: true
@@ -25,8 +22,15 @@ services:
         arguments:
           $nbRounds: '%nb_rounds%'
           $questionManager: '@quizz.question'
+          $userManager: '@quizz.user'
     quizz.game:
         class: QuizzBundle\Service\GameManager
         public: true
         arguments:
+          $roundManager: '@quizz.round'
+    quizz.response:
+        class: QuizzBundle\Service\ResponseManager
+        public: true
+        arguments:
+          $userManager: '@quizz.user'
           $roundManager: '@quizz.round'

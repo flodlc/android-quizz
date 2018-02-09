@@ -78,7 +78,6 @@ class DefaultController extends Controller
      */
     public function getSearchAction(Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
         $userManager = $this->container->get("quizz.user");
         $gameManager = $this->container->get("quizz.game");
 
@@ -102,33 +101,16 @@ class DefaultController extends Controller
      */
     public function getStatusAction(Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $gameRepo = $entityManager->getRepository(Game::class);
-        $roundRepo = $entityManager->getRepository(Round::class);
+        $gameManager = $this->container->get("quizz.game");
         $gameId = $request->get("game");
-        if (!$gameId) {
-            throw new HttpException("Pas de partie", 404);
-        }
+        if (!$gameId)
+            throw new HttpException("L'identifiant de la partie est manquant.");
 
-        $game = $gameRepo->find($gameId);
+        $data_game = $gameManager->getGameAndRounds($gameId);
 
-        $userManager = $this->container->get("quizz.user");
-        $userId = $request->get("user");
-        $me = $userManager->getById($userId);
-
-
-        if (!$game) {
-            throw new HttpException("Pas de partie", 404);
-        }
-        if ($game->getState() == 0) {
-            throw new HttpException("Pas d'adversaire", 404);
-        }
-
-        $rounds = $roundRepo->findBy(["game" => $game]);
-        $gameSeria = $this->serializer->normalize($game, "json", ["groups" => ["game"]]);
-        $roundsSeria = $this->serializer->normalize($rounds, "json", ["groups" => ["game"]]);
+        $gameSeria = $this->serializer->normalize($data_game["game"], "json", ["groups" => ["game"]]);
+        $roundsSeria = $this->serializer->normalize($data_game["rounds"], "json", ["groups" => ["game"]]);
         return new Response(json_encode(["game" => $gameSeria, "rounds" => $roundsSeria]));
-
     }
 
     /**
@@ -139,89 +121,11 @@ class DefaultController extends Controller
      */
     public function postAnswerAction(Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $gameRepo = $entityManager->getRepository(Game::class);
-        $roundRepo = $entityManager->getRepository(Round::class);
-        $userManager = $this->container->get("quizz.user");
+        $responseManager = $this->container->get("quizz.response");
 
         $data = json_decode($request->getContent(), true);
-        $userId = $data["user"];
-        $gameId = $data["game"];
+        $game = $responseManager->saveAnswers($data["user"], $data["game"], $data["answers"]);
+        return new Response($this->serializer->serialize($game, "json", ["groups" => ["game"]]));
 
-        $user = $userManager->getById($userId);
-
-        $game = $gameRepo->find($gameId);
-        if ($game->getState() == 2) {
-            throw new HttpException("Partie terminée", 404);
-        }
-        if (!$user)
-            throw new HttpException("Pas d'utilisateur", 404);
-
-        if ($game->getUserA() == $user) {
-            $whichUser = "A";
-        } elseif ($game->getUserB() == $user) {
-            $whichUser = "B";
-        } else {
-            throw new HttpException("Cet utilisateur n'est pas sur ce jeu.", 404);
-        }
-
-        $answers = $data["answers"];
-
-        $myPoints = 0;
-        foreach ($answers as $answer) {
-            $roundId = $answer["roundId"];
-            $answer = $answer["answer"];
-
-            $response = new \QuizzBundle\Entity\Response();
-            $response->setResponse($answer);
-            $response->setState(1);
-            $response->setUser($user);
-            $entityManager->persist($response);
-            $entityManager->flush();
-
-            $round = $roundRepo->find($roundId);
-            $question = $round->getQuestion();
-            if ($question->getAnswer() == $answer) {
-                $myPoints++;
-            }
-
-            if ($whichUser == "A") {
-                $round->setResponseUA($response);
-            } else {
-                $round->setResponseUB($response);
-            }
-            $entityManager->persist($round);
-            $entityManager->flush();
-        }
-
-        if ($whichUser == "A") {
-            $game->setPointsA($myPoints);
-            if ($game->getPointsB() != null) {
-                if ($game->getPointsB() > $game->getPointsA()) {
-                    $game->setWinner($game->getUserB());
-                } elseif ($game->getPointsB() < $game->getPointsA()) {
-                    $game->setWinner($game->getUserA());
-                } else {
-                    $game->setWinner(null);
-                }
-                $game->setState(2);
-            }
-        } else {
-            $game->setPointsB($myPoints);
-            if ($game->getPointsA() != null) {
-                if ($game->getPointsB() > $game->getPointsA()) {
-                    $game->setWinner($game->getUserB());
-                } elseif ($game->getPointsB() < $game->getPointsA()) {
-                    $game->setWinner($game->getUserA());
-                } else {
-                    $game->setWinner(null);
-                }
-                $game->setState(2);
-            }
-        }
-        $entityManager->merge($game);
-        $entityManager->flush();
-
-        return new Response("", 200);
     }
 }

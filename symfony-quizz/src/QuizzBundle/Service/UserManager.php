@@ -10,6 +10,7 @@ namespace QuizzBundle\Service;
 
 
 use Doctrine\ORM\EntityManagerInterface;
+use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\User;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -67,5 +68,19 @@ class UserManager
         $this->em->persist($user);
         $this->em->flush();
         return $user;
+    }
+
+    /**
+     * @param User $user
+     * @param Game $game
+     * @return string
+     */
+    public function whoIAm(User $user, Game $game)
+    {
+        if ($user === $game->getUserA())
+            return "A";
+        elseif ($user === $game->getUserB())
+            return "B";
+        throw new HttpException("Joueur non présent dans la partie", 500);
     }
 }

@@ -59,39 +59,28 @@ class ResponseManager
 
         if ("A" == $myRole) {
             $game->setPointsA($myPoints);
-            if ($game->getPointsB() != null) {
-                switch ($this->getWinner($game->getPointsB(), $game->getPointsA())) {
-                    case "A":
-                        $game->setWinner($game->getUserB());
-                        break;
-                    case "B":
-                        $game->setWinner($game->getUserA());
-                        break;
-                    case "NUL":
-                        $game->setWinner(null);
-                        break;
-                }
-                $game->setState(2);
-            }
+            $game->setAdv($game->getUserB()->getUsername());
         } else {
             $game->setPointsB($myPoints);
-            if ($game->getPointsA() != null) {
-                switch ($this->getWinner($game->getPointsA(), $game->getPointsB())) {
-                    case "A":
-                        $game->setWinner($game->getUserA());
-                        break;
-                    case "B":
-                        $game->setWinner($game->getUserB());
-                        break;
-                    case "NUL":
-                        $game->setWinner(null);
-                        break;
-                }
-                $game->setState(2);
+            $game->setAdv($game->getUserA()->getUsername());
+        }
+
+        if ($game->getPointsA() != null && $game->getPointsB() != null) {
+            switch ($this->getWinner($game->getPointsB(), $game->getPointsA())) {
+                case "A":
+                    $game->setWinner($game->getUserB());
+                    break;
+                case "B":
+                    $game->setWinner($game->getUserA());
+                    break;
+                default:
+                    break;
             }
+            $game->setState(2);
         }
         $this->em->merge($game);
         $this->em->flush();
+
 
         return $game;
     }

@@ -1,15 +1,16 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: lucas
+ * Date: 09/02/2018
+ * Time: 17:41
+ */
 
 namespace QuizzBundle\Controller;
 
-use QuizzBundle\Entity\Game;
-use QuizzBundle\Entity\Question;
-use QuizzBundle\Entity\Round;
-use QuizzBundle\Entity\User;
 use SensioLabs\Security\Exception\HttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +22,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
 
-class DefaultController extends Controller
+class GameController extends Controller
 {
     /**
      * @var Serializer
@@ -38,22 +39,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/user", name="user")
-     * @Method({"GET"})
-     *
-     * @return Response
-     */
-    public function getMeAction(Request $request)
-    {
-        $username = $request->get("user");
-        $userManager = $this->container->get("quizz.user");
-        $me = $userManager->getByUsername($username);
-
-        return new Response($this->serializer->serialize($me, "json", ["groups" => ["user"]]));
-    }
-
-    /**
-     * @Route("/games", name="games")
+     * @Route("/all", name="games")
      * @Method({"GET"})
      *
      * @return Response
@@ -71,7 +57,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/game", name="search")
+     * @Route("/", name="search")
      * @Method({"GET"})
      *
      * @return Response
@@ -90,11 +76,10 @@ class DefaultController extends Controller
         $roundsSeria = $this->serializer->normalize($game_data["rounds"], "json", ["groups" => ["game"]]);
 
         return new Response(json_encode(["game" => $gameSeria, "rounds" => $roundsSeria]));
-
     }
 
     /**
-     * @Route("/statusgame", name="game_ready")
+     * @Route("/status", name="game_ready")
      * @Method({"GET"})
      *
      * @return Response
@@ -111,21 +96,5 @@ class DefaultController extends Controller
         $gameSeria = $this->serializer->normalize($data_game["game"], "json", ["groups" => ["game"]]);
         $roundsSeria = $this->serializer->normalize($data_game["rounds"], "json", ["groups" => ["game"]]);
         return new Response(json_encode(["game" => $gameSeria, "rounds" => $roundsSeria]));
-    }
-
-    /**
-     * @Route("/game", name="answer")
-     * @Method({"POST"})
-     *
-     *
-     */
-    public function postAnswerAction(Request $request)
-    {
-        $responseManager = $this->container->get("quizz.response");
-
-        $data = json_decode($request->getContent(), true);
-        $game = $responseManager->saveAnswers($data["user"], $data["game"], $data["answers"]);
-        return new Response($this->serializer->serialize($game, "json", ["groups" => ["game"]]));
-
     }
 }

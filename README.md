@@ -24,7 +24,7 @@ Android release "5<"
 ]
 ```
 
-<b>GET</b> /games?user=1 : Get all games wich user 1 is player
+<b>GET</b> /game/all?user=1 : Get all games wich user 1 is player
 ```json
 [
     {
@@ -125,8 +125,102 @@ Android release "5<"
 }
 ```
 
-<b>GET</b> /statusgame?user=1&game=4 : User 1 is waiting for an user to play against, he send this request to know if someone
+<b>GET</b> /game/status?user=1&game=4 : User 1 is waiting for an user to play against, he send this request to know if someone
 want to play, and there is someone
+
+```json
+{
+    "game": {
+        "id": 4,
+        "state": 2,
+        "adv": null,
+        "winner": {
+            "id": 1,
+            "username": "lucas"
+        },
+        "pointsA": 3,
+        "pointsB": 1
+    },
+    "rounds": [
+        {
+            "id": 6,
+            "numRound": 1,
+            "question": {
+                "id": 1,
+                "question": "L'oeuf ou la poule ?",
+                "responseA": "L'oeuf",
+                "responseB": "Poule",
+                "responseC": "Chuck Norris",
+                "responseD": "Jordan Ferri",
+                "answer": "ResponseD"
+            }
+        },
+        {
+            "id": 7,
+            "numRound": 2,
+            "question": {
+                "id": 5,
+                "question": "Bonjour ou pas du tout ?",
+                "responseA": "Non",
+                "responseB": "Chut",
+                "responseC": "Bonjour",
+                "responseD": "Lol",
+                "answer": "ResponseB"
+            }
+        },
+        {
+            "id": 8,
+            "numRound": 3,
+            "question": {
+                "id": 2,
+                "question": "Le ou la ?",
+                "responseA": "Le",
+                "responseB": "La",
+                "responseC": "Non",
+                "responseD": "Jordan Ferri",
+                "answer": "ResponseC"
+            }
+        }
+    ]
+}
+```
+
+<b>POST</b> /response : send all response of the user 2 for the game 13
+<i>BODY :</i>
+```json
+{
+  "user": 2,
+  "game": 13,
+  "answers": [
+    {
+      "roundId": 32,
+      "answer": "ResponseC"
+    },
+    {
+      "roundId": 33,
+      "answer": "ResponseB"
+    },
+    {
+      "roundId": 34,
+      "answer": "ResponseA"
+    }
+  ]
+}
+```
+<i>RESPONSE : The user know that his adv won the game 3-2.</i>
+```json
+{
+	"id": 13,
+	"state": 2,
+	"adv": "lucas",
+	"winner": {
+		"id": 1,
+		"username": "lucas"
+	},
+	"pointsA": 3,
+	"pointsB": 2
+}
+```
 
 ```json
 {

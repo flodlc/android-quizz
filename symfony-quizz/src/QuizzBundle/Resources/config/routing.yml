@@ -1,4 +1,14 @@
-default:
-    resource: '@QuizzBundle/Controller/DefaultController.php'
+user:
+    resource: '@QuizzBundle/Controller/UserController.php'
     type:     annotation
-    prefix:   /
+    prefix:   /user
+
+game:
+    resource: '@QuizzBundle/Controller/GameController.php'
+    type:     annotation
+    prefix:   /game
+
+response:
+    resource: '@QuizzBundle/Controller/ResponseController.php'
+    type:     annotation
+    prefix:   /response

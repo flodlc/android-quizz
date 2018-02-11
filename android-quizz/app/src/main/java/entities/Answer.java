@@ -8,13 +8,14 @@ import com.google.gson.annotations.SerializedName;
 
 public class Answer implements Parcelable
 {
-
     @SerializedName("roundId")
     @Expose
     private Integer roundId;
+
     @SerializedName("answer")
     @Expose
     private String answer;
+
     public final static Parcelable.Creator<Answer> CREATOR = new Creator<Answer>() {
 
 

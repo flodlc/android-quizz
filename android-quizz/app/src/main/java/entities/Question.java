@@ -3,11 +3,11 @@ package entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Question implements Parcelable
-{
+public class Question implements Parcelable {
 
     @SerializedName("question")
     @Expose
@@ -41,8 +41,7 @@ public class Question implements Parcelable
             return (new Question[size]);
         }
 
-    }
-            ;
+    };
 
     protected Question(Parcel in) {
         this.question = ((String) in.readValue((String.class.getClassLoader())));
@@ -55,13 +54,11 @@ public class Question implements Parcelable
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public Question() {
     }
 
     /**
-     *
      * @param answer
      * @param responseD
      * @param responseC

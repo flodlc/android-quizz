@@ -26,21 +26,25 @@ public class OnlineInfosActivity extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.online_selector, container, false);
+        View view = inflater.inflate(R.layout.fragment_online_infos, container, false);
 
         Bundle b = getArguments();
-        this.round = 0;
+        this.round = 1;
         this.score = 0;
         this.adv = b.getString("adv");
 
-        this.DisplayTexts();
+        this.displayTexts(view);
         return view;
     }
 
+    private void displayTexts(View view) {
+        ((TextView) view.findViewById(R.id.score)).setText(score + "/" + (round - 1));
+        ((TextView) view.findViewById(R.id.advName)).setText(adv);
+        ((TextView) view.findViewById(R.id.questionNumber)).setText(String.valueOf(round));
+    }
+
     private void DisplayTexts() {
-        ((TextView) getView().findViewById(R.id.score)).setText(score + "/" + (round - 1));
-        ((TextView) getView().findViewById(R.id.advName)).setText(adv);
-        ((TextView) getView().findViewById(R.id.questionNumber)).setText(String.valueOf(round));
+        this.displayTexts(getView());
     }
 
     public void Update(int round, int score) {

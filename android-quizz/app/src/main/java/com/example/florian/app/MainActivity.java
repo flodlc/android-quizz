@@ -6,12 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.common.collect.ImmutableMap;
 
-import entities.Game;
 import entities.User;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = ((EditText) findViewById(R.id.username)).getText().toString();
                 ApiServiceInterface apiService = ApiService.getService();
-                Call<User> call = apiService.getUser(ImmutableMap.of("username", username));
+                Call<User> call = apiService.getUser(ImmutableMap.of("user", username));
 
                 call.enqueue(new Callback<User>() {
                     @Override

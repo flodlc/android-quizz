@@ -5,9 +5,12 @@ import java.util.Map;
 
 import entities.Answer;
 import entities.Game;
+import entities.GameData;
 import entities.GameResult;
+import entities.PostAnswers;
 import entities.User;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -21,10 +24,11 @@ public interface ApiServiceInterface {
     Call<User> getUser(@QueryMap Map<String, String> param);
 
     @GET("game")
-    Call<Game> getNewGame(@QueryMap Map<String, String> param);
+    Call<GameData> getNewGame(@QueryMap Map<String, String> param);
 
-    @POST("game")
-    Call<GameResult> postAnswers(@Field("answers") ArrayList<Answer> answers,
-                                 @Field("user") int user,
-                                 @Field("game") int gameId);
+    @GET("game/status")
+    Call<GameData> checkNewGame(@QueryMap Map<String, String> param);
+
+    @POST("response/")
+    Call<Game> postAnswers(@Body PostAnswers postAnswers);
 }

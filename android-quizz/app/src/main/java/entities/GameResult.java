@@ -1,14 +1,15 @@
 package entities;
 
 import java.util.List;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GameResult implements Parcelable
-{
+public class GameResult implements Parcelable {
 
     @SerializedName("user")
     @Expose
@@ -30,8 +31,7 @@ public class GameResult implements Parcelable
             return (new GameResult[size]);
         }
 
-    }
-            ;
+    };
 
     protected GameResult(Parcel in) {
         this.user = ((String) in.readValue((String.class.getClassLoader())));
@@ -40,13 +40,11 @@ public class GameResult implements Parcelable
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public GameResult() {
     }
 
     /**
-     *
      * @param answers
      * @param user
      */

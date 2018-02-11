@@ -1,6 +1,7 @@
 package com.example.florian.app;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import entities.Question;
@@ -38,13 +40,26 @@ public class AnswerLineActivity extends Fragment {
         return view;
     }
 
+    private void setBakgroundColor(View view, int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            view.setBackgroundColor(getActivity().getColor(color));
+        } else {
+            view.findViewById(R.id.answerA).setBackgroundColor(getResources().getColor(color));
+        }
+    }
+
+    private void setImage(ImageView imageView, int imageId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            imageView.setImageDrawable(getActivity().getDrawable(imageId));
+        } else {
+            imageView.setImageDrawable(getResources().getDrawable(imageId));
+        }
+    }
 
     private void displayTexts(View view) {
         Question question = round.getQuestion();
         ((TextView) view.findViewById(R.id.questionText)).setText(question.getQuestion());
-        ((Button) view.findViewById(R.id.response1)).setText(question.getResponseA());
-        ((Button) view.findViewById(R.id.response2)).setText(question.getResponseB());
-        ((Button) view.findViewById(R.id.response3)).setText(question.getResponseC());
-        ((Button) view.findViewById(R.id.response4)).setText(question.getResponseD());
+        ((TextView) view.findViewById(R.id.correctAnswer)).setText(question.getAnswer());
+        setImage((ImageView) view.findViewById(R.id.answerA), R.drawable.thumb_up);
     }
 }

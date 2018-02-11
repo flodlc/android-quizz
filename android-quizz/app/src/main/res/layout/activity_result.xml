@@ -31,47 +31,29 @@
             android:gravity="top"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Tom"
+                android:textAlignment="center"
+                android:textSize="25sp" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:text="Correct"
+                android:textAlignment="center"
+                android:textSize="25sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Tom"
-                    android:textAlignment="center"
-                    android:textSize="25sp" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Correct"
-                    android:textAlignment="center"
-                    android:textSize="25sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Jeff"
-                    android:textAlignment="center"
-                    android:textSize="25sp" />
-            </LinearLayout>
+                android:layout_weight="2"
+                android:text="Jeff"
+                android:textAlignment="center"
+                android:textSize="25sp" />
         </LinearLayout>
 
         <ScrollView
@@ -79,11 +61,32 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:scrollbars="vertical">
+
             <LinearLayout
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"/>
+                android:orientation="vertical" >
+                <fragment
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:layout="@layout/fragment_answer_line"/>
+
+                <fragment
+                    android:id="@+id/fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:layout="@layout/fragment_answer_line" />
+
+                <fragment
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:layout="@layout/fragment_answer_line"/>
+                <fragment
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:layout="@layout/fragment_answer_line"/>
+            </LinearLayout>
         </ScrollView>
 
 

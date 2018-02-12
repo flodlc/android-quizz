@@ -207,51 +207,56 @@ want to play, and there is someone
   ]
 }
 ```
-<i>RESPONSE : The user know that his adv won the game 3-2.</i>
-```json
-{
-	"id": 13,
-	"state": 2,
-	"adv": "lucas",
-	"winner": {
-		"id": 1,
-		"username": "lucas"
-	},
-	"pointsA": 3,
-	"pointsB": 2
-}
-```
-
+<i>RESPONSE : </i>
 ```json
 {
     "game": {
-        "id": 4,
+        "id": 13,
         "state": 2,
-        "adv": null,
+        "userA": {
+            "id": 2,
+            "username": "florian"
+        },
+        "userB": {
+            "id": 1,
+            "username": "lucas"
+        },
+        "adv": {
+            "id": 2,
+            "username": "florian"
+        },
         "winner": {
             "id": 1,
             "username": "lucas"
         },
         "pointsA": 3,
-        "pointsB": 1
+        "pointsB": 2
     },
     "rounds": [
         {
-            "id": 6,
+            "id": 32,
             "numRound": 1,
+            "state": 2,
             "question": {
-                "id": 1,
-                "question": "L'oeuf ou la poule ?",
-                "responseA": "L'oeuf",
-                "responseB": "Poule",
-                "responseC": "Chuck Norris",
-                "responseD": "Jordan Ferri",
-                "answer": "ResponseD"
+                "id": 4,
+                "question": "Pourquoi pas ?",
+                "responseA": "Pourquoi",
+                "responseB": "Pas",
+                "responseC": "Non",
+                "responseD": "Oui",
+                "answer": "ResponseC"
+            },
+            "responseUA": {
+                "response": "ResponseC"
+            },
+            "responseUB": {
+                "response": "ResponseC"
             }
         },
         {
-            "id": 7,
+            "id": 33,
             "numRound": 2,
+            "state": 2,
             "question": {
                 "id": 5,
                 "question": "Bonjour ou pas du tout ?",
@@ -260,20 +265,31 @@ want to play, and there is someone
                 "responseC": "Bonjour",
                 "responseD": "Lol",
                 "answer": "ResponseB"
+            },
+            "responseUA": {
+                "response": "ResponseB"
+            },
+            "responseUB": {
+                "response": "ResponseB"
             }
         },
         {
-            "id": 8,
+            "id": 34,
             "numRound": 3,
+            "state": 2,
             "question": {
-                "id": 2,
-                "question": "Le ou la ?",
-                "responseA": "Le",
-                "responseB": "La",
+                "id": 6,
+                "question": "J'ai plus d'idée ?",
+                "responseA": "Oui",
+                "responseB": "C'est la galère",
                 "responseC": "Non",
-                "responseD": "Jordan Ferri",
-                "answer": "ResponseC"
-            }
+                "responseD": "Bonjour",
+                "answer": "ResponseA"
+            },
+            "responseUA": {
+                "response": "ResponseA"
+            },
+            "responseUB": null
         }
     ]
 }

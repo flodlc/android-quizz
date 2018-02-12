@@ -6,7 +6,7 @@ Quizz is a mobile application. It allow you to play against other online player.
 ## Database
 ![alt text](quizz_schema.png "Database diagram")
 
-This schema has been updated on 01/31/2018.
+This schema has been updated on 02/12/2018.
 
 ## Technologies
 Symfony3.4 : API Rest backend ; use Doctrine 2

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6cdc01cf-da8a-4725-be8b-b78fb84e7f6e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/quizz_schema.png" afterPath="$PROJECT_DIR$/quizz_schema.png" />
       <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/ResponseController.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/ResponseController.php" />
       <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php" />
       <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Response.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Response.php" />
@@ -376,16 +377,15 @@
       <workItem from="1518102684217" duration="10830000" />
       <workItem from="1518167339152" duration="773000" />
       <workItem from="1518193700310" duration="2021000" />
-      <workItem from="1518440673988" duration="3028000" />
+      <workItem from="1518440673988" duration="3246000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36058000" />
+    <option name="totallyTimeSpent" value="36276000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="3226" height="1746" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27859896" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -395,7 +395,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5023601" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5023601" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />

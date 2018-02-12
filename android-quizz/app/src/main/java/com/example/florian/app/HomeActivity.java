@@ -26,6 +26,4 @@ public class HomeActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.content, on, "ONLINE").commit();
         getSupportFragmentManager().beginTransaction().add(R.id.content, off, "OFFLINE").commit();
     }
-
-
 }

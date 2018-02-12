@@ -46,7 +46,6 @@ public class QuestionActivity extends Fragment {
     }
 
     public void update(Round round) {
-        handler.removeCallbacks(runnable);
         this.round = round;
         this.displayTexts();
         time = SystemClock.elapsedRealtime();
@@ -64,6 +63,7 @@ public class QuestionActivity extends Fragment {
                     ((ProgressBar) view.findViewById(R.id.progressBar)).setProgress((int) elapsedTime / 50);
                     handler.postDelayed(this, 50);
                 } else {
+                    handler.removeCallbacks(runnable);
                     ((QuizzActivityInterface) getActivity()).saveAnswer(new Answer(round.getId(), ""));
                 }
             }
@@ -94,6 +94,7 @@ public class QuestionActivity extends Fragment {
     private void setListenner(View view, final String responseId) {
         view.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                handler.removeCallbacks(runnable);
                 ((QuizzActivityInterface) getActivity()).saveAnswer(new Answer(round.getId(), responseId));
             }
         });

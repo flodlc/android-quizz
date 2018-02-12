@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 String username = ((EditText) findViewById(R.id.username)).getText().toString();
                 ApiServiceInterface apiService = ApiService.getService();
                 Call<User> call = apiService.getUser(ImmutableMap.of("user", username));
-
+                showLoader();
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(@NonNull Call<User> call,
@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(activity, HomeActivity.class);
                             intent.putExtras(b);
                             startActivity(intent);
-                        } else {
-                            //show message looking for new player ...
+                            finish();
                         }
                     }
 
@@ -53,5 +52,10 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void showLoader() {
+        findViewById(R.id.validUser).setVisibility(View.GONE);
+        findViewById(R.id.loader).setVisibility(View.VISIBLE);
     }
 }

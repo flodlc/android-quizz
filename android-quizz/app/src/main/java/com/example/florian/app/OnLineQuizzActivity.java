@@ -3,7 +3,9 @@ package com.example.florian.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -62,6 +64,13 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
         getSupportFragmentManager().beginTransaction().add(R.id.content, this.questionActivity, "QUESTION").commit();
     }
 
+    private void showLoader() {
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+        findViewById(R.id.loader).setVisibility(View.VISIBLE);
+    }
+
     @Override
     public void saveAnswer(Answer answer) {
         if (answer.getAnswer().equals(gameData.getRounds().get(roundNb - 1).getQuestion().getAnswer())) {
@@ -73,6 +82,7 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
             ApiServiceInterface apiService = ApiService.getService();
             PostAnswers postAnswers = new PostAnswers(user.getId(), gameData.getGame().getId(), answers);
             Call<Game> call = apiService.postAnswers(postAnswers);
+            showLoader();
             call.enqueue(new Callback<Game>() {
                 @Override
                 public void onResponse(@NonNull Call<Game> call,
@@ -97,5 +107,6 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtras(b);
         startActivity(intent);
+        finish();
     }
 }

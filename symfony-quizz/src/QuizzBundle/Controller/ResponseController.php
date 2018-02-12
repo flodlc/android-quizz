@@ -47,12 +47,13 @@ class ResponseController extends Controller
     public function postAnswerAction(Request $request)
     {
         $responseManager = $this->container->get("quizz.response");
-        $gameManager = $this->container->get("quizz.game");
+        $roundManager = $this->container->get("quizz.round");
 
         $data = json_decode($request->getContent(), true);
         $game = $responseManager->saveAnswers($data["user"], $data["game"], $data["answers"]);
-        $rounds = $gameManager->getRoundsOfGames($game);
+        $rounds = $roundManager->getRoundsOfGame($game);
 
-        return new Response(json_encode(["game" => $game, "rounds" => $rounds]));
+        return new Response(json_encode(["game" => $this->serializer->normalize($game, null, ["groups" => ["game"]]),
+            "rounds" => $this->serializer->normalize($rounds, null, ["groups" => ["game"]])]));
     }
 }

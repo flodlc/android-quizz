@@ -34,11 +34,13 @@ class Game
 
     /**
      *
+     * @Groups({"game"})
      * @ORM\ManyToOne(targetEntity="User", cascade={"persist"})
      */
     private $userA;
 
     /**
+     * @Groups({"game"})
      *
      * @ORM\ManyToOne(targetEntity="User", cascade={"persist"})
      */

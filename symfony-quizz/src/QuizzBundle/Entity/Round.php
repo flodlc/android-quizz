@@ -32,9 +32,10 @@ class Round
     private $numRound;
 
     /**
-     * @var bool
+     * @var int
+     * @Groups({"game"})
      *
-     * @ORM\Column(name="state", type="boolean")
+     * @ORM\Column(name="state", type="integer")
      */
     private $state;
 
@@ -48,6 +49,7 @@ class Round
 
     /**
      * @var Response
+     * @Groups({"game"})
      *
      * @ORM\ManyToOne(targetEntity="Response", cascade={"persist"})
      */
@@ -55,6 +57,7 @@ class Round
 
     /**
      * @var Response
+     * @Groups({"game"})
      *
      * @ORM\ManyToOne(targetEntity="Response", cascade={"persist"})
      *
@@ -103,27 +106,19 @@ class Round
     }
 
     /**
-     * Set state
-     *
-     * @param boolean $state
-     *
-     * @return Round
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return bool
+     * @return int
      */
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * @param int $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
     }
 
     /**

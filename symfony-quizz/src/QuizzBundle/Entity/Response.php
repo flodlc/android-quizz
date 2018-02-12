@@ -23,6 +23,7 @@ class Response
 
     /**
      * @var string
+     * @Groups({"game"})
      *
      * @ORM\Column(name="response", type="string", length=255)
      */

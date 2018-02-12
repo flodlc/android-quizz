@@ -15,7 +15,7 @@ class User
 {
     /**
      * @var int
-     * @Groups({"game", "user"})
+     * @Groups({"user"})
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id

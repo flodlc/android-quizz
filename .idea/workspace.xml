@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6cdc01cf-da8a-4725-be8b-b78fb84e7f6e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/ResponseController.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/ResponseController.php" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/GameManager.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/GameManager.php" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/RoundManager.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/RoundManager.php" />
-    </list>
+    <list default="true" id="6cdc01cf-da8a-4725-be8b-b78fb84e7f6e" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="GameController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/GameController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1567">
-              <caret line="93" column="34" lean-forward="true" selection-start-line="93" selection-start-column="34" selection-end-line="93" selection-end-column="34" />
+            <state relative-caret-position="1001">
+              <caret line="93" column="43" lean-forward="true" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
               <folding>
                 <element signature="e#124#172#0#PHP" expanded="true" />
               </folding>
@@ -30,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameManager.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameManager.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/GameManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="825">
-              <caret line="98" column="62" lean-forward="false" selection-start-line="98" selection-start-column="62" selection-end-line="98" selection-end-column="62" />
+            <state relative-caret-position="985">
+              <caret line="101" column="0" lean-forward="true" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -75,8 +71,8 @@
       <file leaf-file-name="ResponseController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/ResponseController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1166">
-              <caret line="53" column="56" lean-forward="false" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
+            <state relative-caret-position="1133">
+              <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding>
                 <element signature="e#124#172#0#PHP" expanded="true" />
               </folding>
@@ -141,8 +137,8 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/symfony-quizz/app/config/parameters.yml.dist" />
         <option value="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/RoundManager.php" />
-        <option value="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/ResponseController.php" />
         <option value="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/GameManager.php" />
+        <option value="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/ResponseController.php" />
       </list>
     </option>
   </component>
@@ -344,12 +340,12 @@
       <workItem from="1518102684217" duration="10830000" />
       <workItem from="1518167339152" duration="773000" />
       <workItem from="1518193700310" duration="2021000" />
-      <workItem from="1518440673988" duration="1396000" />
+      <workItem from="1518440673988" duration="1532000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34426000" />
+    <option name="totallyTimeSpent" value="34562000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="3226" height="1746" extended-state="6" />
@@ -771,14 +767,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="48" column="21" lean-forward="false" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/ResponseManager.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1089">
@@ -789,8 +777,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/ResponseController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1166">
-          <caret line="53" column="56" lean-forward="false" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
+        <state relative-caret-position="1133">
+          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding>
+            <element signature="e#124#172#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/GameController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1001">
+          <caret line="93" column="43" lean-forward="true" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
           <folding>
             <element signature="e#124#172#0#PHP" expanded="true" />
           </folding>
@@ -805,21 +803,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/GameManager.php">
+    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="98" column="62" lean-forward="false" selection-start-line="98" selection-start-column="62" selection-end-line="98" selection-end-column="62" />
+        <state relative-caret-position="330">
+          <caret line="48" column="21" lean-forward="false" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/GameController.php">
+    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/GameManager.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1567">
-          <caret line="93" column="34" lean-forward="true" selection-start-line="93" selection-start-column="34" selection-end-line="93" selection-end-column="34" />
-          <folding>
-            <element signature="e#124#172#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="985">
+          <caret line="101" column="0" lean-forward="true" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

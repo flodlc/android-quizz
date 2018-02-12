@@ -79,7 +79,7 @@ class GameController extends Controller
     }
 
     /**
-     * @Route("/status", name="game_ready")
+     * @Route("/status", name="game_is_ready")
      * @Method({"GET"})
      *
      * @return Response

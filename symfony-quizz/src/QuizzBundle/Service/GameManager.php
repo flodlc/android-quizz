@@ -91,12 +91,13 @@ class GameManager
     public function getGameAndRounds($idGame)
     {
         $gameRepo = $this->em->getRepository(Game::class);
-
         $game = $gameRepo->find($idGame);
+
         if (!$game)
             throw new HttpException("Partie inexistante", 404);
 
         $rounds = $this->roundManager->getRoundsOfGame($game);
+
         return ["game" => $game, "rounds" => $rounds];
     }
 

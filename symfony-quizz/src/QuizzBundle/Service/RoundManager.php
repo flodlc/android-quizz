@@ -33,6 +33,18 @@ class RoundManager
     }
 
     /**
+     * Return all rounds of the game in parameter.
+     * @param Game $game
+     * @return array
+     */
+    public function getRoundsOfGame(Game $game)
+    {
+        $roundRepo = $this->em->getRepository(Round::class);
+        $rounds = $roundRepo->findBy(["game" => $game]);
+        return $rounds;
+    }
+
+    /**
      * Generate rounds for a game, with question. The number of rounds depends on the parameter nb_round.
      * @param Game $game
      * @return array

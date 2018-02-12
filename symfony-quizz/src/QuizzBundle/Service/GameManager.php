@@ -56,6 +56,13 @@ class GameManager
     public function getAGameAvailable(User $me)
     {
         $gameRepo = $this->em->getRepository(Game::class);
+        $mySearch = $gameRepo->findBy(["userA" => $me]);
+        if (count($mySearch) > 0) {
+            $mySearch = $mySearch[0];
+            if (0 == $mySearch->getState())
+                return ["game" => $mySearch[0], "rounds" => []];
+        }
+
         $games = $gameRepo->findBy(["state" => 0]);
 
         if (count($games) > 0 && $games[0]->getUserA() != $me) {
@@ -84,13 +91,12 @@ class GameManager
     public function getGameAndRounds($idGame)
     {
         $gameRepo = $this->em->getRepository(Game::class);
-        $roundRepo = $this->em->getRepository(Round::class);
 
         $game = $gameRepo->find($idGame);
         if (!$game)
             throw new HttpException("Partie inexistante", 404);
-        $rounds = $roundRepo->findBy(["game" => $game]);
 
+        $rounds = $this->roundManager->getRoundsOfGame($game);
         return ["game" => $game, "rounds" => $rounds];
     }
 

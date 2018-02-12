@@ -60,7 +60,7 @@ class GameManager
         if (count($mySearch) > 0) {
             $mySearch = $mySearch[0];
             if (0 == $mySearch->getState())
-                return ["game" => $mySearch[0], "rounds" => []];
+                return ["game" => $mySearch, "rounds" => []];
         }
 
         $games = $gameRepo->findBy(["state" => 0]);

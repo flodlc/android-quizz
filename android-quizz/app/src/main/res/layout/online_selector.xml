@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp">
-        <TextView
-            android:id="@+id/editText3"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:inputType="textPersonName"
-            android:text="@string/online"
-            android:textSize="30sp" />
+    android:layout_marginTop="20dp"
+    android:orientation="vertical">
 
-        <Button
-            android:id="@+id/onlineButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="1 vs 1 Online" />
+    <TextView
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_marginLeft="20dp"
+        android:inputType="textPersonName"
+        android:text="@string/online"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/onlineButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/button_shape"
+        android:text="1 vs 1 Online"
+        android:textColor="@color/colorRed"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 </LinearLayout>

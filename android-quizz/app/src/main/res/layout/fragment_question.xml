@@ -12,32 +12,35 @@
         android:gravity="center"
         android:text="De quel animal est-ce le cri ?"
         android:textAlignment="center"
-        android:textSize="25sp" />
+        android:textStyle="bold"
+        android:textSize="28sp" />
 
     <ProgressBar
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="40dp"
-        android:layout_weight="1"
         android:layout_marginRight="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_weight="1"
         android:progress="40" />
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:layout_height="wrap_content">
+        android:layout_marginTop="20dp"
+        android:layout_weight="1">
 
         <TableRow>
+
             <Button
                 android:id="@+id/response1"
                 android:layout_height="80dp"
-                android:layout_margin="1dp"
+                android:layout_margin="2dp"
                 android:layout_weight="10"
+                android:background="@drawable/button_shape"
                 android:text="Cheval"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp" />
@@ -45,19 +48,22 @@
             <Button
                 android:id="@+id/response2"
                 android:layout_height="80dp"
-                android:layout_margin="1dp"
+                android:layout_margin="2dp"
                 android:layout_weight="10"
+                android:background="@drawable/button_shape"
                 android:text="Vache"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp" />
         </TableRow>
 
         <TableRow>
+
             <Button
                 android:id="@+id/response3"
                 android:layout_height="80dp"
-                android:layout_margin="1dp"
+                android:layout_margin="2dp"
                 android:layout_weight="10"
+                android:background="@drawable/button_shape"
                 android:text="Chien"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp" />
@@ -65,8 +71,9 @@
             <Button
                 android:id="@+id/response4"
                 android:layout_height="80dp"
-                android:layout_margin="1dp"
+                android:layout_margin="2dp"
                 android:layout_weight="10"
+                android:background="@drawable/button_shape"
                 android:text="Chat"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp" />

@@ -51,11 +51,13 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
 
     private void displayGameInformations() {
         Bundle b = new Bundle();
+        b.putParcelable("round", gameData.getRounds().get(0));
         b.putParcelable("adv", gameData.getGame().getAdv());
         this.onlineInfosActivity = OnlineInfosActivity.newInstance(b);
         getSupportFragmentManager().beginTransaction().add(R.id.content,
                 onlineInfosActivity, "INFO").commit();
     }
+
 
     private void displayQuestion() {
         Bundle b = new Bundle();
@@ -95,7 +97,7 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
                 }
             });
         } else {
-            this.onlineInfosActivity.Update(roundNb, score);
+            this.onlineInfosActivity.Update(gameData.getRounds().get(roundNb), score);
             this.questionActivity.update(gameData.getRounds().get(roundNb - 1));
         }
     }

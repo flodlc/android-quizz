@@ -8,8 +8,9 @@
     <TextView
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
-        android:layout_height="55dp"
+        android:layout_height="35dp"
         android:layout_gravity="top|left"
+        android:layout_marginLeft="20dp"
         android:inputType="textPersonName"
         android:text="@string/offline"
         android:textSize="30sp" />
@@ -24,16 +25,26 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_alignParentLeft="true"
+            android:layout_margin="20dp"
             android:layout_weight="1"
-            android:text="1 vs IA" />
+            android:background="@drawable/button_shape"
+            android:text="1 vs IA"
+            android:textColor="@color/colorRed"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
             android:layout_weight="1"
-            android:text="1 vs 1" />
+            android:background="@drawable/button_shape"
+            android:text="1 vs 1"
+            android:textColor="@color/colorRed"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -41,5 +52,10 @@
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="Team A vs Team B" />
+        android:layout_margin="20dp"
+        android:background="@drawable/button_shape"
+        android:text="Team A vs Team B"
+        android:textColor="@color/colorRed"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 </LinearLayout>

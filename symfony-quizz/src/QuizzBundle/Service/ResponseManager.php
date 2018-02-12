@@ -102,7 +102,7 @@ class ResponseManager
             $game->setAdv($game->getUserA());
         }
 
-        if ($game->getPointsA() != null && $game->getPointsB() != null) {
+        if ($game->getPointsA() !== null && $game->getPointsB() !== null) {
             switch ($this->getWinner($game->getPointsB(), $game->getPointsA())) {
                 case "A":
                     $game->setWinner($game->getUserB());

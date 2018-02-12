@@ -56,7 +56,7 @@ class GameManager
     public function getAGameAvailable(User $me)
     {
         $gameRepo = $this->em->getRepository(Game::class);
-        $mySearch = $gameRepo->findBy(["userA" => $me]);
+        $mySearch = $gameRepo->findBy(["userA" => $me, "state" => 0]);
         if (count($mySearch) > 0) {
             $mySearch = $mySearch[0];
             if (0 == $mySearch->getState())

@@ -103,5 +103,4 @@ class RoundManager
             throw new HttpException("Pas de round correspondant", 404);
         return $round->getQuestion();
     }
-
 }

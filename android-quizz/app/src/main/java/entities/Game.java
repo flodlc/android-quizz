@@ -3,11 +3,13 @@ package entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Parcelable.Creator;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Game implements Parcelable {
+import entities.User;
+
+public class Game implements Parcelable
+{
 
     @SerializedName("id")
     @Expose
@@ -15,9 +17,15 @@ public class Game implements Parcelable {
     @SerializedName("state")
     @Expose
     private Integer state;
+    @SerializedName("userA")
+    @Expose
+    private User userA;
+    @SerializedName("userB")
+    @Expose
+    private User userB;
     @SerializedName("adv")
     @Expose
-    private String adv;
+    private User adv;
     @SerializedName("winner")
     @Expose
     private User winner;
@@ -29,6 +37,7 @@ public class Game implements Parcelable {
     private Integer pointsB;
     public final static Parcelable.Creator<Game> CREATOR = new Creator<Game>() {
 
+
         @SuppressWarnings({
                 "unchecked"
         })
@@ -39,24 +48,45 @@ public class Game implements Parcelable {
         public Game[] newArray(int size) {
             return (new Game[size]);
         }
-    };
+
+    }
+            ;
 
     protected Game(Parcel in) {
         this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.state = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.adv = ((String) in.readValue((String.class.getClassLoader())));
+        this.userA = ((User) in.readValue((User.class.getClassLoader())));
+        this.userB = ((User) in.readValue((User.class.getClassLoader())));
+        this.adv = ((User) in.readValue((User.class.getClassLoader())));
         this.winner = ((User) in.readValue((User.class.getClassLoader())));
         this.pointsA = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.pointsB = ((Integer) in.readValue((Integer.class.getClassLoader())));
     }
 
+    /**
+     * No args constructor for use in serialization
+     *
+     */
     public Game() {
     }
 
-    public Game(Integer id, Integer state, String adv, User winner, Integer pointsA, Integer pointsB) {
+    /**
+     *
+     * @param pointsB
+     * @param id
+     * @param pointsA
+     * @param userA
+     * @param userB
+     * @param state
+     * @param winner
+     * @param adv
+     */
+    public Game(Integer id, Integer state, User userA, User userB, User adv, User winner, Integer pointsA, Integer pointsB) {
         super();
         this.id = id;
         this.state = state;
+        this.userA = userA;
+        this.userB = userB;
         this.adv = adv;
         this.winner = winner;
         this.pointsA = pointsA;
@@ -89,15 +119,41 @@ public class Game implements Parcelable {
         return this;
     }
 
-    public String getAdv() {
+    public User getUserA() {
+        return userA;
+    }
+
+    public void setUserA(User userA) {
+        this.userA = userA;
+    }
+
+    public Game withUserA(User userA) {
+        this.userA = userA;
+        return this;
+    }
+
+    public User getUserB() {
+        return userB;
+    }
+
+    public void setUserB(User userB) {
+        this.userB = userB;
+    }
+
+    public Game withUserB(User userB) {
+        this.userB = userB;
+        return this;
+    }
+
+    public User getAdv() {
         return adv;
     }
 
-    public void setAdv(String adv) {
+    public void setAdv(User adv) {
         this.adv = adv;
     }
 
-    public Game withAdv(String adv) {
+    public Game withAdv(User adv) {
         this.adv = adv;
         return this;
     }
@@ -144,6 +200,8 @@ public class Game implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(id);
         dest.writeValue(state);
+        dest.writeValue(userA);
+        dest.writeValue(userB);
         dest.writeValue(adv);
         dest.writeValue(winner);
         dest.writeValue(pointsA);
@@ -153,4 +211,5 @@ public class Game implements Parcelable {
     public int describeContents() {
         return 0;
     }
+
 }

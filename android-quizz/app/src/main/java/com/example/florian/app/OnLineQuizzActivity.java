@@ -51,7 +51,7 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
 
     private void displayGameInformations() {
         Bundle b = new Bundle();
-        b.putString("adv", gameData.getGame().getAdv());
+        b.putParcelable("adv", gameData.getGame().getAdv());
         this.onlineInfosActivity = OnlineInfosActivity.newInstance(b);
         getSupportFragmentManager().beginTransaction().add(R.id.content,
                 onlineInfosActivity, "INFO").commit();
@@ -81,17 +81,17 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
         if (answers.size() == gameData.getRounds().size()) {
             ApiServiceInterface apiService = ApiService.getService();
             PostAnswers postAnswers = new PostAnswers(user.getId(), gameData.getGame().getId(), answers);
-            Call<Game> call = apiService.postAnswers(postAnswers);
+            Call<GameResult> call = apiService.postAnswers(postAnswers);
             showLoader();
-            call.enqueue(new Callback<Game>() {
+            call.enqueue(new Callback<GameResult>() {
                 @Override
-                public void onResponse(@NonNull Call<Game> call,
-                                       @NonNull Response<Game> response) {
+                public void onResponse(@NonNull Call<GameResult> call,
+                                       @NonNull Response<GameResult> response) {
                     displayResult(response.body());
                 }
 
                 @Override
-                public void onFailure(Call<Game> call, Throwable t) {
+                public void onFailure(Call<GameResult> call, Throwable t) {
                 }
             });
         } else {
@@ -100,10 +100,10 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
         }
     }
 
-    private void displayResult(Game game) {
+    private void displayResult(GameResult gameResult) {
         Bundle b = new Bundle();
         b.putParcelable("user", user);
-        b.putParcelable("game", game);
+        b.putParcelable("gameResult", gameResult);
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtras(b);
         startActivity(intent);

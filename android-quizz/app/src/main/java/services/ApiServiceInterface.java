@@ -30,5 +30,5 @@ public interface ApiServiceInterface {
     Call<GameData> checkNewGame(@QueryMap Map<String, String> param);
 
     @POST("response/")
-    Call<Game> postAnswers(@Body PostAnswers postAnswers);
+    Call<GameResult> postAnswers(@Body PostAnswers postAnswers);
 }

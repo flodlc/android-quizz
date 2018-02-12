@@ -59,7 +59,7 @@ public class OnlineSelectorActivity extends Fragment {
                 if (response.code() == 200) {
                     GameData freshGameData = response.body();
                     if (freshGameData.getGame().getState() == 1) {
-                        RouterService.goOnlineQuizz(getActivity(), user, gameData, alertDialog);
+                        RouterService.goOnlineQuizz(getActivity(), user, freshGameData, alertDialog);
                     } else if (SystemClock.elapsedRealtime() - time1 < 30000) {
                         try {
                             Thread.sleep(1000);

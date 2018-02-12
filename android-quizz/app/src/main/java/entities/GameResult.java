@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Parcel;
@@ -11,12 +12,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class GameResult implements Parcelable {
 
-    @SerializedName("user")
+    @SerializedName("game")
     @Expose
-    private String user;
-    @SerializedName("answers")
+    private Game game;
+    @SerializedName("rounds")
     @Expose
-    private List<Answer> answers = null;
+    private List<Round> rounds = new ArrayList<>();
     public final static Parcelable.Creator<GameResult> CREATOR = new Creator<GameResult>() {
 
 
@@ -34,8 +35,8 @@ public class GameResult implements Parcelable {
     };
 
     protected GameResult(Parcel in) {
-        this.user = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.answers, (entities.Answer.class.getClassLoader()));
+        this.game = ((Game) in.readValue((Game.class.getClassLoader())));
+        in.readList(this.rounds, (entities.Round.class.getClassLoader()));
     }
 
     /**
@@ -45,44 +46,44 @@ public class GameResult implements Parcelable {
     }
 
     /**
-     * @param answers
-     * @param user
+     * @param rounds
+     * @param game
      */
-    public GameResult(String user, List<Answer> answers) {
+    public GameResult(Game game, List<Round> rounds) {
         super();
-        this.user = user;
-        this.answers = answers;
+        this.game = game;
+        this.rounds = rounds;
     }
 
-    public String getUser() {
-        return user;
+    public Game getGame() {
+        return game;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
-    public GameResult withUser(String user) {
-        this.user = user;
+    public GameResult withGame(Game game) {
+        this.game = game;
         return this;
     }
 
-    public List<Answer> getAnswers() {
-        return answers;
+    public List<Round> getRounds() {
+        return rounds;
     }
 
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
+    public void setRounds(List<Round> rounds) {
+        this.rounds = rounds;
     }
 
-    public GameResult withAnswers(List<Answer> answers) {
-        this.answers = answers;
+    public GameResult withRounds(List<Round> rounds) {
+        this.rounds = rounds;
         return this;
     }
 
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(user);
-        dest.writeList(answers);
+        dest.writeValue(game);
+        dest.writeList(rounds);
     }
 
     public int describeContents() {

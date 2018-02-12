@@ -47,7 +47,7 @@ class Game
     private $userB;
 
     /**
-     * @var string
+     * @var User
      * @Groups({"game", "mygames"})
      *
      *
@@ -149,7 +149,7 @@ class Game
     }
 
     /**
-     * @return string
+     * @return User
      */
     public function getAdv()
     {
@@ -157,9 +157,9 @@ class Game
     }
 
     /**
-     * @param string $adv
+     * @param User $adv
      */
-    public function setAdv($adv)
+    public function setAdv(User $adv)
     {
         $this->adv = $adv;
     }

@@ -38,12 +38,12 @@ class GameManager
         $gamesA = $gameRepo->findBy(["userA" => $user]);
         foreach ($gamesA as $game) {
             if ($game->getState() > 0)
-                $game->setAdv($game->getUserB()->getUsername());
+                $game->setAdv($game->getUserB());
         }
         $gamesB = $gameRepo->findBy(["userB" => $user]);
         foreach ($gamesB as $game) {
             if ($game->getState() > 0)
-                $game->setAdv($game->getUserA()->getUsername());
+                $game->setAdv($game->getUserA());
         }
         return array_merge($gamesA, $gamesB);
     }

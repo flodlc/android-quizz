@@ -68,12 +68,15 @@ class RoundManager
     }
 
     /**
-     * Add the response in the round at the correct user column.
+     * Add the response in the round at the correct user column. Return true if the response is correct.
      * @param Round $round
      * @param Response $response
+     * @return bool
      */
     public function addResponse(Round $round, Response $response)
     {
+        if ($round->getState() > 1)
+            throw new HttpException("Ce round (" . $round->getId() . ") est déjà plein.", 404);
         $user = $response->getUser();
         $game = $round->getGame();
         $myRole = $this->userManager->whoIAm($user, $game);
@@ -81,8 +84,10 @@ class RoundManager
             $round->setResponseUA($response);
         else
             $round->setResponseUB($response);
+        $round->setState($round->getState() + 1);
         $this->em->merge($round);
         $this->em->flush();
+        return ($response->getResponse() == $round->getQuestion()->getAnswer());
     }
 
     /**

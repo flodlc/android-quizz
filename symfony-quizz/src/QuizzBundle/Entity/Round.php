@@ -41,6 +41,7 @@ class Round
 
     /**
      *
+     * @var Question
      * @Groups({"game"})
      *
      * @ORM\ManyToOne(targetEntity="Question", cascade={"persist"})
@@ -122,7 +123,7 @@ class Round
     }
 
     /**
-     * @return mixed
+     * @return Question
      */
     public function getQuestion()
     {
@@ -130,9 +131,9 @@ class Round
     }
 
     /**
-     * @param mixed $question
+     * @param Question $question
      */
-    public function setQuestion($question)
+    public function setQuestion(Question $question)
     {
         $this->question = $question;
     }

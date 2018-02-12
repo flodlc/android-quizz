@@ -29,6 +29,12 @@ class ResponseManager
         $this->roundManager = $roundManager;
     }
 
+    /**
+     * @param $idUser
+     * @param $idGame
+     * @param $answers
+     * @return object
+     */
     public function saveAnswers($idUser, $idGame, $answers)
     {
         $userRepo = $this->em->getRepository(User::class);
@@ -42,27 +48,58 @@ class ResponseManager
         $game = $gameRepo->find($idGame);
         if (!$game)
             throw new HttpException("Pas de partie liée", 404);
-        if (2 == $game->getState())
-            throw new HttpException("Partie terminée", 200);
-
         $myRole = $this->userManager->whoIAm($user, $game);
 
+        /**
+         * Check if game is end
+         */
+        if (2 == $game->getState())
+            throw new HttpException("Partie terminée", 200);
+        /**
+         * Check if game is end
+         */
+        if (0 == $game->getState())
+            throw new HttpException("Partie en attente d'un adversaire", 200);
+
+        if ("A" == $myRole && $game->getPointsA() !== null
+            || "B" == $myRole && $game->getPointsB() !== null) {
+            throw new HttpException("Tu as déjà répondu pour cette partie!", 500);
+        }
+
+
+        $rounds = $this->roundManager->getRoundsOfGame($game);
         foreach ($answers as $answer) {
-            $response = $this->createResponse($user, $answer["answer"]);
-            $question = $this->roundManager->getQuestionById($answer["roundId"]);
             $round = $roundRepo->find($answer["roundId"]);
-            if ($question->getAnswer() == $response->getResponse())
+            if (!in_array($round, $rounds))
+                throw new HttpException("Ce round (" . $round->getId() . ") n'appartient pas à la partie en cours (" . $game->getId() . ").", 200);
+        }
+
+        foreach ($answers as $answer) {
+            $round = $roundRepo->find($answer["roundId"]);
+            $response = $this->createResponse($user, $answer["answer"]);
+
+            if ($this->roundManager->addResponse($round, $response))
                 $myPoints++;
-            $this->roundManager->addResponse($round, $response);
+            $index = array_search($round, $rounds);
+            unset($rounds[$index]);
+        }
+
+        /**
+         * Check if some rounds had not be answered by the player. If true, we set the round at "played by the player"
+         */
+        if (count($rounds) > 0) {
+            foreach ($rounds as $round) {
+                $round->setState($round->getState() + 1);
+            }
         }
 
 
         if ("A" == $myRole) {
             $game->setPointsA($myPoints);
-            $game->setAdv($game->getUserB()->getUsername());
+            $game->setAdv($game->getUserB());
         } else {
             $game->setPointsB($myPoints);
-            $game->setAdv($game->getUserA()->getUsername());
+            $game->setAdv($game->getUserA());
         }
 
         if ($game->getPointsA() != null && $game->getPointsB() != null) {
@@ -91,7 +128,8 @@ class ResponseManager
      * @param $pointsB
      * @return string
      */
-    public function getWinner($pointsA, $pointsB)
+    public
+    function getWinner($pointsA, $pointsB)
     {
         if ($pointsB > $pointsA) {
             return "A";
@@ -102,7 +140,8 @@ class ResponseManager
         }
     }
 
-    public function createResponse(User $user, $answer)
+    public
+    function createResponse(User $user, $answer)
     {
 
         $response = new \QuizzBundle\Entity\Response();

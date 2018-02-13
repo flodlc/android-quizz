@@ -151,14 +151,14 @@ class GameManager
     }
 
     /**
-     * Remove a game when its state is at 0. Return true if the game is remove, otherwise it return false
+     * Remove a game when its state is at 0. Return true if the game is remove, otherwise throw error 500.
      * @param Game $game
      * @return bool
      */
     public function deleteGame(Game $game)
     {
         if ($game->getState() != 0)
-            return false;
+            throw new HttpException("Partie déjà lancée", 500);
         $this->em->remove($game);
         $this->em->flush();
         return true;

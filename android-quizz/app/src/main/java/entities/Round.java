@@ -58,6 +58,10 @@ public class Round implements Parcelable {
     public Round() {
     }
 
+    public Round(Question question) {
+        this.question = question;
+    }
+
     /**
      * @param id
      * @param numRound

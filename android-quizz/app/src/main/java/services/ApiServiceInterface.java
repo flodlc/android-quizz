@@ -1,6 +1,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import entities.Answer;
@@ -8,6 +9,7 @@ import entities.Game;
 import entities.GameData;
 import entities.GameResult;
 import entities.PostAnswers;
+import entities.Question;
 import entities.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -39,4 +41,7 @@ public interface ApiServiceInterface {
 
     @DELETE("game/{id}")
     Call<Boolean> deleteGame(@Path("id") String gameId);
+
+    @GET("question/all")
+    Call<List<Question>> getAllQuestions();
 }

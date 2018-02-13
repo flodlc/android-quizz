@@ -12,21 +12,27 @@ public class Question implements Parcelable {
     @SerializedName("question")
     @Expose
     private String question;
+
     @SerializedName("responseA")
     @Expose
     private String responseA;
+
     @SerializedName("responseB")
     @Expose
     private String responseB;
+
     @SerializedName("responseC")
     @Expose
     private String responseC;
+
     @SerializedName("responseD")
     @Expose
     private String responseD;
+
     @SerializedName("answer")
     @Expose
     private String answer;
+
     public final static Parcelable.Creator<Question> CREATOR = new Creator<Question>() {
 
 

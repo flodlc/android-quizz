@@ -36,6 +36,7 @@ public class ResultActivity extends AppCompatActivity {
         (findViewById(R.id.backHome)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RouterService.goHome(activity, user);
+                finish();
             }
         });
     }

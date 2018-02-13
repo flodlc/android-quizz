@@ -65,11 +65,11 @@ public class AnswerLineActivity extends Fragment {
 
     private String getAnswerText(Question question) {
         switch (question.getAnswer()) {
-            case "QuestionA":
+            case "ResponseA":
                 return question.getResponseA();
-            case "QuestionB":
+            case "ResponseB":
                 return question.getResponseB();
-            case "QuestionC":
+            case "ResponseC":
                 return question.getResponseC();
             default:
                 return question.getResponseD();

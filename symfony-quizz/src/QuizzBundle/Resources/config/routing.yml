@@ -12,3 +12,8 @@ response:
     resource: '@QuizzBundle/Controller/ResponseController.php'
     type:     annotation
     prefix:   /response
+
+question:
+    resource: '@QuizzBundle/Controller/QuestionController.php'
+    type:     annotation
+    prefix:   /question

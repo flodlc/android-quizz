@@ -1,7 +1,6 @@
 package com.example.florian.app;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -10,13 +9,9 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.util.concurrent.Service;
 
-import entities.Game;
 import entities.GameData;
 import entities.User;
 import retrofit2.Call;
@@ -31,7 +26,8 @@ public class OnlineSelectorActivity extends Fragment {
 
     private User user;
     private AlertDialog alertDialog;
-    private Game currentGame;
+    private ApiServiceInterface apiService;
+    private GameData currentGameData;
 
     public static OnlineSelectorActivity newInstance(Bundle args) {
         OnlineSelectorActivity f = new OnlineSelectorActivity();
@@ -42,6 +38,7 @@ public class OnlineSelectorActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.online_selector, container, false);
+        apiService = ApiService.getService();
         Bundle b = getArguments();
         this.user = b.getParcelable("user");
         setIntent(view.findViewById(R.id.onlineButton));
@@ -51,16 +48,15 @@ public class OnlineSelectorActivity extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ApiServiceInterface apiService = ApiService.getService();
-        Call<Game> call = apiService.getCurrentGame(ImmutableMap.<String, String>of("user",
+        Call<GameData> call = apiService.getCurrentGame(ImmutableMap.<String, String>of("user",
                 String.valueOf(user.getId())));
-        call.enqueue(new Callback<Game>() {
+        call.enqueue(new Callback<GameData>() {
             @Override
-            public void onResponse(@NonNull Call<Game> call,
-                                   @NonNull Response<Game> response) {
+            public void onResponse(@NonNull Call<GameData> call,
+                                   @NonNull Response<GameData> response) {
                 if (response.code() == 200) {
-                    currentGame = response.body();
-                    if (currentGame != null) {
+                    currentGameData = response.body();
+                    if (currentGameData.getGame() != null) {
                         getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.VISIBLE);
                     } else {
                         getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
@@ -69,17 +65,15 @@ public class OnlineSelectorActivity extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Game> call, Throwable t) {
+            public void onFailure(Call<GameData> call, Throwable t) {
                 getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
             }
         });
     }
 
-    private void checkNewGame(final Game game) {
-        ApiServiceInterface apiService = ApiService.getService();
+    private void checkNewGame(final long time1) {
         Call<GameData> call = apiService.checkNewGame(ImmutableMap.of("user", String.valueOf(user.getId()),
-                "game", String.valueOf(game.getId())));
-        final long time1 = SystemClock.elapsedRealtime();
+                "game", String.valueOf(currentGameData.getGame().getId())));
 
         call.enqueue(new Callback<GameData>() {
             @Override
@@ -89,16 +83,15 @@ public class OnlineSelectorActivity extends Fragment {
                     GameData freshGameData = response.body();
                     if (freshGameData.getGame().getState() == 1) {
                         RouterService.goOnlineQuizz(getActivity(), user, freshGameData, alertDialog);
-                    } else if (SystemClock.elapsedRealtime() - time1 < 30000) {
+                    } else if (SystemClock.elapsedRealtime() - time1 < 20000) {
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        checkNewGame(freshGameData.getGame());
+                        checkNewGame(time1);
                     } else {
                         alertDialog.dismiss();
-                        RouterService.goHome(getActivity(), user);
                     }
                 }
             }
@@ -109,39 +102,50 @@ public class OnlineSelectorActivity extends Fragment {
         });
     }
 
-
-    private void getNewGame() {
-        ApiServiceInterface apiService = ApiService.getService();
-        Call<GameData> call = apiService.getNewGame(ImmutableMap.of("user", String.valueOf(user.getId())));
-        final long time1 = SystemClock.currentThreadTimeMillis();
-
+    private void makeAlertDilogue() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Waiting for a player");
         builder.setIcon(R.drawable.sablier);
-        builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //cancel game
+                if (currentGameData.getGame() != null) {
+                    Call<Boolean> call = apiService.deleteGame(String.valueOf(currentGameData.getGame().getId()));
+
+                    call.enqueue(new Callback<Boolean>() {
+                        @Override
+                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<Boolean> call, Throwable t) {
+
+                        }
+                    });
+                }
             }
         });
-
         alertDialog = builder.show();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+    }
 
+    private void getNewGame() {
+        Call<GameData> call = apiService.getNewGame(ImmutableMap.of("user", String.valueOf(user.getId())));
+        final long time1 = SystemClock.elapsedRealtime();
+
+        makeAlertDilogue();
         call.enqueue(new Callback<GameData>() {
             @Override
             public void onResponse(@NonNull Call<GameData> call,
                                    @NonNull Response<GameData> response) {
                 if (response.code() == 200) {
-                    GameData gameData = response.body();
-                    if (gameData.getGame().getState() == 1) {
+                    currentGameData = response.body();
+                    if (currentGameData.getGame().getState() == 1) {
                         RouterService.goOnlineQuizz(getActivity(), user, response.body(), alertDialog);
-                    } else if (SystemClock.currentThreadTimeMillis() - time1 < 30000) {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        checkNewGame(response.body().getGame());
+                    } else {
+                        checkNewGame(time1);
                     }
                 }
             }
@@ -155,11 +159,7 @@ public class OnlineSelectorActivity extends Fragment {
     private void setIntent(View view) {
         view.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (currentGame != null) {
-                    checkNewGame(currentGame);
-                } else {
-                    getNewGame();
-                }
+                getNewGame();
             }
         });
     }

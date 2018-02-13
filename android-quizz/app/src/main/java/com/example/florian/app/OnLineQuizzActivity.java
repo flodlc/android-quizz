@@ -1,6 +1,5 @@
 package com.example.florian.app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -10,7 +9,6 @@ import android.view.View;
 import java.util.ArrayList;
 
 import entities.Answer;
-import entities.Game;
 import entities.GameData;
 import entities.GameResult;
 import entities.PostAnswers;
@@ -20,6 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import services.ApiService;
 import services.ApiServiceInterface;
+import services.RouterService;
 
 /**
  * Created by Florian on 31/01/2018.
@@ -103,12 +102,7 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
     }
 
     private void displayResult(GameResult gameResult) {
-        Bundle b = new Bundle();
-        b.putParcelable("user", user);
-        b.putParcelable("gameResult", gameResult);
-        Intent intent = new Intent(this, ResultActivity.class);
-        intent.putExtras(b);
-        startActivity(intent);
+        RouterService.goResult(this, user, gameResult);
         finish();
     }
 }

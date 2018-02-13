@@ -16,6 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import services.ApiService;
 import services.ApiServiceInterface;
+import services.RouterService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,11 +38,7 @@ public class MainActivity extends AppCompatActivity {
                                            @NonNull Response<User> response) {
                         if (response.code() == 200) {
                             User user = response.body();
-                            Bundle b = new Bundle();
-                            b.putParcelable("user", user);
-                            Intent intent = new Intent(activity, HomeActivity.class);
-                            intent.putExtras(b);
-                            startActivity(intent);
+                            RouterService.goHome(activity, user);
                             finish();
                         }
                     }

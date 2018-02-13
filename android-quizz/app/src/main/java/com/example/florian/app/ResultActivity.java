@@ -1,7 +1,6 @@
 package com.example.florian.app;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 import entities.GameResult;
 import entities.Round;
 import entities.User;
+import services.RouterService;
 
 /**
  * Created by Florian on 11/02/2018.
@@ -35,12 +35,7 @@ public class ResultActivity extends AppCompatActivity {
         final Activity activity = this;
         (findViewById(R.id.backHome)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Bundle b = new Bundle();
-                b.putParcelable("user", user);
-                Intent intent = new Intent(activity, HomeActivity.class);
-                intent.putExtras(b);
-                startActivity(intent);
-                finish();
+                RouterService.goHome(activity, user);
             }
         });
     }

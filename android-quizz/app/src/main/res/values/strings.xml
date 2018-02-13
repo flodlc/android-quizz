@@ -5,4 +5,5 @@
     <string name="online">En ligne</string>
     <string name="offline">Hors ligne</string>
     <string name="question">Question</string>
+    <string name="cancel">Annuler</string>
 </resources>

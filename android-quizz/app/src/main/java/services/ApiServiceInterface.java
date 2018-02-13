@@ -11,9 +11,11 @@ import entities.PostAnswers;
 import entities.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
 /**
@@ -33,5 +35,8 @@ public interface ApiServiceInterface {
     Call<GameResult> postAnswers(@Body PostAnswers postAnswers);
 
     @GET("game/current")
-    Call<Game> getCurrentGame(@QueryMap Map<String, String> param);
+    Call<GameData> getCurrentGame(@QueryMap Map<String, String> param);
+
+    @DELETE("game/{id}")
+    Call<Boolean> deleteGame(@Path("id") String gameId);
 }

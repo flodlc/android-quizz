@@ -28,6 +28,7 @@ services:
         public: true
         arguments:
           $roundManager: '@quizz.round'
+          $userManager: '@quizz.user'
     quizz.response:
         class: QuizzBundle\Service\ResponseManager
         public: true

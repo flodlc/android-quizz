@@ -20,11 +20,13 @@ class GameManager
 {
     private $em;
     private $roundManager;
+    private $userManager;
 
-    public function __construct(EntityManagerInterface $entityManager, RoundManager $roundManager)
+    public function __construct(EntityManagerInterface $entityManager, RoundManager $roundManager, UserManager $userManager)
     {
         $this->em = $entityManager;
         $this->roundManager = $roundManager;
+        $this->userManager = $userManager;
     }
 
     /**
@@ -109,13 +111,26 @@ class GameManager
      * @param $idGame
      * @return array
      */
-    public function getGameAndRounds($idGame)
+    public function getGameAndRounds($idGame, $idUser)
     {
         $gameRepo = $this->em->getRepository(Game::class);
+        $userRepo = $this->em->getRepository(User::class);
         $game = $gameRepo->find($idGame);
+        $user = $userRepo->find($idUser);
 
         if (!$game)
             throw new HttpException("Partie inexistante", 404);
+        if (!$user)
+            throw new HttpException("Utilisateur inexistant", 404);
+
+        if ($game->getState() > 0) {
+            $whoMe = $this->userManager->whoIAm($user, $game);
+            if ("A" == $whoMe) {
+                $game->setAdv($game->getUserB());
+            } else {
+                $game->setAdv($game->getUserA());
+            }
+        }
 
         $rounds = $this->roundManager->getRoundsOfGame($game);
 

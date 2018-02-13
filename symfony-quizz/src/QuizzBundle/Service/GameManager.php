@@ -91,10 +91,14 @@ class GameManager
         /**
          * He has already a party which he has no replied
          */
-        if (count($gamesA) > 0)
+        if (count($gamesA) > 0) {
+            $gamesA[0]->setAdv($gamesA[0]->getUserB());
             return ["game" => $gamesA[0], "rounds" => $this->roundManager->getRoundsOfGame($gamesA[0])];
-        if (count($gamesB) > 0)
+        }
+        if (count($gamesB) > 0) {
+            $gamesB[0]->setAdv($gamesB[0]->getUserA());
             return ["game" => $gamesB[0], "rounds" => $this->roundManager->getRoundsOfGame($gamesB[0])];
+        }
 
 
         $games = $gameRepo->findBy(["state" => 0]);
@@ -107,7 +111,7 @@ class GameManager
 
             $this->startOnlineGame($me, $game);
             $rounds = $this->roundManager->generateRounds($game);
-
+            $game->setAdv($game->getUserA());
             return ["game" => $game, "rounds" => $rounds];
         }
 

@@ -51,12 +51,12 @@ class ResponseManager
         $myRole = $this->userManager->whoIAm($user, $game);
 
         /**
-         * Check if game is end
+         * Check if game is ended
          */
         if (2 == $game->getState())
             throw new HttpException("Partie terminée", 200);
         /**
-         * Check if game is end
+         * Check if game is ended
          */
         if (0 == $game->getState())
             throw new HttpException("Partie en attente d'un adversaire", 200);
@@ -103,12 +103,12 @@ class ResponseManager
         }
 
         if ($game->getPointsA() !== null && $game->getPointsB() !== null) {
-            switch ($this->getWinner($game->getPointsB(), $game->getPointsA())) {
+            switch ($this->getWinner($game->getPointsA(), $game->getPointsB())) {
                 case "A":
-                    $game->setWinner($game->getUserB());
+                    $game->setWinner($game->getUserA());
                     break;
                 case "B":
-                    $game->setWinner($game->getUserA());
+                    $game->setWinner($game->getUserB());
                     break;
                 default:
                     break;
@@ -132,9 +132,9 @@ class ResponseManager
     function getWinner($pointsA, $pointsB)
     {
         if ($pointsB > $pointsA) {
-            return "A";
-        } elseif ($pointsB < $pointsA) {
             return "B";
+        } elseif ($pointsB < $pointsA) {
+            return "A";
         } else {
             return "NUL";
         }

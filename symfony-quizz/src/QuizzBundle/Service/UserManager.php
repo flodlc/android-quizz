@@ -35,9 +35,8 @@ class UserManager
     {
         $userRepo = $this->em->getRepository(User::class);
         $user = $userRepo->findBy(["username" => $username]);
-        if (count($user) > 0) {
-            return $user[0];
-        }
+        if (count($user) > 0)
+            throw new HttpException("Utilisateur déjà existant", 500);
         return $this->newUser($username);
     }
 
@@ -50,10 +49,9 @@ class UserManager
     {
         $userRepo = $this->em->getRepository(User::class);
         $user = $userRepo->find($userId);
-        if ($user) {
-            return $user;
-        }
-        throw new HttpException("Pas d'utilisateur", 404);
+        if (!$user)
+            throw new HttpException("Pas d'utilisateur", 404);
+        return $user;
     }
 
     /**

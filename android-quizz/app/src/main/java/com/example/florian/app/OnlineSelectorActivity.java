@@ -16,6 +16,7 @@ import android.widget.EditText;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.Service;
 
+import entities.Game;
 import entities.GameData;
 import entities.User;
 import retrofit2.Call;
@@ -30,6 +31,7 @@ public class OnlineSelectorActivity extends Fragment {
 
     private User user;
     private AlertDialog alertDialog;
+    private Game currentGame;
 
     public static OnlineSelectorActivity newInstance(Bundle args) {
         OnlineSelectorActivity f = new OnlineSelectorActivity();
@@ -46,10 +48,37 @@ public class OnlineSelectorActivity extends Fragment {
         return view;
     }
 
-    private void checkNewGame(final GameData gameData) {
+    @Override
+    public void onStart() {
+        super.onStart();
+        ApiServiceInterface apiService = ApiService.getService();
+        Call<Game> call = apiService.getCurrentGame(ImmutableMap.<String, String>of("user",
+                String.valueOf(user.getId())));
+        call.enqueue(new Callback<Game>() {
+            @Override
+            public void onResponse(@NonNull Call<Game> call,
+                                   @NonNull Response<Game> response) {
+                if (response.code() == 200) {
+                    currentGame = response.body();
+                    if (currentGame != null) {
+                        getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.VISIBLE);
+                    } else {
+                        getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Game> call, Throwable t) {
+                getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void checkNewGame(final Game game) {
         ApiServiceInterface apiService = ApiService.getService();
         Call<GameData> call = apiService.checkNewGame(ImmutableMap.of("user", String.valueOf(user.getId()),
-                "game", String.valueOf(gameData.getGame().getId())));
+                "game", String.valueOf(game.getId())));
         final long time1 = SystemClock.elapsedRealtime();
 
         call.enqueue(new Callback<GameData>() {
@@ -66,7 +95,7 @@ public class OnlineSelectorActivity extends Fragment {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        checkNewGame(freshGameData);
+                        checkNewGame(freshGameData.getGame());
                     } else {
                         alertDialog.dismiss();
                         RouterService.goHome(getActivity(), user);
@@ -112,7 +141,7 @@ public class OnlineSelectorActivity extends Fragment {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        checkNewGame(response.body());
+                        checkNewGame(response.body().getGame());
                     }
                 }
             }
@@ -126,7 +155,11 @@ public class OnlineSelectorActivity extends Fragment {
     private void setIntent(View view) {
         view.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                getNewGame();
+                if (currentGame != null) {
+                    checkNewGame(currentGame);
+                } else {
+                    getNewGame();
+                }
             }
         });
     }

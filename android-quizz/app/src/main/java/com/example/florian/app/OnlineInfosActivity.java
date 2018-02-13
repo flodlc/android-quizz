@@ -41,7 +41,7 @@ public class OnlineInfosActivity extends Fragment {
 
     private void displayTexts(View view) {
         ((TextView) view.findViewById(R.id.score)).setText(score + "/" + (round.getNumRound() - 1));
-        ((TextView) view.findViewById(R.id.advName)).setText(adv.getUsername());
+        //((TextView) view.findViewById(R.id.advName)).setText(adv.getUsername());
         ((TextView) view.findViewById(R.id.questionNumber)).setText(String.valueOf(round.getNumRound()));
     }
 

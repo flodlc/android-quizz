@@ -97,7 +97,7 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
                 }
             });
         } else {
-            this.onlineInfosActivity.Update(gameData.getRounds().get(roundNb), score);
+            this.onlineInfosActivity.Update(gameData.getRounds().get(roundNb - 1), score);
             this.questionActivity.update(gameData.getRounds().get(roundNb - 1));
         }
     }

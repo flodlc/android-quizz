@@ -9,9 +9,8 @@
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_gravity="top|left"
+        android:layout_gravity="top|start"
         android:layout_marginLeft="20dp"
-        android:inputType="textPersonName"
         android:text="@string/offline"
         android:textSize="30sp" />
 
@@ -21,9 +20,9 @@
         android:layout_height="60dp"
         android:layout_margin="20dp"
         android:background="@drawable/button_shape"
-        android:text="Tentative de record"
+        android:text="@string/recordAttempt"
         android:textColor="@color/colorRed"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -34,23 +33,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|left"
+            android:layout_gravity="top|start"
             android:layout_marginLeft="20dp"
-            android:text="Record à battre : "
+            android:text="@string/recordToBeat"
             android:textSize="22sp" />
 
         <TextView
             android:id="@+id/record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20"
-            android:textStyle="bold"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" points"
-            android:textStyle="bold"
-            android:textSize="22sp" />
+            android:text="@string/points"
+            android:textSize="22sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

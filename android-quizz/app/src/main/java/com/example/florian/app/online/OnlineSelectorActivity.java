@@ -1,4 +1,4 @@
-package com.example.florian.app;
+package com.example.florian.app.online;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.florian.app.R;
 import com.google.common.collect.ImmutableMap;
 
 import entities.GameData;
@@ -104,7 +105,7 @@ public class OnlineSelectorActivity extends Fragment {
 
     private void makeAlertDilogue() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Waiting for a player");
+        builder.setTitle(getResources().getString(R.string.waitPlayer));
         builder.setIcon(R.drawable.sablier);
         builder.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override

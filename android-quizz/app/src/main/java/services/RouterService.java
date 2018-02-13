@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 
 import com.example.florian.app.HomeActivity;
-import com.example.florian.app.OffLineResultActivity;
-import com.example.florian.app.OnLineQuizzActivity;
-import com.example.florian.app.ResultActivity;
+import com.example.florian.app.offline.OffLineResultActivity;
+import com.example.florian.app.online.OnLineQuizzActivity;
+import com.example.florian.app.online.ResultActivity;
 
 import entities.GameData;
 import entities.GameResult;

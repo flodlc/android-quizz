@@ -1,10 +1,14 @@
-package com.example.florian.app;
+package com.example.florian.app.online;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.example.florian.app.QuestionActivity;
+import com.example.florian.app.QuizzActivityInterface;
+import com.example.florian.app.R;
 
 import java.util.ArrayList;
 

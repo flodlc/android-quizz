@@ -1,4 +1,4 @@
-package com.example.florian.app;
+package com.example.florian.app.online;
 
 import android.support.v4.app.Fragment;
 import android.os.Build;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.florian.app.R;
 
 import entities.Question;
 import entities.Response;

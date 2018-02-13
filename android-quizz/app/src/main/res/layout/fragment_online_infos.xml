@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Score : "
+            android:text="@string/score"
             android:textSize="20sp" />
 
         <TextView
@@ -21,23 +21,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="3/5"
             android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right"
-            android:text="Adversaire : "
+            android:gravity="end"
+            android:text="@string/adv"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/advName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="Jacky"
+            android:layout_gravity="end"
             android:textSize="20sp" />
     </LinearLayout>
     <ImageView
@@ -55,14 +53,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Question "
+            android:text="@string/question_"
             android:textSize="30sp"
             android:textStyle="bold" />
         <TextView
             android:id="@+id/questionNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="3"
             android:textSize="30sp"
             android:textStyle="bold" />
     </LinearLayout>

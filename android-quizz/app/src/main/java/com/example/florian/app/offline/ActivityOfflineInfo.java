@@ -1,4 +1,4 @@
-package com.example.florian.app;
+package com.example.florian.app.offline;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,8 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import entities.Round;
-import entities.User;
+import com.example.florian.app.R;
 
 /**
  * Created by Florian on 01/02/2018.

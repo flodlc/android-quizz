@@ -1,4 +1,4 @@
-package com.example.florian.app;
+package com.example.florian.app.online;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.florian.app.R;
 
 import entities.Round;
 import entities.User;

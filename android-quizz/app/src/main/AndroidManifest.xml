@@ -27,28 +27,28 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".OnLineQuizzActivity"
+            android:name=".online.OnLineQuizzActivity"
             android:parentActivityName=".HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".ResultActivity"
+            android:name=".online.ResultActivity"
             android:parentActivityName=".HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".OffLineQuizzActivity"
+            android:name=".offline.OffLineQuizzActivity"
             android:parentActivityName=".HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".OffLineResultActivity"
+            android:name=".offline.OffLineResultActivity"
             android:parentActivityName=".HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

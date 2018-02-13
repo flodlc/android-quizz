@@ -1,4 +1,4 @@
-package com.example.florian.app;
+package com.example.florian.app.online;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.florian.app.R;
 
 import entities.GameResult;
 import entities.Round;
@@ -56,11 +58,11 @@ public class ResultActivity extends AppCompatActivity {
         if (gameResult.getGame().getState() != 2) {
             resultText = "En attente de l'adversaire";
         } else if (gameResult.getGame().getWinner() == null) {
-            resultText = "Match nul ! (trad)";
+            resultText = getResources().getString(R.string.matchNul);
         } else if (gameResult.getGame().getWinner().getId() == user.getId()) {
-            resultText = "Gagné ! (trad)";
+            resultText = getResources().getString(R.string.win);
         } else {
-            resultText = "Perdu ! (trad)";
+            resultText = getResources().getString(R.string.lost);
         }
 
         ((TextView) findViewById(R.id.result)).setText(resultText);

@@ -3,6 +3,9 @@ package com.example.florian.app;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.florian.app.offline.OfflineSelectorActivity;
+import com.example.florian.app.online.OnlineSelectorActivity;
+
 import entities.User;
 
 

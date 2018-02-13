@@ -1,10 +1,23 @@
 <resources>
     <string name="app_name">QuizzExpress</string>
-    <string name="user1">Veuillez choisir un pseudo</string>
-    <string name="valid">Valider</string>
-    <string name="online">En ligne</string>
-    <string name="offline">Hors ligne</string>
+    <string name="user1">Please choose a username</string>
+    <string name="valid">Validate</string>
+    <string name="online">In-Line</string>
+    <string name="offline">Off-Line</string>
     <string name="question">Question</string>
-    <string name="cancel">Annuler</string>
-    <string name="userNotAvailable">Pseudo non disponible</string>
+    <string name="cancel">Cancel</string>
+    <string name="userNotAvailable">Username not available</string>
+    <string name="backHome">Back home</string>
+    <string name="points">\p points</string>
+    <string name="recordToBeat">Record to beat : \p</string>
+    <string name="recordAttempt">Record attempt</string>
+    <string name="question_">Question \p</string>
+    <string name="adv">opponent : \p</string>
+    <string name="score">Score : \p</string>
+    <string name="result">Result</string>
+    <string name="newRecord">New record !</string>
+    <string name="matchNul">Tie Game !</string>
+    <string name="win">You win !</string>
+    <string name="lost">You lost !</string>
+    <string name="waitPlayer">Waiting for a player</string>
 </resources>

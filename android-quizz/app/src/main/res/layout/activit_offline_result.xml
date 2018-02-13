@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.florian.app.OffLineResultActivity">
+    tools:context="com.example.florian.app.offline.OffLineResultActivity">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -27,7 +27,6 @@
             android:layout_height="match_parent"
             android:layout_weight="8"
             android:gravity="center"
-            android:text="8"
             android:textAlignment="center"
             android:textColor="@color/colorBlack"
             android:textSize="100sp" />
@@ -37,7 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="10"
-            android:text="Quelle est la capitale de l'Allemagne ?"
             android:textAlignment="center"
             android:textSize="30sp" />
 
@@ -46,7 +44,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="10"
-            android:text="Berlin"
             android:textAlignment="center"
             android:textSize="40sp"
             android:textStyle="bold" />
@@ -56,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="10"
-            android:text="Nouveau record !"
+            android:text="@string/newRecord"
             android:textAlignment="center"
             android:textColor="@color/colorRed"
             android:textSize="40sp"
@@ -70,9 +67,9 @@
             android:layout_gravity="bottom"
             android:background="@drawable/button_shape"
             android:padding="20dp"
-            android:text="back home"
+            android:text="@string/backHome"
             android:textColor="@color/colorRed"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 

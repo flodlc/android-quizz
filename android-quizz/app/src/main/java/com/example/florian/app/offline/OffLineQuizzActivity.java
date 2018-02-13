@@ -1,28 +1,18 @@
-package com.example.florian.app;
+package com.example.florian.app.offline;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
+
+import com.example.florian.app.QuestionActivity;
+import com.example.florian.app.QuizzActivityInterface;
+import com.example.florian.app.R;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import entities.Answer;
-import entities.GameData;
-import entities.GameResult;
-import entities.PostAnswers;
 import entities.Question;
 import entities.Round;
 import entities.User;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import services.ApiService;
-import services.ApiServiceInterface;
 import services.QuestionManager;
 import services.RouterService;
 
@@ -76,9 +66,9 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            score++;
             this.questionActivity.update(new Round(currentQuestion));
             this.activityOfflineInfo.update(score);
-            score++;
         } else {
             displayResult();
         }

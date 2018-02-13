@@ -58,6 +58,10 @@ class GameManager
     public function getMyGameCurrent(User $user)
     {
         $gameRepo = $this->em->getRepository(Game::class);
+        $games = $gameRepo->findBy(["userA" => $user, "state" => 0]);
+        if (count($games) > 0)
+            return ["id" => $games[0]->getId(), "state" => $games[0]->getState()];
+
         $gamesA = $gameRepo->findBy(["userA" => $user, "state" => 1]);
         foreach ($gamesA as $game) {
             if ($game->getPointsA() === null)
@@ -79,23 +83,32 @@ class GameManager
     public function getAGameAvailable(User $me)
     {
         $gameRepo = $this->em->getRepository(Game::class);
-        $mySearch = $gameRepo->findBy(["userA" => $me, "state" => 0]);
-        if (count($mySearch) > 0) {
-            $mySearch = $mySearch[0];
-            if (0 == $mySearch->getState())
-                return ["game" => $mySearch, "rounds" => []];
-        }
+
+        $games = $gameRepo->findBy(["userA" => $me, "state" => 0]);
+        /**
+         * He's already looking for an adversaire
+         */
+        if (count($games) > 0)
+            return ["game" => $games[0], "rounds" => []];
+
+        $gamesA = $gameRepo->findBy(["userA" => $me, "state" => 1, "pointsA" => null]);
+        $gamesB = $gameRepo->findBy(["userB" => $me, "state" => 1, "pointsB" => null]);
+        /**
+         * He has already a party which he has no replied
+         */
+        if (count($gamesA) > 0)
+            return ["game" => $gamesA[0], "rounds" => $this->roundManager->getRoundsOfGame($gamesA[0])];
+        if (count($gamesB) > 0)
+            return ["game" => $gamesB[0], "rounds" => $this->roundManager->getRoundsOfGame($gamesB[0])];
+
 
         $games = $gameRepo->findBy(["state" => 0]);
+        /**
+         * There is a party which is waiting for someone
+         */
+        if (count($games) > 0) {
 
-        if (count($games) > 0 && $games[0]->getUserA() != $me) {
-
-            $index_games = array_keys($games);
-            do {
-                $rd = array_rand($index_games);
-                unset($index_games[$rd]);
-                $game = $games[$rd];
-            } while ($game->getUserA() == $me);
+            $game = $games[array_rand($games)];
 
             $this->startOnlineGame($me, $game);
             $rounds = $this->roundManager->generateRounds($game);
@@ -103,6 +116,9 @@ class GameManager
             return ["game" => $game, "rounds" => $rounds];
         }
 
+        /**
+         * Create a new party
+         */
         return ["game" => $this->createGame($me), "rounds" => []];
     }
 

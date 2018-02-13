@@ -58,12 +58,12 @@ class GameManager
         $gameRepo = $this->em->getRepository(Game::class);
         $gamesA = $gameRepo->findBy(["userA" => $user, "state" => 1]);
         foreach ($gamesA as $game) {
-            if ($game->getPointsA() !== null)
+            if ($game->getPointsA() === null)
                 return ["id" => $game->getId(), "state" => $game->getState()];
         }
         $gamesB = $gameRepo->findBy(["userB" => $user, "state" => 1]);
         foreach ($gamesB as $game) {
-            if ($game->getPointsB() !== null)
+            if ($game->getPointsB() === null)
                 return ["id" => $game->getId(), "state" => $game->getState()];
         }
         return null;

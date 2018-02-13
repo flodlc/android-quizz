@@ -58,9 +58,6 @@ class GameManager
     public function getMyGameCurrent(User $user)
     {
         $gameRepo = $this->em->getRepository(Game::class);
-        $games = $gameRepo->findBy(["userA" => $user, "state" => 0]);
-        if (count($games) > 0)
-            return ["id" => $games[0]->getId(), "state" => $games[0]->getState()];
 
         $gamesA = $gameRepo->findBy(["userA" => $user, "state" => 1, "pointsA" => null]);
         if (count($gamesA) > 0)

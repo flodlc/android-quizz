@@ -62,16 +62,14 @@ class GameManager
         if (count($games) > 0)
             return ["id" => $games[0]->getId(), "state" => $games[0]->getState()];
 
-        $gamesA = $gameRepo->findBy(["userA" => $user, "state" => 1]);
-        foreach ($gamesA as $game) {
-            if ($game->getPointsA() === null)
-                return ["id" => $game->getId(), "state" => $game->getState()];
-        }
-        $gamesB = $gameRepo->findBy(["userB" => $user, "state" => 1]);
-        foreach ($gamesB as $game) {
-            if ($game->getPointsB() === null)
-                return ["id" => $game->getId(), "state" => $game->getState()];
-        }
+        $gamesA = $gameRepo->findBy(["userA" => $user, "state" => 1, "pointsA" => null]);
+        if (count($gamesA) > 0)
+            return ["id" => $gamesA[0]->getId(), "state" => $gamesA[0]->getState()];
+
+        $gamesB = $gameRepo->findBy(["userB" => $user, "state" => 1, "pointsB" => null]);
+        if (count($gamesB) > 0)
+            return ["id" => $gamesB[0]->getId(), "state" => $gamesB[0]->getState()];
+
         return null;
     }
 

@@ -8,6 +8,7 @@
 
 namespace QuizzBundle\Controller;
 
+use QuizzBundle\Entity\Game;
 use SensioLabs\Security\Exception\HttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -39,7 +40,7 @@ class GameController extends Controller
     }
 
     /**
-     * @Route("/all", name="games")
+     * @Route("/all", name="my_games")
      * @Method({"GET"})
      *
      * @return Response
@@ -54,6 +55,25 @@ class GameController extends Controller
         $games_tmp = $gameManager->getMyGames($user);
 
         return new Response($this->serializer->serialize($games_tmp, "json", ["groups" => ["mygames"]]));
+    }
+
+    /**
+     * @Route("/current", name="games")
+     * @Method({"GET"})
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function getCurrentGameAction(Request $request)
+    {
+        $userManager = $this->container->get("quizz.user");
+        $gameManager = $this->container->get("quizz.game");
+        $userId = $request->get("user");
+
+        $user = $userManager->getById($userId);
+        $gameCurrent = $gameManager->getMyGameCurrent($user);
+
+        return new Response(json_encode(["game" => $gameCurrent]));
     }
 
     /**
@@ -96,5 +116,22 @@ class GameController extends Controller
         $gameSeria = $this->serializer->normalize($data_game["game"], "json", ["groups" => ["game"]]);
         $roundsSeria = $this->serializer->normalize($data_game["rounds"], "json", ["groups" => ["game"]]);
         return new Response(json_encode(["game" => $gameSeria, "rounds" => $roundsSeria]));
+    }
+
+    /**
+     * @Route("/{id}", name="game_delete")
+     * @Method({"DELETE"})
+     *
+     * @return Response
+     */
+    public function deleteGameAction(Request $request)
+    {
+        $gameManager = $this->container->get("quizz.game");
+        $gameId = $request->get("id");
+        if (!$gameId)
+            throw new HttpException("L'identifiant de la partie est manquant.");
+        $game = $this->getDoctrine()->getManager()->getRepository(Game::class)->find($gameId);
+        $removeState = $gameManager->deleteGame($game);
+        return new Response(json_encode($removeState));
     }
 }

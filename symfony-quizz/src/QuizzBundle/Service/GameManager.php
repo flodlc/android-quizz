@@ -49,6 +49,27 @@ class GameManager
     }
 
     /**
+     * Get a game with $user as a player (UserA or UserB in the game) and ready to play
+     * @param User $user
+     * @return array
+     */
+    public function getMyGameCurrent(User $user)
+    {
+        $gameRepo = $this->em->getRepository(Game::class);
+        $gamesA = $gameRepo->findBy(["userA" => $user, "state" => 1]);
+        foreach ($gamesA as $game) {
+            if ($game->getPointsA() !== null)
+                return ["id" => $game->getId(), "state" => $game->getState()];
+        }
+        $gamesB = $gameRepo->findBy(["userB" => $user, "state" => 1]);
+        foreach ($gamesB as $game) {
+            if ($game->getPointsB() !== null)
+                return ["id" => $game->getId(), "state" => $game->getState()];
+        }
+        return null;
+    }
+
+    /**
      * Get a game available, if it's possible. Otherwise, a new Game will be returned.
      * @param User $me
      * @return array
@@ -127,5 +148,19 @@ class GameManager
         $game->setState(1);
         $this->em->persist($game);
         $this->em->flush();
+    }
+
+    /**
+     * Remove a game when its state is at 0. Return true if the game is remove, otherwise it return false
+     * @param Game $game
+     * @return bool
+     */
+    public function deleteGame(Game $game)
+    {
+        if ($game->getState() != 0)
+            return false;
+        $this->em->remove($game);
+        $this->em->flush();
+        return true;
     }
 }

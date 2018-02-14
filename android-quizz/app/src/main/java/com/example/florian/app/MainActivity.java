@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         QuestionManager.getOfflineQuestions(this);
         checkUserData();
 
+
         final Activity activity = this;
         (findViewById(R.id.validUser)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

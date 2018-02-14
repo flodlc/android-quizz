@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">QuizzExpress</string>
     <string name="user1">Please choose a username</string>
@@ -8,16 +9,17 @@
     <string name="cancel">Cancel</string>
     <string name="userNotAvailable">Username not available</string>
     <string name="backHome">Back home</string>
-    <string name="points">\p points</string>
-    <string name="recordToBeat">Record to beat : \p</string>
+    <string name="points">\u0020 points</string>
+    <string name="recordToBeat">Record to beat : \u0020</string>
     <string name="recordAttempt">Record attempt</string>
-    <string name="question_">Question \p</string>
-    <string name="adv">opponent : \p</string>
-    <string name="score">Score : \p</string>
+    <string name="question_">Question \u0020</string>
+    <string name="score">Score : \u0020</string>
     <string name="result">Result</string>
     <string name="newRecord">New record !</string>
     <string name="matchNul">Tie Game !</string>
     <string name="win">You win !</string>
     <string name="lost">You lost !</string>
     <string name="waitPlayer">Waiting for a player</string>
+    <string name="adv">opponent : \u0020</string>
+    <string name="seeGames">Display my games</string>
 </resources>

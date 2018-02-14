@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 
 import com.example.florian.app.HomeActivity;
 import com.example.florian.app.offline.OffLineResultActivity;
+import com.example.florian.app.online.DisplayGamesActivity;
 import com.example.florian.app.online.OnLineQuizzActivity;
 import com.example.florian.app.online.ResultActivity;
 
@@ -58,6 +59,14 @@ public class RouterService {
         b.putParcelable("user", user);
         b.putParcelable("question", question);
         b.putInt("score", score);
+        intent.putExtras(b);
+        activity.startActivity(intent);
+    }
+
+    public static void goDisplayGames(Activity activity, User user) {
+        Intent intent = new Intent(activity, DisplayGamesActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelable("user", user);
         intent.putExtras(b);
         activity.startActivity(intent);
     }

@@ -44,4 +44,7 @@ public interface ApiServiceInterface {
 
     @GET("question/all")
     Call<List<Question>> getAllQuestions();
+
+    @GET("game/all")
+    Call<List<Game>> getMyGames(@QueryMap Map<String, String> param);
 }

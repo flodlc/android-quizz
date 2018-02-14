@@ -44,5 +44,16 @@
             android:textSize="18sp"
             android:visibility="gone" />
     </RelativeLayout>
-
+    <Button
+        android:id="@+id/diplayGames"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_shape"
+        android:text="@string/seeGames"
+        android:textColor="@color/colorRed"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 </LinearLayout>

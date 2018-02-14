@@ -8,16 +8,17 @@
     <string name="cancel">Annuler</string>
     <string name="userNotAvailable">Pseudo non disponible</string>
     <string name="backHome">Retour à l\'accueil</string>
-    <string name="points">\p points</string>
-    <string name="recordToBeat">Record à battre : \p</string>
+    <string name="points">\u0020 points</string>
+    <string name="recordToBeat">Record à battre : \u0020</string>
     <string name="recordAttempt">Tentative de record</string>
-    <string name="question_">Question \p</string>
-    <string name="adv">Adversaire : \p</string>
-    <string name="score">Score : \p</string>
+    <string name="question_">Question \u0020</string>
+    <string name="score">Score : \u0020</string>
     <string name="result">Résultat</string>
     <string name="newRecord">Nouveau record !</string>
     <string name="matchNul">Match nul !</string>
     <string name="win">Gagné !</string>
     <string name="lost">Perdu !</string>
     <string name="waitPlayer">En attente d\'un joueur</string>
+    <string name="adv">Adversaire : \u0020</string>
+    <string name="seeGames">Voir mes parties</string>
 </resources>

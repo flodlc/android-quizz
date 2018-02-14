@@ -43,6 +43,12 @@ public class OnlineSelectorActivity extends Fragment {
         Bundle b = getArguments();
         this.user = b.getParcelable("user");
         setIntent(view.findViewById(R.id.onlineButton));
+
+        (view.findViewById(R.id.diplayGames)).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RouterService.goDisplayGames(getActivity(), user);
+            }
+        });
         return view;
     }
 

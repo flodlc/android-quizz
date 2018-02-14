@@ -11,6 +11,7 @@ namespace QuizzBundle\Service;
 
 use ClassesWithParents\G;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\Round;
 use QuizzBundle\Entity\User;
@@ -36,18 +37,22 @@ class GameManager
      */
     public function getMyGames(User $user)
     {
-        $gameRepo = $this->em->getRepository(Game::class);
-        $gamesA = $gameRepo->findBy(["userA" => $user], ["id" => "DESC"]);
-        foreach ($gamesA as $game) {
-            if ($game->getState() > 0)
+
+        $sqlQuery = "SELECT * 
+FROM `game` g
+WHERE g.user_a_id = " . $user->getId() . " OR g.user_b_id = " . $user->getId() . " 
+ORDER BY id DESC;";
+        $rsm = new ResultSetMappingBuilder($this->em);
+        $rsm->addRootEntityFromClassMetadata(Game::class, 'game');
+        $q = $this->em->createNativeQuery($sqlQuery, $rsm);
+        $games = $q->getResult();
+        foreach ($games as $game) {
+            if ($user == $game->getUserA())
                 $game->setAdv($game->getUserB());
-        }
-        $gamesB = $gameRepo->findBy(["userB" => $user], ["id" => "DESC"]);
-        foreach ($gamesB as $game) {
-            if ($game->getState() > 0)
+            else
                 $game->setAdv($game->getUserA());
         }
-        return array_merge($gamesA, $gamesB);
+        return $games;
     }
 
     /**

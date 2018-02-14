@@ -37,12 +37,12 @@ class GameManager
     public function getMyGames(User $user)
     {
         $gameRepo = $this->em->getRepository(Game::class);
-        $gamesA = $gameRepo->findBy(["userA" => $user]);
+        $gamesA = $gameRepo->findBy(["userA" => $user], ["id" => "DESC"]);
         foreach ($gamesA as $game) {
             if ($game->getState() > 0)
                 $game->setAdv($game->getUserB());
         }
-        $gamesB = $gameRepo->findBy(["userB" => $user]);
+        $gamesB = $gameRepo->findBy(["userB" => $user], ["id" => "DESC"]);
         foreach ($gamesB as $game) {
             if ($game->getState() > 0)
                 $game->setAdv($game->getUserA());

@@ -93,9 +93,6 @@ public class QuestionManager {
     }
 
     public static void getOfflineQuestions(Activity activity) {
-        //For test
-        activity.deleteFile(FILENAME);
-
         File file = new File(activity.getFilesDir(), FILENAME);
         if (file.exists()) {
             return;

@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiService {
     public static ApiServiceInterface getService() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://172.20.10.5/")
+                .baseUrl("http://192.168.0.41/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit.create(ApiServiceInterface.class);

@@ -40,17 +40,22 @@ class GameManager
 
         $sqlQuery = "SELECT * 
 FROM `game` g
-WHERE g.user_a_id = " . $user->getId() . " OR g.user_b_id = " . $user->getId() . " 
+WHERE g.user_a_id = " . $user->getId() . " OR g.user_b_id = " . $user->getId() . " and g.state > 0
 ORDER BY id DESC;";
         $rsm = new ResultSetMappingBuilder($this->em);
         $rsm->addRootEntityFromClassMetadata(Game::class, 'game');
         $q = $this->em->createNativeQuery($sqlQuery, $rsm);
         $games = $q->getResult();
-        foreach ($games as $game) {
-            if ($user == $game->getUserA())
+        foreach ($games as $ind => $game) {
+            if ($user == $game->getUserA()) {
                 $game->setAdv($game->getUserB());
-            else
+                if (null === $game->getPointsA())
+                    unset($games[$ind]);
+            } else {
                 $game->setAdv($game->getUserA());
+                if (null === $game->getPointsB())
+                    unset($games[$ind]);
+            }
         }
         return $games;
     }

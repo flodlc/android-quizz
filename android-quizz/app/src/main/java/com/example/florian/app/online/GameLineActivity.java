@@ -79,7 +79,7 @@ public class GameLineActivity extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             view.setBackgroundColor(getActivity().getColor(color));
         } else {
-            view.findViewById(R.id.answerA).setBackgroundColor(getResources().getColor(color));
+            view.setBackgroundColor(getResources().getColor(color));
         }
     }
 

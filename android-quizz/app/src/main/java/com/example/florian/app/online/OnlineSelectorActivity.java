@@ -116,7 +116,7 @@ public class OnlineSelectorActivity extends Fragment {
         builder.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (currentGameData.getGame() != null) {
+                if (currentGameData!= null && currentGameData.getGame() != null) {
                     Call<Boolean> call = apiService.deleteGame(String.valueOf(currentGameData.getGame().getId()));
 
                     call.enqueue(new Callback<Boolean>() {
@@ -149,7 +149,7 @@ public class OnlineSelectorActivity extends Fragment {
                                    @NonNull Response<GameData> response) {
                 if (response.code() == 200) {
                     currentGameData = response.body();
-                    if (currentGameData.getGame().getState() == 1) {
+                    if (currentGameData!=null && currentGameData.getGame().getState() == 1) {
                         RouterService.goOnlineQuizz(getActivity(), user, response.body(), alertDialog);
                     } else {
                         checkNewGame(time1);

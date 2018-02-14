@@ -64,7 +64,9 @@ public class QuestionActivity extends Fragment {
                     handler.postDelayed(this, 50);
                 } else {
                     handler.removeCallbacks(runnable);
-                    ((QuizzActivityInterface) getActivity()).saveAnswer(new Answer(round.getId(), ""));
+                    if (getActivity() != null) {
+                        ((QuizzActivityInterface) getActivity()).saveAnswer(new Answer(round.getId(), ""));
+                    }
                 }
             }
         };

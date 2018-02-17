@@ -2,12 +2,12 @@
     <string name="app_name">QuizzExpress</string>
     <string name="user1">Veuillez choisir un pseudo</string>
     <string name="valid">Valider</string>
-    <string name="online">En ligne</string>
-    <string name="offline">Hors ligne</string>
+    <string name="online">En-ligne</string>
+    <string name="offline">Hors-ligne</string>
     <string name="question">Question</string>
     <string name="cancel">Annuler</string>
     <string name="userNotAvailable">Pseudo non disponible</string>
-    <string name="backHome">Retour à l\'accueil</string>
+    <string name="backHome">Accueil</string>
     <string name="points">\u0020 points</string>
     <string name="recordToBeat">Record à battre : \u0020</string>
     <string name="recordAttempt">Tentative de record</string>
@@ -22,4 +22,5 @@
     <string name="adv">Adversaire : \u0020</string>
     <string name="seeGames">Voir mes parties</string>
     <string name="internetIssue">Erreur réseau !</string>
+    <string name="playAgain">Recommencer !</string>
 </resources>

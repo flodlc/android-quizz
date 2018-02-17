@@ -23,4 +23,5 @@
     <string name="adv">opponent : \u0020</string>
     <string name="seeGames">Display my games</string>
     <string name="internetIssue">Network issue !</string>
+    <string name="playAgain">Play again !</string>
 </resources>

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.florian.app.R;
 
 import entities.User;
+import services.RouterService;
 import services.UserManager;
 
 /**
@@ -32,7 +33,12 @@ public class OfflineSelectorActivity extends Fragment {
         Bundle b = getArguments();
         this.user = b.getParcelable("user");
         View view = inflater.inflate(R.layout.offline_selector, container, false);
-        setIntent((Button) view.findViewById(R.id.offlineButton), OffLineQuizzActivity.class);
+
+        view.findViewById(R.id.offlineButton).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RouterService.goOfflineQuizz(getActivity(), user);
+            }
+        });
 
         return view;
     }
@@ -43,17 +49,5 @@ public class OfflineSelectorActivity extends Fragment {
         String record = UserManager.getData(getActivity(), "record");
         record = record.equals("") ? "0" : record;
         ((TextView) getView().findViewById(R.id.record)).setText(record);
-    }
-
-    private void setIntent(Button button, final Class className) {
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), className);
-                Bundle b = new Bundle();
-                b.putParcelable("user", user);
-                intent.putExtras(b);
-                startActivity(intent);
-            }
-        });
     }
 }

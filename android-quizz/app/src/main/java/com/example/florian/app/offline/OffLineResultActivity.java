@@ -34,10 +34,16 @@ public class OffLineResultActivity extends AppCompatActivity {
 
         displayTexts(b.getInt("score"), (Question) b.getParcelable("question"));
 
-        final Activity activity = this;
-        (findViewById(R.id.backHome)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.backHome).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                RouterService.goHome(activity, user);
+                RouterService.goHome(OffLineResultActivity.this, user);
+                finish();
+            }
+        });
+
+        findViewById(R.id.playAgain).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RouterService.goOfflineQuizz(OffLineResultActivity.this, user);
                 finish();
             }
         });

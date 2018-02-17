@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.florian.app.MainActivity;
 import com.example.florian.app.R;
 import com.google.common.collect.ImmutableMap;
 
@@ -74,6 +75,7 @@ public class OnlineSelectorActivity extends Fragment {
             @Override
             public void onFailure(Call<GameData> call, Throwable t) {
                 getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
+                ApiService.showErrorMessage(OnlineSelectorActivity.this.getActivity());
             }
         });
     }
@@ -105,6 +107,7 @@ public class OnlineSelectorActivity extends Fragment {
 
             @Override
             public void onFailure(Call<GameData> call, Throwable t) {
+                ApiService.showErrorMessage(OnlineSelectorActivity.this.getActivity());
             }
         });
     }
@@ -127,7 +130,7 @@ public class OnlineSelectorActivity extends Fragment {
 
                         @Override
                         public void onFailure(Call<Boolean> call, Throwable t) {
-
+                            ApiService.showErrorMessage(OnlineSelectorActivity.this.getActivity());
                         }
                     });
                 }
@@ -159,6 +162,7 @@ public class OnlineSelectorActivity extends Fragment {
 
             @Override
             public void onFailure(Call<GameData> call, Throwable t) {
+                ApiService.showErrorMessage(OnlineSelectorActivity.this.getActivity());
             }
         });
     }

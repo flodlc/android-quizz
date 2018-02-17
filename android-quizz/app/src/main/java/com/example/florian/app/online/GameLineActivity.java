@@ -68,7 +68,7 @@ public class GameLineActivity extends Fragment {
 
                     @Override
                     public void onFailure(Call<GameData> call, Throwable t) {
-
+                        ApiService.showErrorMessage(GameLineActivity.this.getActivity());
                     }
                 });
             }

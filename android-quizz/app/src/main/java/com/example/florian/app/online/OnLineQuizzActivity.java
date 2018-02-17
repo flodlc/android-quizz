@@ -97,6 +97,7 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
 
                 @Override
                 public void onFailure(Call<GameResult> call, Throwable t) {
+                    ApiService.showErrorMessage(OnLineQuizzActivity.this);
                 }
             });
         } else {

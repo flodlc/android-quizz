@@ -44,17 +44,17 @@ public class DisplayGamesActivity extends AppCompatActivity{
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
                 games = response.body();
-                displayRounds();
+                displayGames();
             }
 
             @Override
             public void onFailure(Call<List<Game>> call, Throwable t) {
-
+                ApiService.showErrorMessage(DisplayGamesActivity.this);
             }
         });
     }
 
-    private void displayRounds() {
+    private void displayGames() {
         for(Fragment fragment : getSupportFragmentManager().getFragments()){
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         }

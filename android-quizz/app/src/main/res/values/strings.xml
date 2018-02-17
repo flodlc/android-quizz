@@ -22,4 +22,5 @@
     <string name="waitPlayer">Waiting for a player</string>
     <string name="adv">opponent : \u0020</string>
     <string name="seeGames">Display my games</string>
+    <string name="internetIssue">Network issue !</string>
 </resources>

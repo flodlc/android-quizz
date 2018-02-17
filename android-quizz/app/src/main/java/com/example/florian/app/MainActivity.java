@@ -93,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onFailure(Call<User> call, Throwable t) {
-            showDialogue(MainActivity.this);
+            ApiService.showErrorMessage(MainActivity.this);
+            hideLoader();
         }
     };
 }

@@ -58,6 +58,9 @@ public class QuestionActivity extends Fragment {
         runnable = new Runnable() {
             @Override
             public void run() {
+                if (getActivity() == null) {
+                    return;
+                }
                 long elapsedTime = SystemClock.elapsedRealtime() - time;
                 if (elapsedTime <= 5000) {
                     ((ProgressBar) view.findViewById(R.id.progressBar)).setProgress((int) elapsedTime / 50);

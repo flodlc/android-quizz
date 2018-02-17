@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name="com.example.florian.app.MainActivity">
+        <activity android:name="com.example.florian.app.MainActivity"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,45 +22,32 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+            android:launchMode="singleInstance"
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity
+            android:launchMode="singleInstance"
             android:name=".online.OnLineQuizzActivity"
             android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".online.ResultActivity"
             android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
         </activity>
         <activity
+            android:launchMode="singleInstance"
             android:name=".offline.OffLineQuizzActivity"
             android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
         </activity>
         <activity
+            android:launchMode="singleInstance"
             android:name=".offline.OffLineResultActivity"
             android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
         </activity>
         <activity
+            android:launchMode="singleInstance"
             android:name=".online.DisplayGamesActivity"
             android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
         </activity>
     </application>
 

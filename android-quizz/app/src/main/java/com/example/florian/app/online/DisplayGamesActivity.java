@@ -3,6 +3,7 @@ package com.example.florian.app.online;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.example.florian.app.R;
 import com.google.common.collect.ImmutableMap;
@@ -45,13 +46,20 @@ public class DisplayGamesActivity extends AppCompatActivity{
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
                 games = response.body();
                 displayGames();
+                hideLoader();
             }
 
             @Override
             public void onFailure(Call<List<Game>> call, Throwable t) {
                 ApiService.showErrorMessage(DisplayGamesActivity.this);
+                hideLoader();
             }
         });
+    }
+
+    private void hideLoader() {
+        this.findViewById(R.id.loader).setVisibility(View.GONE);
+        this.findViewById(R.id.scrollContent).setVisibility(View.VISIBLE);
     }
 
     private void displayGames() {

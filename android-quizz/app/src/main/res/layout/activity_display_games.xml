@@ -10,7 +10,18 @@
         android:layout_margin="15dp"
         android:src="@drawable/logo" />
 
+    <ProgressBar
+        android:id="@+id/loader"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
+        android:layout_weight="1"
+        android:indeterminate="true" />
+
     <ScrollView
+        android:id="@+id/scrollContent"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

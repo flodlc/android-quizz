@@ -48,7 +48,7 @@ public interface ApiServiceInterface {
     Call<Boolean> deleteGame(@Path("id") String gameId);
 
     @GET("question/all")
-    Call<List<Question>> getAllQuestions();
+    Call<List<Question>> getAllQuestions(@QueryMap Map<String, String> param);
 
     @FormUrlEncoded
     @POST("login_check")

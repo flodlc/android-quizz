@@ -6,8 +6,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-
-import com.example.florian.app.MainActivity;
 import com.example.florian.app.MyApp;
 import com.example.florian.app.R;
 
@@ -48,7 +46,7 @@ public class ApiService {
 
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.41/")
+                .baseUrl("http://207.154.219.236/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

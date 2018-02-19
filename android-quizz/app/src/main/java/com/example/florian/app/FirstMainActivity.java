@@ -11,6 +11,7 @@ import retrofit2.Response;
 import services.ApiService;
 
 import services.ApiServiceInterface;
+import services.QuestionManager;
 import services.RouterService;
 import services.UserManager;
 
@@ -22,6 +23,9 @@ public class FirstMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_first);
         showLoader();
+        if (ApiService.isConnected()) {
+            QuestionManager.getOfflineQuestions();
+        }
         checkUserData();
     }
 

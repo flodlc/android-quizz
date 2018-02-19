@@ -1,24 +1,44 @@
-# To get started with security, check out the documentation:
-# https://symfony.com/doc/current/security.html
 security:
 
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    always_authenticate_before_granting:  true
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_USER: IS_AUTHENTICATED_ANONYMOUSLY
+        ROLE_ADMIN: ROLE_USER
+
     providers:
-        in_memory:
-            memory: ~
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
             security: false
-
+            anonymous: true
         main:
-            anonymous: ~
-            # activate different ways to authenticate
+            pattern: ^/
+            anonymous: true
+            provider: fos_userbundle
+            logout:
+                path: /logout
+                target: /success
+            form_login:
+                login_path: fail
+                check_path: /login_check
+                default_target_path: success
+                always_use_default_target_path: true
+                failure_path: fail
+            json_login:
+                require_previous_session: false
+                check_path: /login
+                username_path: username
+                password_path: plainPassword
 
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+    access_control:
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/createUser$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/success$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/fail$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }

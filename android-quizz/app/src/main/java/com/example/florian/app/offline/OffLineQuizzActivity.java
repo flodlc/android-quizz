@@ -32,7 +32,6 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
     private User user;
     private int score;
     private QuestionActivity questionActivity;
-    private QuestionManager questionManager;
     private ActivityOfflineInfo activityOfflineInfo;
     private Question currentQuestion;
     AlertDialog alertDialog;
@@ -42,7 +41,6 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offline_quizz);
 
-        questionManager = new QuestionManager(this);
         this.user = getIntent().getExtras().getParcelable("user");
         this.score = 0;
         this.displayScore();
@@ -56,11 +54,9 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
 
     public void displayQuestion() {
         Bundle b = new Bundle();
-        if (alertDialog != null) {
-            alertDialog.dismiss();
-        }
+
         try {
-            currentQuestion = questionManager.getRandomQuestion();
+            currentQuestion = QuestionManager.getRandomQuestion();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,7 +66,7 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
             getSupportFragmentManager().beginTransaction().add(R.id.content, this.questionActivity, "QUESTION").commit();
         } else {
             alertDialog = makeAlertDilogue();
-            QuestionManager.getOfflineQuestions(OffLineQuizzActivity.this, this);
+            QuestionManager.getOfflineQuestions();
         }
     }
 
@@ -79,7 +75,12 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
         AlertDialog.Builder builder = new AlertDialog.Builder(OffLineQuizzActivity.this);
         builder.setIcon(R.drawable.sablier);
         builder.setMessage(R.string.loadingQuestions);
-        builder.setPositiveButton(R.string.ok, null);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
         AlertDialog alertDialog = builder.show();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setCancelable(false);
@@ -91,7 +92,7 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
     public void saveAnswer(Answer answer) {
         if (answer.getAnswer().equals(currentQuestion.getAnswer())) {
             try {
-                currentQuestion = questionManager.getRandomQuestion();
+                currentQuestion = QuestionManager.getRandomQuestion();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -29,7 +29,11 @@ import retrofit2.Response;
 public class QuestionManager {
     static String FILENAME = "QEQuestions";
 
-    private int getNbLines() throws IOException {
+    private static int getNbLines() throws IOException {
+        File file = new File(MyApp.getContext().getFilesDir(), FILENAME);
+        if (!file.exists()) {
+            return 0;
+        }
         FileInputStream fis = null;
 
         try {
@@ -47,6 +51,10 @@ public class QuestionManager {
     }
 
     public static int getLastId() {
+        File file = new File(MyApp.getContext().getFilesDir(), FILENAME);
+        if (!file.exists()) {
+            return 0;
+        }
         FileInputStream fis = null;
 
         try {
@@ -56,7 +64,6 @@ public class QuestionManager {
         }
 
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-        int lastId = 0;
         String line;
         String lastLine = "0===0";
         try {
@@ -70,7 +77,7 @@ public class QuestionManager {
         return 0;
     }
 
-    public Question getRandomQuestion() throws IOException {
+    public static Question getRandomQuestion() throws IOException {
         File file = new File(MyApp.getContext().getFilesDir(), FILENAME);
         if (!file.exists()) {
             return null;

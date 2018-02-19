@@ -41,4 +41,5 @@ security:
         - { path: ^/createUser$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/success$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/fail$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/question/all, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_USER }

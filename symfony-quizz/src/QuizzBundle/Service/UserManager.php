@@ -12,6 +12,7 @@ namespace QuizzBundle\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\User;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserManager
@@ -21,24 +22,59 @@ class UserManager
      */
     private $em;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    private $userManager;
+
+    public function __construct(EntityManagerInterface $entityManager, \FOS\UserBundle\Model\UserManager $userManager)
     {
         $this->em = $entityManager;
+        $this->userManager = $userManager;
+    }
+
+
+    /**
+     * edit a User.
+     *
+     * @param User $user
+     * @return User
+     */
+    public function editUser(User $user)
+    {
+        $userRepo = $this->em->getRepository(User::class);
+        /** @var User $currentUser */
+        $currentUser = $userRepo->find($user->getId());
+        if (!$currentUser) {
+            throw new Exception("no user", 2);
+        }
+        $currentUser->setRecord($user->getRecord());
+        $this->em->persist($currentUser);
+        $this->em->flush();
+        return $user;
     }
 
     /**
-     * Get the User with username = $username
-     * @param string $username
+     * Persist a User.
+     *
+     * @param User $user with prenom, nom, email, username, plainPassword and plainPasswordVerif.
      * @return User
      */
-    public function getByUsername($username)
+    public function createUser(User $user)
     {
-        $userRepo = $this->em->getRepository(User::class);
-        $user = $userRepo->findBy(["username" => $username]);
-        if (count($user) > 0)
-            throw new HttpException("Utilisateur déjà existant", 500);
-        return $this->newUser($username);
+        if (!$user->getUsername() || $this->userManager->findUserByUsername($user->getUsername())) {
+            throw new HttpException(400, "username");
+        }
+        if (!$user->getPlainPassword() || !$user->getPlainPasswordVerif()
+            || $user->getPlainPasswordVerif() != $user->getPlainPassword()
+        ) {
+            throw new HttpException(400, "password");
+        }
+
+        $user->setRoles(["ROLE_USER"]);
+        $this->userManager->updatePassword($user);
+        $user->setRoles(["ROLE_USER"]);
+        $this->userManager->updateUser($user);
+        return $user;
     }
+
 
     /**
      * Get the User with id = $userId
@@ -48,7 +84,7 @@ class UserManager
     public function getById($userId)
     {
         $userRepo = $this->em->getRepository(User::class);
-        $user = $userRepo->find($userId);
+        /** @var User $user */$user = $userRepo->find($userId);
         if (!$user)
             throw new HttpException("Pas d'utilisateur", 404);
         return $user;

@@ -8,9 +8,15 @@
 
 namespace QuizzBundle\Controller;
 
+use FOS\UserBundle\Form\Factory\FormFactory;
+use FOS\UserBundle\FOSUserBundle;
+use QuizzBundle\Entity\User;
+use QuizzBundle\Service\UserManager;
 use SensioLabs\Security\Exception\HttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Annotations\AnnotationReader;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +27,8 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 
 class UserController extends Controller
 {
@@ -35,21 +43,70 @@ class UserController extends Controller
     public function __construct()
     {
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        $this->serializer = new Serializer([new DateTimeNormalizer("d/m/Y"), new ObjectNormalizer($classMetadataFactory)], [new JsonEncoder()]);
+        $this->serializer = new Serializer([new DateTimeNormalizer("d/m/Y"), new ObjectNormalizer($classMetadataFactory,
+            null, null, new ReflectionExtractor()), new ArrayDenormalizer()], [new JsonEncoder()]);
+    }
+
+
+    /**
+     * @Route("/createUser", name="createUser")
+     * @Method({"POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function createUserAction(Request $request)
+    {
+        $user = $this->serializer->deserialize($request->getContent(), User::class, "json");
+
+        /**@var $userManager UserManager */
+        $userManager = $this->container->get("quizz.user");
+        $userManager->createUser($user);
+        return new Response("true");
     }
 
     /**
-     * @Route("/", name="user")
+     * @Route("/editUser", name="editUser")
+     * @Method({"POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function editUserAction(Request $request)
+    {
+        $user = $this->serializer->deserialize($request->getContent(), User::class, "json");
+
+        /**@var $userManager UserManager */
+        $userManager = $this->container->get("quizz.user");
+        $userManager->editUser($user);
+        return new Response($this->serializer->serialize($this->getUser(), "json", ["groups" => ["user"]]));
+    }
+
+
+    /**
+     * @Route("/success", name="success")
+     * @Method({"GET"})
+     */
+    public function successAction(Request $request)
+    {
+        return new Response($this->serializer->serialize($this->getUser(), "json", ["groups" => ["user"]]));
+    }
+
+
+    /**
+     * @Route("/fail", name="fail")
+     */
+    public function testFailureAction()
+    {
+        return new Response("false", 403);
+    }
+
+    /**
+     * @Route("/user", name="user")
      * @Method({"GET"})
      *
      * @return Response
      */
-    public function getMeAction(Request $request)
+    public function getMeAction()
     {
-        $username = $request->get("user");
-        $userManager = $this->container->get("quizz.user");
-        $me = $userManager->getByUsername($username);
-
-        return new Response($this->serializer->serialize($me, "json", ["groups" => ["user"]]));
+        return new Response($this->serializer->serialize($this->getUser(), "json", ["groups" => ["user"]]));
     }
 }

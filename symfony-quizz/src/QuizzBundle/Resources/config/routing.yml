@@ -1,7 +1,6 @@
 user:
     resource: '@QuizzBundle/Controller/UserController.php'
     type:     annotation
-    prefix:   /user
 
 game:
     resource: '@QuizzBundle/Controller/GameController.php'

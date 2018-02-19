@@ -14,6 +14,7 @@ import com.example.florian.app.R;
 import entities.Question;
 import entities.Response;
 import entities.Round;
+import services.QuestionManager;
 
 /**
  * Created by Florian on 31/01/2018.
@@ -42,7 +43,7 @@ public class AnswerLineActivity extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             view.setBackgroundColor(getActivity().getColor(color));
         } else {
-            view.findViewById(R.id.answerA).setBackgroundColor(getResources().getColor(color));
+            view.setBackgroundColor(getResources().getColor(color));
         }
     }
 
@@ -89,13 +90,15 @@ public class AnswerLineActivity extends Fragment {
 
     private void displayTexts(View view) {
         Question question = round.getQuestion();
-        ((TextView) view.findViewById(R.id.questionText)).setText(question.getQuestion());
-        ((TextView) view.findViewById(R.id.correctAnswer)).setText(getAnswerText(question));
+        if (question.getAnswer() != null) {
+            ((TextView) view.findViewById(R.id.questionText)).setText(question.getQuestion());
+            ((TextView) view.findViewById(R.id.correctAnswer)).setText(getAnswerText(question));
 
-        setAnimation((ImageView) view.findViewById(R.id.answerA),
-                round.getResponseUA(), question.getAnswer());
+            setAnimation((ImageView) view.findViewById(R.id.answerA),
+                    round.getResponseUA(), question.getAnswer());
 
-        setAnimation((ImageView) view.findViewById(R.id.answerB),
-                round.getResponseUB(), question.getAnswer());
+            setAnimation((ImageView) view.findViewById(R.id.answerB),
+                    round.getResponseUB(), question.getAnswer());
+        }
     }
 }

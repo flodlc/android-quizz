@@ -92,7 +92,11 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
                 @Override
                 public void onResponse(@NonNull Call<GameResult> call,
                                        @NonNull Response<GameResult> response) {
-                    displayResult(response.body());
+                    if (response.code() != 403) {
+                        displayResult(response.body());
+                    } else {
+                        RouterService.goConnectPageAndFinish(OnLineQuizzActivity.this);
+                    }
                 }
 
                 @Override

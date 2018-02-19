@@ -63,15 +63,12 @@ public class OffLineResultActivity extends AppCompatActivity {
     }
 
     private void checkRecord(int score) {
-        String recordString = UserManager.getData(this, "record");
-        int record = recordString.equals("") ? 0 : Integer.valueOf(UserManager.getData(this, "record"));
+        String recordString = UserManager.getData("record");
+        int record = recordString.equals("") ? 0 : Integer.valueOf(recordString);
         if (score > record) {
             findViewById(R.id.newRecord).setVisibility(View.VISIBLE);
-            try {
-                UserManager.setData(this, "record", String.valueOf(score));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            user.setRecord(score);
+            UserManager.saveRecord(user);
         }
     }
 

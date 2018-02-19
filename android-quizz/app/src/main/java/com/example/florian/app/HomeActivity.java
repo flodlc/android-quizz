@@ -7,6 +7,7 @@ import com.example.florian.app.offline.OfflineSelectorActivity;
 import com.example.florian.app.online.OnlineSelectorActivity;
 
 import entities.User;
+import services.QuestionManager;
 
 
 /**
@@ -18,6 +19,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        //deleteFile("QEQuestions");
+        //QuestionManager.getOfflineQuestions(this);
 
         Bundle b = new Bundle();
         User user = getIntent().getExtras().getParcelable("user");

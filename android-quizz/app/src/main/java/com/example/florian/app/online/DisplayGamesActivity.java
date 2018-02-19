@@ -19,12 +19,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import services.ApiService;
 import services.ApiServiceInterface;
+import services.RouterService;
 
 /**
  * Created by Florian on 14/02/2018.
  */
 
-public class DisplayGamesActivity extends AppCompatActivity{
+public class DisplayGamesActivity extends AppCompatActivity {
 
     private User user;
     private List<Game> games;
@@ -40,13 +41,17 @@ public class DisplayGamesActivity extends AppCompatActivity{
     protected void onStart() {
         super.onStart();
         ApiServiceInterface apiService = ApiService.getService();
-        Call<List<Game>> call = apiService.getMyGames(ImmutableMap.of("user", String.valueOf(user.getId())));
+        Call<List<Game>> call = apiService.getMyGames();
         call.enqueue(new Callback<List<Game>>() {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
-                games = response.body();
-                displayGames();
-                hideLoader();
+                if (response.code() != 403) {
+                    games = response.body();
+                    displayGames();
+                    hideLoader();
+                } else {
+                    RouterService.goConnectPageAndFinish(DisplayGamesActivity.this);
+                }
             }
 
             @Override
@@ -63,8 +68,12 @@ public class DisplayGamesActivity extends AppCompatActivity{
     }
 
     private void displayGames() {
-        for(Fragment fragment : getSupportFragmentManager().getFragments()){
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+
+        if (games == null) {
+            return;
         }
 
         for (Game game : games) {

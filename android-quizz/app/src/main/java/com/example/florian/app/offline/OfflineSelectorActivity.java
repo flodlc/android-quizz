@@ -46,8 +46,7 @@ public class OfflineSelectorActivity extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        String record = UserManager.getData(getActivity(), "record");
-        record = record.equals("") ? "0" : record;
-        ((TextView) getView().findViewById(R.id.record)).setText(record);
+        user.setRecord(Integer.valueOf(UserManager.getData("record")));
+        ((TextView) getView().findViewById(R.id.record)).setText(String.valueOf(user.getRecord()));
     }
 }

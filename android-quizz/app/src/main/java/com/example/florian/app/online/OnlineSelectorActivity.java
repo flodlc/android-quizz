@@ -22,6 +22,7 @@ import retrofit2.Response;
 import services.ApiService;
 import services.ApiServiceInterface;
 import services.RouterService;
+import services.UserManager;
 
 
 public class OnlineSelectorActivity extends Fragment {
@@ -56,41 +57,40 @@ public class OnlineSelectorActivity extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Call<GameData> call = apiService.getCurrentGame(ImmutableMap.<String, String>of("user",
-                String.valueOf(user.getId())));
+        Call<GameData> call = apiService.getCurrentGame();
         call.enqueue(new Callback<GameData>() {
             @Override
             public void onResponse(@NonNull Call<GameData> call,
                                    @NonNull Response<GameData> response) {
-                if (response.code() == 200) {
+                if (response.code() != 403) {
                     currentGameData = response.body();
                     if (currentGameData.getGame() != null) {
                         getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.VISIBLE);
                     } else {
                         getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
                     }
+                } else {
+                    RouterService.goConnectPageAndFinish(getActivity());
                 }
             }
 
             @Override
             public void onFailure(Call<GameData> call, Throwable t) {
                 getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
-                ApiService.showErrorMessage(OnlineSelectorActivity.this.getActivity());
             }
         });
     }
 
     private void checkNewGame(final long time1) {
-        Call<GameData> call = apiService.checkNewGame(ImmutableMap.of("user", String.valueOf(user.getId()),
-                "game", String.valueOf(currentGameData.getGame().getId())));
+        Call<GameData> call = apiService.checkNewGame(ImmutableMap.of("game", String.valueOf(currentGameData.getGame().getId())));
 
         call.enqueue(new Callback<GameData>() {
             @Override
             public void onResponse(@NonNull Call<GameData> call,
                                    @NonNull Response<GameData> response) {
-                if (response.code() == 200) {
+                if (response.code() != 403) {
                     GameData freshGameData = response.body();
-                    if (freshGameData.getGame().getState() == 1) {
+                    if (freshGameData != null && freshGameData.getGame().getState() == 1) {
                         RouterService.goOnlineQuizz(getActivity(), user, freshGameData, alertDialog);
                     } else if (SystemClock.elapsedRealtime() - time1 < 20000) {
                         try {
@@ -102,6 +102,8 @@ public class OnlineSelectorActivity extends Fragment {
                     } else {
                         alertDialog.dismiss();
                     }
+                } else {
+                    RouterService.goConnectPageAndFinish(getActivity());
                 }
             }
 
@@ -125,7 +127,9 @@ public class OnlineSelectorActivity extends Fragment {
                     call.enqueue(new Callback<Boolean>() {
                         @Override
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-
+                            if (response.code() == 403) {
+                                RouterService.goConnectPageAndFinish(getActivity());
+                            }
                         }
 
                         @Override
@@ -142,7 +146,7 @@ public class OnlineSelectorActivity extends Fragment {
     }
 
     private void getNewGame() {
-        Call<GameData> call = apiService.getNewGame(ImmutableMap.of("user", String.valueOf(user.getId())));
+        Call<GameData> call = apiService.getNewGame();
         final long time1 = SystemClock.elapsedRealtime();
 
         makeAlertDilogue();
@@ -150,13 +154,15 @@ public class OnlineSelectorActivity extends Fragment {
             @Override
             public void onResponse(@NonNull Call<GameData> call,
                                    @NonNull Response<GameData> response) {
-                if (response.code() == 200) {
+                if (response.code() != 403) {
                     currentGameData = response.body();
                     if (currentGameData.getGame().getState() == 1) {
                         RouterService.goOnlineQuizz(getActivity(), user, response.body(), alertDialog);
                     } else {
                         checkNewGame(time1);
                     }
+                } else {
+                    RouterService.goConnectPageAndFinish(getActivity());
                 }
             }
 

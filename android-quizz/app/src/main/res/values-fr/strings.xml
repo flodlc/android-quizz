@@ -23,4 +23,6 @@
     <string name="seeGames">Voir mes parties</string>
     <string name="internetIssue">Erreur réseau !</string>
     <string name="playAgain">Recommencer !</string>
+    <string name="ok">OK</string>
+    <string name="loadingQuestions">Chargement de la librairie de questions.</string>
 </resources>

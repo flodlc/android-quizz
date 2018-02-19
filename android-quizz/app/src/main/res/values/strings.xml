@@ -24,4 +24,6 @@
     <string name="seeGames">Display my games</string>
     <string name="internetIssue">Network issue !</string>
     <string name="playAgain">Play again !</string>
+    <string name="ok">OK</string>
+    <string name="loadingQuestions">Loading questions library</string>
 </resources>

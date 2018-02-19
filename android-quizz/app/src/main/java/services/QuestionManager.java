@@ -3,6 +3,9 @@ package services;
 import android.app.Activity;
 import android.content.Context;
 
+import com.example.florian.app.MyApp;
+import com.example.florian.app.offline.OffLineQuizzActivity;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -48,6 +51,10 @@ public class QuestionManager {
     }
 
     public Question getRandomQuestion() throws IOException {
+        File file = new File(MyApp.getContext().getFilesDir(), FILENAME);
+        if (!file.exists()) {
+            return null;
+        }
         FileInputStream fis = null;
 
         try {
@@ -92,7 +99,7 @@ public class QuestionManager {
         fos.close();
     }
 
-    public static void getOfflineQuestions(Activity activity) {
+    public static void getOfflineQuestions(Activity activity, final OffLineQuizzActivity offLineQuizzActivity) {
         //For test
         activity.deleteFile(FILENAME);
 
@@ -115,6 +122,9 @@ public class QuestionManager {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }
+                if (!offLineQuizzActivity.isDestroyed()) {
+                    offLineQuizzActivity.displayQuestion();
                 }
             }
 

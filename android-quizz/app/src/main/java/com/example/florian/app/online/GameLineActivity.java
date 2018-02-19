@@ -56,14 +56,18 @@ public class GameLineActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 ApiServiceInterface apiService = ApiService.getService();
-                Call<GameData> call = apiService.checkNewGame(ImmutableMap.of("user", String.valueOf(user.getId()),
-                        "game", String.valueOf(game.getId())));
+                Call<GameData> call = apiService.checkNewGame(ImmutableMap.of("game", String.valueOf(game.getId())));
                 call.enqueue(new Callback<GameData>() {
                     @Override
                     public void onResponse(Call<GameData> call, retrofit2.Response<GameData> response) {
-                        GameData gamedata = response.body();
-                        RouterService.goResult(getActivity(), user,
-                                new GameResult(gamedata.getGame(), gamedata.getRounds()));
+                        if (response.code() != 403) {
+                            GameData gamedata = response.body();
+                            RouterService.goResult(getActivity(), user,
+                                    new GameResult(gamedata.getGame(), gamedata.getRounds()));
+                        } else {
+                            RouterService.goConnectPageAndFinish(getActivity());
+                        }
+
                     }
 
                     @Override
@@ -91,20 +95,27 @@ public class GameLineActivity extends Fragment {
         }
     }
 
-    private void setCorrect(ImageView view, boolean isCorrect) {
-        if (isCorrect) {
+    private void setCorrect(ImageView view, String winStatus) {
+        if (winStatus.equals("WIN")) {
             setImage(view, R.drawable.thumb_up);
             setBakgroundColor(view, R.color.colorGreen);
-        } else {
+        } else if (winStatus.equals("LOSE")) {
             setImage(view, R.drawable.thumb_down);
             setBakgroundColor(view, R.color.colorRed);
+        } else {
+            setImage(view, R.drawable.equal);
         }
     }
 
     private void setAnimation(ImageView imageView) {
-        if (game.getWinner() != null) {
-            boolean isCorrect = game.getWinner().getUsername().equals(user.getUsername());
-            setCorrect(imageView, isCorrect);
+        if (game.getState() == 2) {
+            if (game.getWinner() == null) {
+                setCorrect(imageView, "");
+            } else if (game.getWinner().getUsername().equals(user.getUsername())) {
+                setCorrect(imageView, "WIN");
+            } else {
+                setCorrect(imageView, "LOSE");
+            }
         } else {
             setImage(imageView, R.drawable.sablier);
             setBakgroundColor(imageView, R.color.colorGrey);

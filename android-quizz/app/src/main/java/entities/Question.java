@@ -9,6 +9,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Question implements Parcelable {
 
+    @SerializedName("id")
+    @Expose
+    private int id;
+
     @SerializedName("question")
     @Expose
     private String question;
@@ -50,6 +54,7 @@ public class Question implements Parcelable {
     };
 
     protected Question(Parcel in) {
+        this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.question = ((String) in.readValue((String.class.getClassLoader())));
         this.responseA = ((String) in.readValue((String.class.getClassLoader())));
         this.responseB = ((String) in.readValue((String.class.getClassLoader())));
@@ -65,6 +70,7 @@ public class Question implements Parcelable {
     }
 
     /**
+     * @param id
      * @param answer
      * @param responseD
      * @param responseC
@@ -72,8 +78,9 @@ public class Question implements Parcelable {
      * @param responseA
      * @param question
      */
-    public Question(String question, String responseA, String responseB, String responseC, String responseD, String answer) {
+    public Question(int id, String question, String responseA, String responseB, String responseC, String responseD, String answer) {
         super();
+        this.id = id;
         this.question = question;
         this.responseA = responseA;
         this.responseB = responseB;
@@ -160,7 +167,16 @@ public class Question implements Parcelable {
         return this;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(id);
         dest.writeValue(question);
         dest.writeValue(responseA);
         dest.writeValue(responseB);

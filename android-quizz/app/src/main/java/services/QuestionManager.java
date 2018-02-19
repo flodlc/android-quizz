@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.example.florian.app.MyApp;
 import com.example.florian.app.offline.OffLineQuizzActivity;
+import com.google.common.collect.ImmutableMap;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,17 +28,12 @@ import retrofit2.Response;
 
 public class QuestionManager {
     static String FILENAME = "QEQuestions";
-    Activity activity;
-
-    public QuestionManager(Activity activity) {
-        this.activity = activity;
-    }
 
     private int getNbLines() throws IOException {
         FileInputStream fis = null;
 
         try {
-            fis = activity.openFileInput(FILENAME);
+            fis = MyApp.getContext().openFileInput(FILENAME);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -50,6 +46,30 @@ public class QuestionManager {
         return count;
     }
 
+    public static int getLastId() {
+        FileInputStream fis = null;
+
+        try {
+            fis = MyApp.getContext().openFileInput(FILENAME);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+        int lastId = 0;
+        String line;
+        String lastLine = "0===0";
+        try {
+            while ((line = br.readLine()) != null) {
+                lastLine = line;
+            }
+            return Integer.valueOf(lastLine.split("===")[0]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public Question getRandomQuestion() throws IOException {
         File file = new File(MyApp.getContext().getFilesDir(), FILENAME);
         if (!file.exists()) {
@@ -58,7 +78,7 @@ public class QuestionManager {
         FileInputStream fis = null;
 
         try {
-            fis = activity.openFileInput(FILENAME);
+            fis = MyApp.getContext().openFileInput(FILENAME);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -79,18 +99,18 @@ public class QuestionManager {
         }
         String[] array = line.split("===");
         fis.close();
-        return new Question(array[0], array[1], array[2], array[3], array[4], array[5]);
+        return new Question(Integer.valueOf(array[0]), array[1], array[2], array[3], array[4], array[5], array[6]);
     }
 
-    public void writeInFile(Question question) throws IOException {
+    private static void writeInFile(Question question) throws IOException {
         FileOutputStream fos = null;
         try {
-            fos = activity.openFileOutput(FILENAME, Context.MODE_APPEND);
+            fos = MyApp.getContext().openFileOutput(FILENAME, Context.MODE_APPEND);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            fos.write((question.getQuestion() + "===" + question.getResponseA() + "===" +
+            fos.write((question.getId() + "===" + question.getQuestion() + "===" + question.getResponseA() + "===" +
                     question.getResponseB() + "===" + question.getResponseC() + "===" +
                     question.getResponseD() + "===" + question.getAnswer() + "\n").getBytes());
         } catch (IOException e) {
@@ -99,31 +119,28 @@ public class QuestionManager {
         fos.close();
     }
 
-    public static void getOfflineQuestions(Activity activity, final OffLineQuizzActivity offLineQuizzActivity) {
-        //For test
-        activity.deleteFile(FILENAME);
-        File file = new File(activity.getFilesDir(), FILENAME);
+
+    public static void getOfflineQuestions() {
+        MyApp.getContext().deleteFile(FILENAME);
+
+        File file = new File(MyApp.getContext().getFilesDir(), FILENAME);
         if (file.exists()) {
             return;
         }
 
-        final QuestionManager qm = new QuestionManager(activity);
-
         ApiServiceInterface apiService = ApiService.getService();
-        Call<List<Question>> call = apiService.getAllQuestions();
+        Call<List<Question>> call = apiService
+                .getAllQuestions(ImmutableMap.of("lastId", String.valueOf(QuestionManager.getLastId())));
         call.enqueue(new Callback<List<Question>>() {
             @Override
             public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
                 List<Question> questions = response.body();
                 for (Question question : questions) {
                     try {
-                        qm.writeInFile(question);
+                        writeInFile(question);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
-                if (!offLineQuizzActivity.isDestroyed()) {
-                    offLineQuizzActivity.displayQuestion();
                 }
             }
 

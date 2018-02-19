@@ -43,7 +43,26 @@ class QuestionManager
         }
 
         return $questions;
+    }
 
+
+    /**
+     * @param Question $questions
+     * @return array
+     */
+    public function saveQuestions(array $questions) {
+        $questionRepo = $this->em->getRepository(Question::class);
+        $badQuestions = [];
+        foreach ($questions as $question) {
+            if ($question->getQuestion() && $question->getResponseA() && $question->getResponseB()
+            && $question->getResponseC() && $question->getResponseD() && $question->getAnswer()) {
+                $this->em->persist($question);
+            } else {
+                $badQuestions[] = $question;
+            }
+        }
+        $this->em->flush();
+        return $badQuestions;
     }
 
 }

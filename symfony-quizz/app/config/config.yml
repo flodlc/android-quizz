@@ -27,7 +27,7 @@ framework:
         handler_id:  session.handler.native_file
         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
         gc_probability: 0
-        cookie_lifetime: 10
+        cookie_lifetime: 10000000000000
     fragments: ~
     http_method_override: true
     assets: ~

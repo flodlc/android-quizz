@@ -4,38 +4,91 @@ namespace QuizzBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use FOS\UserBundle\Model\User as BaseUser;
+
 
 /**
- * User
- *
+ * @ORM\Entity
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="QuizzBundle\Repository\UserRepository")
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="email", column=@ORM\Column(type="string", name="email", length=255, nullable=false)),
+ *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(type="string", name="email_canonical", length=255, nullable=false))
+ * })
  */
-class User
+class User extends BaseUser
 {
     /**
-     * @var int
-     * @Groups({"game", "user"})
+     * @Groups({"user"})
      *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var string
-     * @Groups({"game", "user", "mygames"})
+     * @var String
      *
-     * @ORM\Column(name="username", type="string", length=255, unique=true)
+     * Use to check the if identique with $plainPassword during the registration
      */
-    private $username;
-
+    private $plainPasswordVerif;
 
     /**
-     * Get id
+     * @Groups({"game", "user", "mygames"})
+     */
+    protected $username;
+
+    /**
+     * @Groups({"user"})
      *
-     * @return int
+     * @ORM\Column(name="record", type="integer", nullable=true)
+     */
+    private $record;
+
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setRecord(0);
+        $this->setEmail("");
+        $this->setEmailCanonical("");
+        $this->setEnabled(true);
+    }
+
+    /**
+     * @return String
+     */
+    public function getPlainPasswordVerif()
+    {
+        return $this->plainPasswordVerif;
+    }
+
+    /**
+     * @param String $plainPasswordVerif
+     */
+    public function setPlainPasswordVerif($plainPasswordVerif)
+    {
+        $this->plainPasswordVerif = $plainPasswordVerif;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecord()
+    {
+        return $this->record;
+    }
+
+    /**
+     * @param mixed $record
+     */
+    public function setRecord($record)
+    {
+        $this->record = $record;
+    }
+
+    /**
+     * @return mixed
      */
     public function getId()
     {
@@ -43,27 +96,13 @@ class User
     }
 
     /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return User
+     * @param mixed $id
      */
-    public function setUsername($username)
+    public function setId($id)
     {
-        $this->username = $username;
-
-        return $this;
+        $this->id = $id;
     }
 
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
+
+
 }
-

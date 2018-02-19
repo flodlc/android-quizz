@@ -11,6 +11,8 @@ services:
     quizz.user:
         class: QuizzBundle\Service\UserManager
         public: true
+        arguments:
+          $userManager: '@fos_user.user_manager'
     quizz.question:
         class: QuizzBundle\Service\QuestionManager
         public: true
@@ -35,3 +37,7 @@ services:
         arguments:
           $userManager: '@quizz.user'
           $roundManager: '@quizz.round'
+
+    quizz.accessDeniedHandler:
+        class: QuizzBundle\Security\AccessDeniedHandler
+        public: true

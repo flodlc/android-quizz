@@ -49,7 +49,7 @@ class GameController extends Controller
     {
         $userManager = $this->container->get("quizz.user");
         $gameManager = $this->container->get("quizz.game");
-        $userId = $request->get("user");
+        $userId = $this->getUser()->getId();
 
         $user = $userManager->getById($userId);
         $games_tmp = $gameManager->getMyGames($user);
@@ -68,7 +68,7 @@ class GameController extends Controller
     {
         $userManager = $this->container->get("quizz.user");
         $gameManager = $this->container->get("quizz.game");
-        $userId = $request->get("user");
+        $userId = $this->getUser()->getId();
 
         $user = $userManager->getById($userId);
         $gameCurrent = $gameManager->getMyGameCurrent($user);
@@ -87,7 +87,7 @@ class GameController extends Controller
         $userManager = $this->container->get("quizz.user");
         $gameManager = $this->container->get("quizz.game");
 
-        $userId = $request->get("user");
+        $userId = $this->getUser()->getId();
         $me = $userManager->getById($userId);
 
         $game_data = $gameManager->getAGameAvailable($me);
@@ -107,7 +107,7 @@ class GameController extends Controller
     public function getStatusAction(Request $request)
     {
         $gameManager = $this->container->get("quizz.game");
-        $userId = $request->get("user");
+        $userId = $this->getUser()->getId();
         $gameId = $request->get("game");
         if (!$gameId)
             throw new HttpException("L'identifiant de la partie est manquant.");
@@ -131,7 +131,11 @@ class GameController extends Controller
         $gameId = $request->get("id");
         if (!$gameId)
             throw new HttpException("L'identifiant de la partie est manquant.");
+        /** @var Game $game */
         $game = $this->getDoctrine()->getManager()->getRepository(Game::class)->find($gameId);
+        if ($game->getUserA()->getId() != $this->getUser()->getId() && $game->getUserB()->getId() != $this->getUser()->getId()) {
+            return new Response("", 403);
+        }
         $removeState = $gameManager->deleteGame($game);
         return new Response(json_encode($removeState));
     }

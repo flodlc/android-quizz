@@ -2,12 +2,20 @@ package com.example.florian.app;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.example.florian.app.offline.OfflineSelectorActivity;
 import com.example.florian.app.online.OnlineSelectorActivity;
 
 import entities.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import services.ApiService;
+import services.ApiServiceInterface;
 import services.QuestionManager;
+import services.RouterService;
+import services.UserManager;
 
 
 /**
@@ -31,5 +39,25 @@ public class HomeActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().add(R.id.content, on, "ONLINE").commit();
         getSupportFragmentManager().beginTransaction().add(R.id.content, off, "OFFLINE").commit();
+
+        findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApiServiceInterface apiService = ApiService.getService();
+                Call<Boolean> call = apiService.logout();
+                call.enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        deleteFile("QEUser");
+                        RouterService.goConnectPageAndFinish(HomeActivity.this);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+                        ApiService.showErrorMessage(HomeActivity.this);
+                    }
+                });
+            }
+        });
     }
 }

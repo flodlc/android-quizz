@@ -25,4 +25,7 @@
     <string name="playAgain">Recommencer !</string>
     <string name="ok">OK</string>
     <string name="loadingQuestions">Chargement de la librairie de questions.</string>
+    <string name="password">Mot de passe</string>
+    <string name="passwordVerif">Mot de passe (vérification)</string>
+    <string name="username">Nom d\'utilisateur</string>
 </resources>

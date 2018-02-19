@@ -26,4 +26,7 @@
     <string name="playAgain">Play again !</string>
     <string name="ok">OK</string>
     <string name="loadingQuestions">Loading questions library</string>
+    <string name="password">Password</string>
+    <string name="passwordVerif">Password (check)</string>
+    <string name="username">Username</string>
 </resources>

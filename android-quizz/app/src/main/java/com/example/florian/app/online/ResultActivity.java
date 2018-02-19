@@ -59,7 +59,7 @@ public class ResultActivity extends AppCompatActivity {
             resultText = "En attente de l'adversaire";
         } else if (gameResult.getGame().getWinner() == null) {
             resultText = getResources().getString(R.string.matchNul);
-        } else if (gameResult.getGame().getWinner().getUsername().equals(user.getId())) {
+        } else if (gameResult.getGame().getWinner().getUsername().equals(user.getUsername())) {
             resultText = getResources().getString(R.string.win);
         } else {
             resultText = getResources().getString(R.string.lost);

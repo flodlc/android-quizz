@@ -60,6 +60,9 @@ public interface ApiServiceInterface {
     @GET("game/all")
     Call<List<Game>> getMyGames();
 
+    @GET("logout")
+    Call<Boolean> logout();
+
     @POST("editUser")
     Call<User> editUser(@Body User user);
 }

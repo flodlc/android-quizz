@@ -1,6 +1,7 @@
 package com.example.florian.app;
 
 import android.app.Activity;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -163,14 +164,24 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
+    private void setDrawable(View view, int drawableId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            view.setBackground(getDrawable(drawableId));
+        } else {
+            view.setBackground(getResources().getDrawable(drawableId));
+        }
+    }
+
     private void showCreateAccount() {
-        this.findViewById(R.id.verifText).setVisibility(View.VISIBLE);
+        setDrawable(this.findViewById(R.id.createButton), R.drawable.button_shape);
+        setDrawable(this.findViewById(R.id.loginButton), R.drawable.button_off_shape);
         this.findViewById(R.id.passwordVerif).setVisibility(View.VISIBLE);
         loginMode = false;
     }
 
     private void showLogin() {
-        this.findViewById(R.id.verifText).setVisibility(View.GONE);
+        setDrawable(this.findViewById(R.id.loginButton), R.drawable.button_shape);
+        setDrawable(this.findViewById(R.id.createButton), R.drawable.button_off_shape);
         this.findViewById(R.id.passwordVerif).setVisibility(View.GONE);
         loginMode = true;
     }

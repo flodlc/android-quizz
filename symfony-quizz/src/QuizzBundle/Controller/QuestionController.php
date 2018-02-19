@@ -10,6 +10,7 @@ namespace QuizzBundle\Controller;
 
 use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\Question;
+use QuizzBundle\Service\QuestionManager;
 use SensioLabs\Security\Exception\HttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -23,6 +24,8 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 
 class QuestionController extends Controller
 {
@@ -37,7 +40,8 @@ class QuestionController extends Controller
     public function __construct()
     {
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        $this->serializer = new Serializer([new DateTimeNormalizer("d/m/Y"), new ObjectNormalizer($classMetadataFactory)], [new JsonEncoder()]);
+        $this->serializer = new Serializer([new DateTimeNormalizer("d/m/Y"), new ObjectNormalizer($classMetadataFactory,
+            null, null, new ReflectionExtractor()), new ArrayDenormalizer()], [new JsonEncoder()]);
     }
 
     /**
@@ -48,7 +52,27 @@ class QuestionController extends Controller
      */
     public function getQuestionsAction(Request $request)
     {
-        $questions = $this->getDoctrine()->getManager()->getRepository(Question::class)->findAll();
+        $lastId = $request->get("lastId");
+        if ($lastId) {
+            $offset = $lastId;
+        } else {
+            $offset = 0;
+        }
+        $questionsRepo = $this->getDoctrine()->getManager()->getRepository(Question::class);
+        $questions = $questionsRepo->findBy([], ["id" => "ASC"], 500, $offset);
         return new Response($this->serializer->serialize($questions, "json"));
+    }
+
+    /**
+     * @Route("", name="postQuestions")
+     * @Method({"POST"})
+     *
+     * @return Response
+     */
+    public function postQuestionsAction(Request $request)
+    {
+        /** @var array $questions */$questions = $this->serializer->deserialize($request->getContent(), Question::class . '[]', "json");
+        /** @var QuestionManager $questionManager */$questionManager = $this->get("quizz.question");
+        return new Response($this->serializer->serialize($questionManager->saveQuestions($questions), "json"));
     }
 }

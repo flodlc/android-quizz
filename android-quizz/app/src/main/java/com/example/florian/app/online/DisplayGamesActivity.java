@@ -3,6 +3,7 @@ package com.example.florian.app.online;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.example.florian.app.R;
 import com.google.common.collect.ImmutableMap;
@@ -18,12 +19,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import services.ApiService;
 import services.ApiServiceInterface;
+import services.RouterService;
 
 /**
  * Created by Florian on 14/02/2018.
  */
 
-public class DisplayGamesActivity extends AppCompatActivity{
+public class DisplayGamesActivity extends AppCompatActivity {
 
     private User user;
     private List<Game> games;
@@ -39,24 +41,39 @@ public class DisplayGamesActivity extends AppCompatActivity{
     protected void onStart() {
         super.onStart();
         ApiServiceInterface apiService = ApiService.getService();
-        Call<List<Game>> call = apiService.getMyGames(ImmutableMap.of("user", String.valueOf(user.getId())));
+        Call<List<Game>> call = apiService.getMyGames();
         call.enqueue(new Callback<List<Game>>() {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
-                games = response.body();
-                displayRounds();
+                if (response.code() != 403) {
+                    games = response.body();
+                    displayGames();
+                    hideLoader();
+                } else {
+                    RouterService.goConnectPageAndFinish(DisplayGamesActivity.this);
+                }
             }
 
             @Override
             public void onFailure(Call<List<Game>> call, Throwable t) {
-
+                ApiService.showErrorMessage(DisplayGamesActivity.this);
+                hideLoader();
             }
         });
     }
 
-    private void displayRounds() {
-        for(Fragment fragment : getSupportFragmentManager().getFragments()){
+    private void hideLoader() {
+        this.findViewById(R.id.loader).setVisibility(View.GONE);
+        this.findViewById(R.id.scrollContent).setVisibility(View.VISIBLE);
+    }
+
+    private void displayGames() {
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+
+        if (games == null) {
+            return;
         }
 
         for (Game game : games) {

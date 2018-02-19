@@ -22,4 +22,11 @@
     <string name="waitPlayer">Waiting for a player</string>
     <string name="adv">opponent : \u0020</string>
     <string name="seeGames">Display my games</string>
+    <string name="internetIssue">Network issue !</string>
+    <string name="playAgain">Play again !</string>
+    <string name="ok">OK</string>
+    <string name="loadingQuestions">Loading questions library</string>
+    <string name="password">Password</string>
+    <string name="passwordVerif">Password (check)</string>
+    <string name="username">Username</string>
 </resources>

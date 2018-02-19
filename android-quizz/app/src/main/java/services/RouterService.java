@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 
 import com.example.florian.app.HomeActivity;
+import com.example.florian.app.MainActivity;
+import com.example.florian.app.offline.OffLineQuizzActivity;
 import com.example.florian.app.offline.OffLineResultActivity;
 import com.example.florian.app.online.DisplayGamesActivity;
 import com.example.florian.app.online.OnLineQuizzActivity;
@@ -69,5 +71,19 @@ public class RouterService {
         b.putParcelable("user", user);
         intent.putExtras(b);
         activity.startActivity(intent);
+    }
+
+    public static void goOfflineQuizz(Activity activity, User user) {
+        Intent intent = new Intent(activity, OffLineQuizzActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelable("user", user);
+        intent.putExtras(b);
+        activity.startActivity(intent);
+    }
+
+    public static void goConnectPageAndFinish(Activity activity) {
+        Intent intent = new Intent(activity, MainActivity.class);
+        activity.startActivity(intent);
+        activity.finish();
     }
 }

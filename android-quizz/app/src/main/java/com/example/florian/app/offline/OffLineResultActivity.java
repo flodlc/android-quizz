@@ -34,10 +34,16 @@ public class OffLineResultActivity extends AppCompatActivity {
 
         displayTexts(b.getInt("score"), (Question) b.getParcelable("question"));
 
-        final Activity activity = this;
-        (findViewById(R.id.backHome)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.backHome).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                RouterService.goHome(activity, user);
+                RouterService.goHome(OffLineResultActivity.this, user);
+                finish();
+            }
+        });
+
+        findViewById(R.id.playAgain).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RouterService.goOfflineQuizz(OffLineResultActivity.this, user);
                 finish();
             }
         });
@@ -57,15 +63,12 @@ public class OffLineResultActivity extends AppCompatActivity {
     }
 
     private void checkRecord(int score) {
-        String recordString = UserManager.getData(this, "record");
-        int record = recordString.equals("") ? 0 : Integer.valueOf(UserManager.getData(this, "record"));
+        String recordString = UserManager.getData("record");
+        int record = recordString.equals("") ? 0 : Integer.valueOf(recordString);
         if (score > record) {
             findViewById(R.id.newRecord).setVisibility(View.VISIBLE);
-            try {
-                UserManager.setData(this, "record", String.valueOf(score));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            user.setRecord(score);
+            UserManager.saveRecord(user);
         }
     }
 

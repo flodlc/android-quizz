@@ -1,5 +1,7 @@
 package services;
 
+import com.google.gson.internal.LinkedTreeMap;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +17,10 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
@@ -25,10 +30,10 @@ import retrofit2.http.QueryMap;
  */
 public interface ApiServiceInterface {
     @GET("user")
-    Call<User> getUser(@QueryMap Map<String, String> param);
+    Call<User> getUser();
 
     @GET("game")
-    Call<GameData> getNewGame(@QueryMap Map<String, String> param);
+    Call<GameData> getNewGame();
 
     @GET("game/status")
     Call<GameData> checkNewGame(@QueryMap Map<String, String> param);
@@ -37,7 +42,7 @@ public interface ApiServiceInterface {
     Call<GameResult> postAnswers(@Body PostAnswers postAnswers);
 
     @GET("game/current")
-    Call<GameData> getCurrentGame(@QueryMap Map<String, String> param);
+    Call<GameData> getCurrentGame();
 
     @DELETE("game/{id}")
     Call<Boolean> deleteGame(@Path("id") String gameId);
@@ -45,6 +50,19 @@ public interface ApiServiceInterface {
     @GET("question/all")
     Call<List<Question>> getAllQuestions();
 
+    @FormUrlEncoded
+    @POST("login_check")
+    Call<User> connect(@Field("_username") String username, @Field("_password") String password);
+
+    @POST("createUser")
+    Call<Boolean> createUser(@Body User user);
+
     @GET("game/all")
-    Call<List<Game>> getMyGames(@QueryMap Map<String, String> param);
+    Call<List<Game>> getMyGames();
+
+    @GET("logout")
+    Call<Boolean> logout();
+
+    @POST("editUser")
+    Call<User> editUser(@Body User user);
 }

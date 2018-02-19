@@ -1,11 +1,14 @@
 package com.example.florian.app.offline;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.florian.app.QuestionActivity;
 import com.example.florian.app.QuizzActivityInterface;
 import com.example.florian.app.R;
+import com.example.florian.app.online.OnlineSelectorActivity;
 
 import java.io.IOException;
 
@@ -13,6 +16,10 @@ import entities.Answer;
 import entities.Question;
 import entities.Round;
 import entities.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import services.ApiService;
 import services.QuestionManager;
 import services.RouterService;
 
@@ -28,6 +35,7 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
     private QuestionManager questionManager;
     private ActivityOfflineInfo activityOfflineInfo;
     private Question currentQuestion;
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +54,38 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
         getSupportFragmentManager().beginTransaction().add(R.id.content, activityOfflineInfo, "INFO").commit();
     }
 
-    private void displayQuestion() {
+    public void displayQuestion() {
         Bundle b = new Bundle();
+        if (alertDialog != null) {
+            alertDialog.dismiss();
+        }
         try {
             currentQuestion = questionManager.getRandomQuestion();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        b.putParcelable("round", new Round(currentQuestion));
-        this.questionActivity = QuestionActivity.newInstance(b);
-        getSupportFragmentManager().beginTransaction().add(R.id.content, this.questionActivity, "QUESTION").commit();
+        if (currentQuestion != null) {
+            b.putParcelable("round", new Round(currentQuestion));
+            this.questionActivity = QuestionActivity.newInstance(b);
+            getSupportFragmentManager().beginTransaction().add(R.id.content, this.questionActivity, "QUESTION").commit();
+        } else {
+            alertDialog = makeAlertDilogue();
+            QuestionManager.getOfflineQuestions(OffLineQuizzActivity.this, this);
+        }
     }
+
+
+    private AlertDialog makeAlertDilogue() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(OffLineQuizzActivity.this);
+        builder.setIcon(R.drawable.sablier);
+        builder.setMessage(R.string.loadingQuestions);
+        builder.setPositiveButton(R.string.ok, null);
+        AlertDialog alertDialog = builder.show();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        return alertDialog;
+    }
+
 
     @Override
     public void saveAnswer(Answer answer) {

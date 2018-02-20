@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
     defaultConfig {
-        applicationId "com.example.florian.myapplication"
+        applicationId "com.quizzExpress"
         minSdkVersion 18
         targetSdkVersion 26
         versionCode 1

@@ -15,7 +15,7 @@ class Question
 {
     /**
      * @var int
-     * @Groups({"game"})
+     * @Groups({"game", "questions"})
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -25,7 +25,7 @@ class Question
 
     /**
      * @var string
-     * @Groups({"game"})
+     * @Groups({"game", "questions"})
      *
      * @ORM\Column(name="question", type="string", length=255)
      */
@@ -33,7 +33,7 @@ class Question
 
     /**
      * @var string
-     * @Groups({"game"})
+     * @Groups({"game", "questions"})
      *
      * @ORM\Column(name="responseA", type="string", length=255)
      */
@@ -41,7 +41,7 @@ class Question
 
     /**
      * @var string
-     * @Groups({"game"})
+     * @Groups({"game", "questions"})
      *
      * @ORM\Column(name="responseB", type="string", length=255)
      */
@@ -49,7 +49,7 @@ class Question
 
     /**
      * @var string
-     * @Groups({"game"})
+     * @Groups({"game", "questions"})
      *
      * @ORM\Column(name="responseC", type="string", length=255)
      */
@@ -57,7 +57,7 @@ class Question
 
     /**
      * @var string
-     * @Groups({"game"})
+     * @Groups({"game", "questions"})
      *
      * @ORM\Column(name="responseD", type="string", length=255)
      */
@@ -65,11 +65,18 @@ class Question
 
     /**
      * @var string
-     * @Groups({"game"})
+     * @Groups({"game", "questions"})
      *
      * @ORM\Column(name="answer", type="string", length=255)
      */
     private $answer;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="enabled", type="boolean")
+     */
+    private $enabled;
 
 
     /**
@@ -231,6 +238,22 @@ class Question
     public function getAnswer()
     {
         return $this->answer;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param bool $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
     }
 }
 

@@ -10,6 +10,7 @@ namespace QuizzBundle\Controller;
 
 use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\Question;
+use QuizzBundle\Entity\User;
 use QuizzBundle\Service\QuestionManager;
 use SensioLabs\Security\Exception\HttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -60,19 +61,40 @@ class QuestionController extends Controller
         }
         $questionsRepo = $this->getDoctrine()->getManager()->getRepository(Question::class);
         $questions = $questionsRepo->findBy([], ["id" => "ASC"], 500, $offset);
-        return new Response($this->serializer->serialize($questions, "json"));
+        return new Response($this->serializer->serialize($questions, "json", ["groups" => ["questions"]]));
     }
 
     /**
-     * @Route("", name="postQuestions")
+     * @Route("create", name="postQuestions")
      * @Method({"POST"})
      *
      * @return Response
      */
     public function postQuestionsAction(Request $request)
     {
-        /** @var array $questions */$questions = $this->serializer->deserialize($request->getContent(), Question::class . '[]', "json");
-        /** @var QuestionManager $questionManager */$questionManager = $this->get("quizz.question");
+        /** @var array $questions */
+        $questions = $this->serializer->deserialize($request->getContent(), Question::class . '[]', "json");
+
+        /** @var QuestionManager $questionManager */
+        $questionManager = $this->get("quizz.question");
+
         return new Response($this->serializer->serialize($questionManager->saveQuestions($questions), "json"));
+    }
+
+    /**
+     * @Route("edit", name="editQuestions")
+     * @Method({"POST"})
+     *
+     * @return Response
+     */
+    public function editQuestionsAction(Request $request)
+    {
+        /** @var array $questions */
+        $questions = $this->serializer->deserialize($request->getContent(), Question::class . '[]', "json");
+
+        /** @var QuestionManager $questionManager */
+        $questionManager = $this->get("quizz.question");
+
+        return new Response($this->serializer->serialize($questionManager->editQuestions($questions), "json"));
     }
 }

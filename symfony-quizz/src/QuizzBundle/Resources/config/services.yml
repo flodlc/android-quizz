@@ -17,6 +17,7 @@ services:
         class: QuizzBundle\Service\QuestionManager
         public: true
         arguments:
+          $authorizationChecker: '@security.authorization_checker'
           $nbRounds: '%nb_rounds%'
     quizz.round:
         class: QuizzBundle\Service\RoundManager

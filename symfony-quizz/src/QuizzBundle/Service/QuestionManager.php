@@ -10,18 +10,26 @@ namespace QuizzBundle\Service;
 
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use QuizzBundle\Entity\Question;
-use SensioLabs\Security\Exception\HttpException;
+use QuizzBundle\Repository\QuestionRepository;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+
 
 class QuestionManager
 {
     private $em;
     private $nbRounds;
 
-    public function __construct(EntityManagerInterface $entityManager, $nbRounds)
+    /** @var AuthorizationChecker */
+    private $authorizationChecker;
+
+    public function __construct(EntityManagerInterface $entityManager, AuthorizationChecker $authorizationChecker, $nbRounds)
     {
         $this->em = $entityManager;
         $this->nbRounds = $nbRounds;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -30,53 +38,100 @@ class QuestionManager
      */
     public function generateQuestions()
     {
-        $questionRepo = $this->em->getRepository(Question::class);
-        $questions = [];
-
-        $questions_all = $questionRepo->findAll();
-        if (count($questions_all) < $this->nbRounds)
-            throw new HttpException("Il n'y a pas assez de question en stock !", 404);
-
-        $index_questions = array_rand($questions_all, $this->nbRounds);
-        foreach ($index_questions as $index) {
-            $questions[] = $questions_all[$index];
+        $sqlQuery = "SELECT * 
+                    FROM `question` q
+                    WHERE q.enabled = 1 ORDER BY RAND() LIMIT " . $this->nbRounds . ";";
+        $rsm = new ResultSetMappingBuilder($this->em);
+        $rsm->addRootEntityFromClassMetadata(Question::class, 'question');
+        $q = $this->em->createNativeQuery($sqlQuery, $rsm);
+        $questions = $q->getResult();
+        if (array_key_exists($this->nbRounds - 1, $questions)) {
+            return $questions;
+        } else {
+            throw new HttpException(500, "Not enough questions");
         }
-
-        return $questions;
     }
 
 
     /**
      * @param array $questions
-     * @return array
+     * @return boolean
      */
     public function saveQuestions(array $questions)
     {
-        $badQuestions = [];
-        $questionRepo = $this->em->getRepository(Question::class);
-
         foreach ($questions as $question) {
-            if ($id = $question->getId()) {
-                /** @var Question $currentQuestion */
-                $currentQuestion = $questionRepo->find($id);
-                $currentQuestion->setAnswer($question->getAnswer());
-                $currentQuestion->setResponseA($question->getResponseA());
-                $currentQuestion->setResponseB($question->getResponseB());
-                $currentQuestion->setResponseC($question->getResponseC());
-                $currentQuestion->setResponseD($question->getResponseD());
-                $currentQuestion->setQuestion($question->getQuestion());
-            } else {
-                if ($question->getQuestion() && $question->getResponseA() && $question->getResponseB()
-                    && $question->getResponseC() && $question->getResponseD() && $question->getAnswer()
-                ) {
-                    $this->em->persist($question);
-                } else {
-                    $badQuestions[] = $question;
-                }
-            }
+            $this->saveQuestion($question, false);
         }
         $this->em->flush();
-        return $badQuestions;
+        return true;
     }
 
+    /**
+     * @param array $questions
+     * @return boolean
+     */
+    public function editQuestions(array $questions)
+    {
+        foreach ($questions as $question) {
+            $this->editQuestion($question, false);
+        }
+        $this->em->flush();
+        return true;
+    }
+
+    /**
+     * @param Question $question
+     * @param bool $flush
+     * @return bool
+     */
+    public function saveQuestion(Question $question, $flush = true)
+    {
+        if ($question->getQuestion() && $question->getResponseA() && $question->getResponseB()
+            && $question->getResponseC() && $question->getResponseD() && $question->getAnswer()
+        ) {
+            if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+                $question->setEnabled(true);
+            } else {
+                $question->setEnabled(false);
+            }
+
+            $this->em->persist($question);
+            if ($flush) {
+                $this->em->flush();
+            }
+            return true;
+        } else {
+            throw new HttpException(400, "missing date for question : " . $question->getQuestion());
+        }
+    }
+
+    public function editQuestion(Question $question, $flush = true)
+    {
+        if ($id = $question->getId()) {
+            /** @var QuestionRepository $questionRepo */
+            $questionRepo = $this->em->getRepository(Question::class);
+
+            /** @var Question $currentQuestion */
+            $currentQuestion = $questionRepo->find($id);
+            if (!$currentQuestion) {
+                throw new HttpException(400, "id not found : " . $question->getId());
+            }
+            $currentQuestion->setAnswer($question->getAnswer());
+            $currentQuestion->setResponseA($question->getResponseA());
+            $currentQuestion->setResponseB($question->getResponseB());
+            $currentQuestion->setResponseC($question->getResponseC());
+            $currentQuestion->setResponseD($question->getResponseD());
+            $currentQuestion->setQuestion($question->getQuestion());
+
+            if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+                $currentQuestion->setEnabled($question->isEnabled());
+            }
+
+            if ($flush) {
+                $this->em->flush();
+            }
+            return true;
+        }
+        throw new HttpException(400, "missing id for : " . $question->getQuestion());
+    }
 }

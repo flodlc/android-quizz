@@ -39,9 +39,9 @@ class GameManager
     {
 
         $sqlQuery = "SELECT * 
-FROM `game` g
-WHERE g.user_a_id = " . $user->getId() . " OR g.user_b_id = " . $user->getId() . " and g.state > 0
-ORDER BY id DESC;";
+                    FROM `game` g
+                    WHERE g.user_a_id = " . $user->getId() . " OR g.user_b_id = " . $user->getId() . " and g.state > 0
+                    ORDER BY id DESC LIMIT 30;";
         $rsm = new ResultSetMappingBuilder($this->em);
         $rsm->addRootEntityFromClassMetadata(Game::class, 'game');
         $q = $this->em->createNativeQuery($sqlQuery, $rsm);
@@ -89,25 +89,26 @@ ORDER BY id DESC;";
     {
         $gameRepo = $this->em->getRepository(Game::class);
 
-        $games = $gameRepo->findBy(["userA" => $me, "state" => 0]);
         /**
          * He's already looking for an adversaire
          */
-        if (count($games) > 0)
-            return ["game" => $games[0], "rounds" => []];
+        $game = $gameRepo->findOneBy(["userA" => $me, "state" => 0]);
+        if ($game)
+            return ["game" => $game, "rounds" => []];
 
-        $gamesA = $gameRepo->findBy(["userA" => $me, "state" => 1, "pointsA" => null]);
-        $gamesB = $gameRepo->findBy(["userB" => $me, "state" => 1, "pointsB" => null]);
-        /**
-         * He has already a party which he has no replied
-         */
-        if (count($gamesA) > 0) {
-            $gamesA[0]->setAdv($gamesA[0]->getUserB());
-            return ["game" => $gamesA[0], "rounds" => $this->roundManager->getRoundsOfGame($gamesA[0])];
+
+        /** @var Game $gameA */
+        $gameA = $gameRepo->findOneBy(["userA" => $me, "state" => 1, "pointsA" => null]);
+        if ($gameA) {
+            $gameA->setAdv($gameA->getUserB());
+            return ["game" => $gameA, "rounds" => $this->roundManager->getRoundsOfGame($gameA)];
         }
-        if (count($gamesB) > 0) {
-            $gamesB[0]->setAdv($gamesB[0]->getUserA());
-            return ["game" => $gamesB[0], "rounds" => $this->roundManager->getRoundsOfGame($gamesB[0])];
+
+        /** @var Game $gameB */
+        $gameB = $gameRepo->findOneBy(["userB" => $me, "state" => 1, "pointsB" => null]);
+        if ($gameB) {
+            $gameB->setAdv($gameB->getUserA());
+            return ["game" => $gameB, "rounds" => $this->roundManager->getRoundsOfGame($gameB)];
         }
 
 
@@ -116,12 +117,12 @@ ORDER BY id DESC;";
          * There is a party which is waiting for someone
          */
         if (count($games) > 0) {
-
+            /** @var Game $game */
             $game = $games[array_rand($games)];
-
-            $this->startOnlineGame($me, $game);
+            $this->startOnlineGame($me, $game, false);
             $rounds = $this->roundManager->generateRounds($game);
             $game->setAdv($game->getUserA());
+            $this->em->flush();
             return ["game" => $game, "rounds" => $rounds];
         }
 
@@ -165,15 +166,19 @@ ORDER BY id DESC;";
     /**
      * Create a new Game with $me as a UserA
      * @param User $me
+     * @param bool $flush
      * @return Game
      */
-    public function createGame(User $me)
+    public function createGame(User $me, $flush = true)
     {
         $game = new Game();
         $game->setState(0);
         $game->setUserA($me);
         $this->em->persist($game);
         $this->em->flush();
+        if ($flush) {
+            $this->em->flush();
+        }
         return $game;
     }
 
@@ -181,13 +186,16 @@ ORDER BY id DESC;";
      * Set a party, which is waiting a second player, in order to be playable.
      * @param User $user
      * @param Game $game
+     * @param bool $flush
      */
-    public function startOnlineGame(User $user, Game $game)
+    public function startOnlineGame(User $user, Game $game, $flush = true)
     {
         $game->setUserB($user);
         $game->setState(1);
         $this->em->persist($game);
-        $this->em->flush();
+        if ($flush) {
+            $this->em->flush();
+        }
     }
 
     /**

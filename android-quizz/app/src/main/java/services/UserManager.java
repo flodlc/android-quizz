@@ -115,6 +115,7 @@ public class UserManager {
         tempFos.close();
         tempBr.close();
         br.close();
+        MyApp.getContext().deleteFile("tempFile");
     }
 
     public static void saveUser(User user) {

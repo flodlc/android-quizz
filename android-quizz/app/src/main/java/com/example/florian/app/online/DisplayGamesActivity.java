@@ -62,7 +62,6 @@ public class DisplayGamesActivity extends AppCompatActivity {
 
     private void hideLoader() {
         this.findViewById(R.id.loader).setVisibility(View.GONE);
-        this.findViewById(R.id.scrollContent).setVisibility(View.VISIBLE);
     }
 
     private void displayGames() {
@@ -70,10 +69,11 @@ public class DisplayGamesActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         }
 
-        if (games == null) {
+        if (games == null || games.size() == 0) {
             findViewById(R.id.noGames).setVisibility(View.VISIBLE);
             return;
         }
+        this.findViewById(R.id.scrollContent).setVisibility(View.VISIBLE);
         findViewById(R.id.noGames).setVisibility(View.GONE);
 
         for (Game game : games) {

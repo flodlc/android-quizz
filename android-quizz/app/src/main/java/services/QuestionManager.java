@@ -126,12 +126,7 @@ public class QuestionManager {
 
 
     public static void getOfflineQuestions() {
-        MyApp.getContext().deleteFile(FILENAME);
-
-        File file = new File(MyApp.getContext().getFilesDir(), FILENAME);
-        if (file.exists()) {
-            return;
-        }
+        //MyApp.getContext().deleteFile(FILENAME);
 
         ApiServiceInterface apiService = ApiService.getService();
         Call<List<Question>> call = apiService
@@ -139,7 +134,7 @@ public class QuestionManager {
         call.enqueue(new Callback<List<Question>>() {
             @Override
             public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
-                if (response.code() == 200) {
+                if (response.code() == 200 && response.body() != null) {
                     List<Question> questions = response.body();
                     for (Question question : questions) {
                         try {

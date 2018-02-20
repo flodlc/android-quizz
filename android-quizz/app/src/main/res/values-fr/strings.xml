@@ -28,4 +28,8 @@
     <string name="password">Mot de passe</string>
     <string name="passwordVerif">Mot de passe (vérification)</string>
     <string name="username">Nom d\'utilisateur</string>
+    <string name="error">Erreur</string>
+    <string name="notSamePassword">Mots de passe non identiques</string>
+    <string name="badCredentials">Identifiants incorrects</string>
+    <string name="noGames">Pas de parties pour l\'instant !</string>
 </resources>

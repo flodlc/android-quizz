@@ -1,10 +1,8 @@
 package services;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.example.florian.app.MyApp;
-import com.example.florian.app.offline.OffLineQuizzActivity;
 import com.google.common.collect.ImmutableMap;
 
 import java.io.BufferedReader;
@@ -141,12 +139,14 @@ public class QuestionManager {
         call.enqueue(new Callback<List<Question>>() {
             @Override
             public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
-                List<Question> questions = response.body();
-                for (Question question : questions) {
-                    try {
-                        writeInFile(question);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                if (response.code() == 200) {
+                    List<Question> questions = response.body();
+                    for (Question question : questions) {
+                        try {
+                            writeInFile(question);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

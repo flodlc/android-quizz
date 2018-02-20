@@ -45,18 +45,16 @@ public class DisplayGamesActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Game>>() {
             @Override
             public void onResponse(Call<List<Game>> call, Response<List<Game>> response) {
-                if (response.code() != 403) {
+                if (ApiService.checkCode(DisplayGamesActivity.this, response)) {
                     games = response.body();
                     displayGames();
-                    hideLoader();
-                } else {
-                    RouterService.goConnectPageAndFinish(DisplayGamesActivity.this);
                 }
+                hideLoader();
             }
 
             @Override
             public void onFailure(Call<List<Game>> call, Throwable t) {
-                ApiService.showErrorMessage(DisplayGamesActivity.this);
+                ApiService.showErrorMessage(DisplayGamesActivity.this, true);
                 hideLoader();
             }
         });
@@ -73,8 +71,10 @@ public class DisplayGamesActivity extends AppCompatActivity {
         }
 
         if (games == null) {
+            findViewById(R.id.noGames).setVisibility(View.VISIBLE);
             return;
         }
+        findViewById(R.id.noGames).setVisibility(View.GONE);
 
         for (Game game : games) {
             Bundle b = new Bundle();

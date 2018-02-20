@@ -31,6 +31,7 @@ public class OnlineSelectorActivity extends Fragment {
     private AlertDialog alertDialog;
     private ApiServiceInterface apiService;
     private GameData currentGameData;
+    private boolean searchingGame;
 
     public static OnlineSelectorActivity newInstance(Bundle args) {
         OnlineSelectorActivity f = new OnlineSelectorActivity();
@@ -62,15 +63,13 @@ public class OnlineSelectorActivity extends Fragment {
             @Override
             public void onResponse(@NonNull Call<GameData> call,
                                    @NonNull Response<GameData> response) {
-                if (response.code() != 403) {
+                if (ApiService.checkCode(getActivity(), response)) {
                     currentGameData = response.body();
                     if (currentGameData.getGame() != null) {
                         getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.VISIBLE);
                     } else {
                         getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
                     }
-                } else {
-                    RouterService.goConnectPageAndFinish(getActivity());
                 }
             }
 
@@ -82,13 +81,18 @@ public class OnlineSelectorActivity extends Fragment {
     }
 
     private void checkNewGame(final long time1) {
+        if (!searchingGame || currentGameData == null
+                || currentGameData.getGame() == null
+                || currentGameData.getGame().getId() == null) {
+            return;
+        }
         Call<GameData> call = apiService.checkNewGame(ImmutableMap.of("game", String.valueOf(currentGameData.getGame().getId())));
 
         call.enqueue(new Callback<GameData>() {
             @Override
             public void onResponse(@NonNull Call<GameData> call,
                                    @NonNull Response<GameData> response) {
-                if (response.code() != 403) {
+                if (ApiService.checkCode(getActivity(), response)) {
                     GameData freshGameData = response.body();
                     if (freshGameData != null && freshGameData.getGame().getState() == 1) {
                         RouterService.goOnlineQuizz(getActivity(), user, freshGameData, alertDialog);
@@ -101,15 +105,19 @@ public class OnlineSelectorActivity extends Fragment {
                         checkNewGame(time1);
                     } else {
                         alertDialog.dismiss();
+                        searchingGame = false;
                     }
                 } else {
-                    RouterService.goConnectPageAndFinish(getActivity());
+                    alertDialog.dismiss();
+                    searchingGame = false;
                 }
             }
 
             @Override
             public void onFailure(Call<GameData> call, Throwable t) {
                 ApiService.showErrorMessage(OnlineSelectorActivity.this.getActivity());
+                alertDialog.dismiss();
+                searchingGame = false;
             }
         });
     }
@@ -121,15 +129,12 @@ public class OnlineSelectorActivity extends Fragment {
         builder.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (currentGameData!= null && currentGameData.getGame() != null) {
+                if (currentGameData != null && currentGameData.getGame() != null) {
                     Call<Boolean> call = apiService.deleteGame(String.valueOf(currentGameData.getGame().getId()));
-
                     call.enqueue(new Callback<Boolean>() {
                         @Override
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                            if (response.code() == 403) {
-                                RouterService.goConnectPageAndFinish(getActivity());
-                            }
+                            ApiService.checkCode(getActivity(), response);
                         }
 
                         @Override
@@ -137,6 +142,8 @@ public class OnlineSelectorActivity extends Fragment {
                             ApiService.showErrorMessage(OnlineSelectorActivity.this.getActivity());
                         }
                     });
+                    searchingGame = false;
+                    alertDialog.dismiss();
                 }
             }
         });
@@ -146,29 +153,32 @@ public class OnlineSelectorActivity extends Fragment {
     }
 
     private void getNewGame() {
+        makeAlertDilogue();
         Call<GameData> call = apiService.getNewGame();
         final long time1 = SystemClock.elapsedRealtime();
-
-        makeAlertDilogue();
         call.enqueue(new Callback<GameData>() {
             @Override
             public void onResponse(@NonNull Call<GameData> call,
                                    @NonNull Response<GameData> response) {
-                if (response.code() != 403) {
+                if (ApiService.checkCode(getActivity(), response)) {
                     currentGameData = response.body();
-                    if (currentGameData!=null && currentGameData.getGame().getState() == 1) {
+                    if (currentGameData != null && currentGameData.getGame().getState() == 1) {
                         RouterService.goOnlineQuizz(getActivity(), user, response.body(), alertDialog);
                     } else {
+                        searchingGame = true;
                         checkNewGame(time1);
                     }
                 } else {
-                    RouterService.goConnectPageAndFinish(getActivity());
+                    alertDialog.dismiss();
+                    searchingGame = false;
                 }
             }
 
             @Override
             public void onFailure(Call<GameData> call, Throwable t) {
                 ApiService.showErrorMessage(OnlineSelectorActivity.this.getActivity());
+                alertDialog.dismiss();
+                searchingGame = false;
             }
         });
     }

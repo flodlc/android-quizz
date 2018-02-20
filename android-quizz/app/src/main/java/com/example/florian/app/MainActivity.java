@@ -61,16 +61,17 @@ public class MainActivity extends AppCompatActivity {
     private void createUser(final String username, final String plainPassword, String plainPasswordVerif) {
         if (plainPassword.equals("") || !plainPassword.equals(plainPasswordVerif)) {
             hideLoader();
-            showDialogue(this);
+            showDialogue(this, R.string.notSamePassword);
         } else {
             ApiServiceInterface apiService = ApiService.getService();
             Call<Boolean> call = apiService.createUser(new User(username, plainPassword, plainPasswordVerif));
             call.enqueue(new Callback<Boolean>() {
                 @Override
                 public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                    if (response.code() != 403 && response.body() == true) {
+                    if (response.code() == 200  && response.body() == true) {
                         connect(username, plainPassword);
                     } else {
+                        showDialogue(MainActivity.this, R.string.userNotAvailable);
                         hideLoader();
                     }
                 }
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle(R.string.internetIssue);
+        builder.setTitle(R.string.error);
         builder.setMessage(message);
         builder.setIcon(R.drawable.sablier);
         builder.setPositiveButton("OK", null);
@@ -104,14 +105,12 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.code() != 403 && response.body() != null) {
+                if (ApiService.checkCode(MainActivity.this, response) && response.body() != null) {
                     if (fromConnection) {
                         UserManager.saveUser(response.body());
                     }
                     RouterService.goHome(MainActivity.this, response.body());
                     MainActivity.this.finish();
-                } else {
-                    hideLoader();
                 }
             }
 
@@ -128,12 +127,12 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.code() != 403) {
+                if (response.code() == 200) {
                     UserManager.savePHPSESSID(response);
                     getUser(true);
                 } else {
                     hideLoader();
-                    showErrorMessage(new String[]{"identifiants incorrects"});
+                    showErrorMessage(new String[]{getString(R.string.badCredentials)});
                 }
             }
 
@@ -155,9 +154,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.loader).setVisibility(View.GONE);
     }
 
-    private void showDialogue(Activity activity) {
+    private void showDialogue(Activity activity, int messageId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.userNotAvailable);
+        builder.setTitle(messageId);
         builder.setIcon(R.drawable.sablier);
         hideLoader();
         builder.setPositiveButton("OK", null);

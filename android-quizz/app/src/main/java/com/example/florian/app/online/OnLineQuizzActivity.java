@@ -9,6 +9,7 @@ import android.view.View;
 import com.example.florian.app.QuestionActivity;
 import com.example.florian.app.QuizzActivityInterface;
 import com.example.florian.app.R;
+import com.example.florian.app.offline.OffLineQuizzActivity;
 
 import java.util.ArrayList;
 
@@ -92,10 +93,8 @@ public class OnLineQuizzActivity extends AppCompatActivity implements QuizzActiv
                 @Override
                 public void onResponse(@NonNull Call<GameResult> call,
                                        @NonNull Response<GameResult> response) {
-                    if (response.code() != 403) {
+                    if (ApiService.checkCode(OnLineQuizzActivity.this, response)) {
                         displayResult(response.body());
-                    } else {
-                        RouterService.goConnectPageAndFinish(OnLineQuizzActivity.this);
                     }
                 }
 

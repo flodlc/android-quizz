@@ -60,12 +60,10 @@ public class GameLineActivity extends Fragment {
                 call.enqueue(new Callback<GameData>() {
                     @Override
                     public void onResponse(Call<GameData> call, retrofit2.Response<GameData> response) {
-                        if (response.code() != 403) {
+                        if (ApiService.checkCode(getActivity(), response)) {
                             GameData gamedata = response.body();
                             RouterService.goResult(getActivity(), user,
                                     new GameResult(gamedata.getGame(), gamedata.getRounds()));
-                        } else {
-                            RouterService.goConnectPageAndFinish(getActivity());
                         }
 
                     }

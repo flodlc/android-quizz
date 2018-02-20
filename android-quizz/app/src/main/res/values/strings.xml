@@ -29,4 +29,8 @@
     <string name="password">Password</string>
     <string name="passwordVerif">Password (check)</string>
     <string name="username">Username</string>
+    <string name="error">Error</string>
+    <string name="notSamePassword">Not same passwords</string>
+    <string name="badCredentials">Bad credentials</string>
+    <string name="noGames">No games yet !</string>
 </resources>

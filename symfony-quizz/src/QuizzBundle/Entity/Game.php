@@ -159,7 +159,7 @@ class Game
     /**
      * @param User $adv
      */
-    public function setAdv(User $adv)
+    public function setAdv(User $adv = null)
     {
         $this->adv = $adv;
     }
@@ -175,7 +175,7 @@ class Game
     /**
      * @param User $winner
      */
-    public function setWinner(User $winner)
+    public function setWinner(User $winner = null)
     {
         $this->winner = $winner;
     }

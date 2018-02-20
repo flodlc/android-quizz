@@ -30,8 +30,6 @@ public class FirstMainActivity extends AppCompatActivity {
     }
 
     private void checkUserData() {
-        //this.deleteFile("QEUser");
-
         if (!ApiService.isConnected()) {
             User user = UserManager.getUSer();
             if (user != null) {
@@ -47,11 +45,9 @@ public class FirstMainActivity extends AppCompatActivity {
             call.enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
-                    if (response.code() != 403 && response.body() != null) {
+                    if (ApiService.checkCode(FirstMainActivity.this, response) && response.body() != null) {
                         RouterService.goHome(FirstMainActivity.this, response.body());
                         FirstMainActivity.this.finish();
-                    } else {
-                        RouterService.goConnectPageAndFinish(FirstMainActivity.this);
                     }
                 }
 

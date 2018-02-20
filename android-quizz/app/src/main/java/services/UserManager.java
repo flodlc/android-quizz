@@ -153,7 +153,9 @@ public class UserManager {
                 String token = response.headers().get("Set-Cookie").substring(10,
                         response.headers().get("Set-Cookie").indexOf(";"));
                 UserManager.setData("PHPSESSID", token);
-            } else if (response.raw().priorResponse().headers().toMultimap().get("Set-Cookie").get(0) != null) {
+            } else if (response.raw().priorResponse() != null
+                    && response.raw().priorResponse().headers().toMultimap().get("Set-Cookie").get(0) != null) {
+
                 String value = response.raw().priorResponse().headers().toMultimap().get("Set-Cookie").get(0);
                 String token = value.substring(10,
                         value.indexOf(";"));
@@ -183,11 +185,5 @@ public class UserManager {
 
             }
         });
-    }
-
-    public static boolean checkIfConnected(Response response) {
-        return (response.code() == 200 && ((response.raw().priorResponse() == null) ||
-                (response.raw().priorResponse() != null
-                        && response.raw().priorResponse().code() == 302)));
     }
 }

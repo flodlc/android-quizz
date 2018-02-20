@@ -54,7 +54,8 @@ public class HomeActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-                        ApiService.showErrorMessage(HomeActivity.this);
+                        deleteFile("QEUser");
+                        RouterService.goConnectPageAndFinish(HomeActivity.this);
                     }
                 });
             }

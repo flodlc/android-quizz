@@ -47,18 +47,32 @@ class QuestionManager
 
 
     /**
-     * @param Question $questions
+     * @param array $questions
      * @return array
      */
-    public function saveQuestions(array $questions) {
-        $questionRepo = $this->em->getRepository(Question::class);
+    public function saveQuestions(array $questions)
+    {
         $badQuestions = [];
+        $questionRepo = $this->em->getRepository(Question::class);
+
         foreach ($questions as $question) {
-            if ($question->getQuestion() && $question->getResponseA() && $question->getResponseB()
-            && $question->getResponseC() && $question->getResponseD() && $question->getAnswer()) {
-                $this->em->persist($question);
+            if ($id = $question->getId()) {
+                /** @var Question $currentQuestion */
+                $currentQuestion = $questionRepo->find($id);
+                $currentQuestion->setAnswer($question->getAnswer());
+                $currentQuestion->setResponseA($question->getResponseA());
+                $currentQuestion->setResponseB($question->getResponseB());
+                $currentQuestion->setResponseC($question->getResponseC());
+                $currentQuestion->setResponseD($question->getResponseD());
+                $currentQuestion->setQuestion($question->getQuestion());
             } else {
-                $badQuestions[] = $question;
+                if ($question->getQuestion() && $question->getResponseA() && $question->getResponseB()
+                    && $question->getResponseC() && $question->getResponseD() && $question->getAnswer()
+                ) {
+                    $this->em->persist($question);
+                } else {
+                    $badQuestions[] = $question;
+                }
             }
         }
         $this->em->flush();

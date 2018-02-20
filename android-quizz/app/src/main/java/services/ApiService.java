@@ -6,8 +6,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+
+import com.example.florian.app.FirstMainActivity;
 import com.example.florian.app.MyApp;
 import com.example.florian.app.R;
+import com.example.florian.app.online.OnLineQuizzActivity;
 
 import java.io.IOException;
 
@@ -65,6 +68,13 @@ public class ApiService {
         builder.show();
     }
 
+    public static void showErrorMessage(Activity activity, boolean finish) {
+        showErrorMessage(activity);
+        if (finish) {
+            activity.finish();
+        }
+    }
+
     public static boolean isConnected() {
         ConnectivityManager
                 cm = (ConnectivityManager) MyApp.getInstance().getApplicationContext()
@@ -72,5 +82,17 @@ public class ApiService {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null
                 && activeNetwork.isConnectedOrConnecting();
+    }
+
+    public static boolean checkCode(Activity activity, retrofit2.Response response) {
+        if (response.code() == 200) {
+            return true;
+        } else if (response.code() == 403) {
+            RouterService.goConnectPageAndFinish(activity);
+            return false;
+        } else {
+            ApiService.showErrorMessage(activity);
+            return false;
+        }
     }
 }

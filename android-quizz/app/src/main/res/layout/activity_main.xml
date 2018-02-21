@@ -116,8 +116,7 @@
                 android:paddingRight="60dp"
                 android:paddingTop="20dp"
                 android:text="@string/valid"
-                android:textColor="@color/colorRed"
-                android:textSize="23sp"/>
+                android:textSize="20sp"/>
             <ProgressBar
                 android:id="@+id/loader"
                 android:layout_width="match_parent"

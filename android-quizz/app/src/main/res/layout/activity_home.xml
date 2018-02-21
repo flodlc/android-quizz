@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.florian.app.com.MainActivity">
+    tools:context="com.quizz.FirstMainActivity">
 
     <LinearLayout
         android:layout_width="0dp"

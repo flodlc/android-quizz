@@ -45,7 +45,6 @@
                 android:gravity="center"
                 android:paddingBottom="2dp"
                 android:paddingTop="2dp"
-                android:text="dfsd"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp" />
 

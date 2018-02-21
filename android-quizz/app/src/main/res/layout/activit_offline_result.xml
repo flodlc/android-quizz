@@ -79,9 +79,7 @@
                 android:paddingStart="5dp"
                 android:paddingTop="20dp"
                 android:text="@string/backHome"
-                android:textColor="@color/colorRed"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="19sp"/>
 
             <Button
                 android:id="@+id/playAgain"
@@ -95,9 +93,7 @@
                 android:paddingStart="5dp"
                 android:paddingTop="20dp"
                 android:text="@string/playAgain"
-                android:textColor="@color/colorRed"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="19sp"/>
         </LinearLayout>
     </LinearLayout>
 

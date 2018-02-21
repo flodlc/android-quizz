@@ -75,7 +75,7 @@
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"/>
+                android:orientation="vertical" />
         </ScrollView>
 
 
@@ -91,9 +91,7 @@
             android:background="@drawable/button_shape"
             android:padding="20dp"
             android:text="@string/backHome"
-            android:textColor="@color/colorRed"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

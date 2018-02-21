@@ -13,6 +13,9 @@ services:
         public: true
         arguments:
           $userManager: '@fos_user.user_manager'
+    quizz.stats:
+        class: QuizzBundle\Service\StatsManager
+        public: true
     quizz.question:
         class: QuizzBundle\Service\QuestionManager
         public: true

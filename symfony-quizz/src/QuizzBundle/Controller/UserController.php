@@ -11,6 +11,7 @@ namespace QuizzBundle\Controller;
 use FOS\UserBundle\Form\Factory\FormFactory;
 use FOS\UserBundle\FOSUserBundle;
 use QuizzBundle\Entity\User;
+use QuizzBundle\Service\StatsManager;
 use QuizzBundle\Service\UserManager;
 use SensioLabs\Security\Exception\HttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -99,6 +100,7 @@ class UserController extends Controller
         return new Response("false", 403);
     }
 
+
     /**
      * @Route("/user", name="user")
      * @Method({"GET"})
@@ -108,5 +110,22 @@ class UserController extends Controller
     public function getMeAction()
     {
         return new Response($this->serializer->serialize($this->getUser(), "json", ["groups" => ["user"]]));
+    }
+
+
+    /**
+     * @Route("/stats", name="stats")
+     * @Method({"GET"})
+     *
+     * @return Response
+     */
+    public function getMyStatsAction()
+    {
+        /**
+         * @var StatsManager $statsMana
+         */
+        $statsMana = $this->container->get("quizz.stats");
+        $stats = $statsMana->getMyStats($this->getUser());
+        return new Response($this->serializer->serialize($stats, "json", ["groups" => ["stats"]]));
     }
 }

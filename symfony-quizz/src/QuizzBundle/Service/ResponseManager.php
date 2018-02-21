@@ -71,7 +71,7 @@ class ResponseManager
         foreach ($answers as $answer) {
             $round = $roundRepo->find($answer["roundId"]);
             if (!in_array($round, $rounds))
-                throw new HttpException("Ce round (" . $round->getId() . ") n'appartient pas à la partie en cours (" . $game->getId() . ").", 200);
+                throw new HttpException("Ce round (" . $answer["roundId"] . ") n'appartient pas à la partie en cours (" . $game->getId() . ").", 200);
         }
 
         foreach ($answers as $answer) {

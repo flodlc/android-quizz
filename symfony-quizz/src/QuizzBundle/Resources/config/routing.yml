@@ -16,3 +16,8 @@ question:
     resource: '@QuizzBundle/Controller/QuestionController.php'
     type:     annotation
     prefix:   /question
+
+invitation:
+    resource: '@QuizzBundle/Controller/InvitationController.php'
+    type:     annotation
+    prefix:   /invitation

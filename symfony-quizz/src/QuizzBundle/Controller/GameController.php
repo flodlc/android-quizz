@@ -107,12 +107,12 @@ class GameController extends Controller
     public function getStatusAction(Request $request)
     {
         $gameManager = $this->container->get("quizz.game");
-        $userId = $this->getUser()->getId();
+        $gameRepo = $this->getDoctrine()->getManager()->getRepository(Game::class);
         $gameId = $request->get("game");
-        if (!$gameId)
-            throw new HttpException("L'identifiant de la partie est manquant.");
+        $game = $gameRepo->find($gameId);
+        $user = $this->getUser();
 
-        $data_game = $gameManager->getGameAndRounds($gameId, $userId);
+        $data_game = $gameManager->getGameAndRounds($game, $user);
 
         $gameSeria = $this->serializer->normalize($data_game["game"], "json", ["groups" => ["game"]]);
         $roundsSeria = $this->serializer->normalize($data_game["rounds"], "json", ["groups" => ["game"]]);

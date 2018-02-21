@@ -38,6 +38,12 @@ services:
         arguments:
           $userManager: '@quizz.user'
           $roundManager: '@quizz.round'
+    quizz.invitation:
+        class: QuizzBundle\Service\InvitationManager
+        public: true
+        arguments:
+          $gameManager: '@quizz.game'
+          $userManager: '@quizz.user'
 
     quizz.accessDeniedHandler:
         class: QuizzBundle\Security\AccessDeniedHandler

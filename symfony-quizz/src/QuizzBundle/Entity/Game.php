@@ -34,6 +34,13 @@ class Game
 
     /**
      *
+     * @ORM\ManyToOne(targetEntity="Invitation", cascade={"persist"})
+     * @ORM\Column(nullable=true)
+     */
+    private $invitation;
+
+    /**
+     *
      * @Groups({"game"})
      * @ORM\ManyToOne(targetEntity="User", cascade={"persist"})
      */

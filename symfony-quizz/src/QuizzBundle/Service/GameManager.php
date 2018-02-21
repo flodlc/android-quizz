@@ -61,7 +61,7 @@ class GameManager
     }
 
     /**
-     * Get a game with $user as a player (UserA or UserB in the game) and ready to play
+     * Get a game with $user as a player (UserA or UserB in the game) and he have to play
      * @param User $user
      * @return array
      */
@@ -119,7 +119,7 @@ class GameManager
         if (count($games) > 0) {
             /** @var Game $game */
             $game = $games[array_rand($games)];
-            $this->startOnlineGame($me, $game, false);
+            $this->setUserB($me, $game, false);
             $rounds = $this->roundManager->generateRounds($game);
             $game->setAdv($game->getUserA());
             $this->em->flush();
@@ -129,28 +129,24 @@ class GameManager
         /**
          * Create a new party
          */
-        return ["game" => $this->createGame($me), "rounds" => []];
+        return ["game" => $this->createGameUserA($me), "rounds" => []];
     }
 
     /**
      * Get the game corresponding to the id and its rounds.
-     * @param $idGame
+     * @param Game $game
+     * @param User $me
      * @return array
      */
-    public function getGameAndRounds($idGame, $idUser)
+    public function getGameAndRounds(Game $game, User $me)
     {
-        $gameRepo = $this->em->getRepository(Game::class);
-        $userRepo = $this->em->getRepository(User::class);
-        $game = $gameRepo->find($idGame);
-        $user = $userRepo->find($idUser);
-
         if (!$game)
             throw new HttpException("Partie inexistante", 404);
-        if (!$user)
+        if (!$me)
             throw new HttpException("Utilisateur inexistant", 404);
 
         if ($game->getState() > 0) {
-            $whoMe = $this->userManager->whoIAm($user, $game);
+            $whoMe = $this->userManager->whoIAm($me, $game);
             if ("A" == $whoMe) {
                 $game->setAdv($game->getUserB());
             } else {
@@ -164,38 +160,50 @@ class GameManager
     }
 
     /**
+     * Create an online game with two players, return the Game and every Rounds
+     * @param User $userA
+     * @param User $userB
+     * @return array
+     */
+    public function createOnlineGame(User $userA, User $userB)
+    {
+        $game = $this->createGameUserA($userA);
+        $game = $this->setUserB($userB, $game, true);
+        $rounds = $this->roundManager->generateRounds($game);
+        return ["game" => $game, "rounds" => $rounds];
+    }
+
+    /**
      * Create a new Game with $me as a UserA
      * @param User $me
-     * @param bool $flush
      * @return Game
      */
-    public function createGame(User $me, $flush = true)
+    public function createGameUserA(User $me)
     {
         $game = new Game();
         $game->setState(0);
         $game->setUserA($me);
         $this->em->persist($game);
         $this->em->flush();
-        if ($flush) {
-            $this->em->flush();
-        }
         return $game;
     }
 
     /**
      * Set a party, which is waiting a second player, in order to be playable.
-     * @param User $user
+     * @param User $userB
      * @param Game $game
      * @param bool $flush
+     * @return Game
      */
-    public function startOnlineGame(User $user, Game $game, $flush = true)
+    public function setUserB(User $userB, Game $game, $flush = true)
     {
-        $game->setUserB($user);
+        $game->setUserB($userB);
         $game->setState(1);
         $this->em->persist($game);
         if ($flush) {
             $this->em->flush();
         }
+        return $game;
     }
 
     /**

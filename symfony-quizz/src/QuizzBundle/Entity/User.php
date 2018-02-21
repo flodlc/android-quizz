@@ -18,7 +18,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser
 {
     /**
-     * @Groups({"user"})
+     * @Groups({"user", "invit"})
      *
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -34,7 +34,7 @@ class User extends BaseUser
     private $plainPasswordVerif;
 
     /**
-     * @Groups({"game", "user", "mygames"})
+     * @Groups({"game", "user", "mygames", "invit"})
      */
     protected $username;
 

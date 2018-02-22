@@ -121,4 +121,9 @@ class UserManager
             return "B";
         throw new HttpException("Joueur non présent dans la partie", 500);
     }
+
+    public function visitUser(User $user) {
+        $user->setLastVisit(new \DateTime());
+        $this->em->flush();
+    }
 }

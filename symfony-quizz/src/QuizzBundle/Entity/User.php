@@ -52,6 +52,13 @@ class User extends BaseUser
     private $lastRecordDate;
 
 
+    /**
+     *
+     * @ORM\Column(name="last_visit", type="datetime", nullable=true)
+     */
+    private $lastVisit;
+
+
     public function __construct()
     {
         parent::__construct();
@@ -124,5 +131,21 @@ class User extends BaseUser
     public function setLastRecordDate($lastRecordDate)
     {
         $this->lastRecordDate = $lastRecordDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastVisit()
+    {
+        return $this->lastVisit;
+    }
+
+    /**
+     * @param mixed $lastVisit
+     */
+    public function setLastVisit($lastVisit)
+    {
+        $this->lastVisit = $lastVisit;
     }
 }

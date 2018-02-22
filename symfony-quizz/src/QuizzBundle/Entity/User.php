@@ -5,6 +5,7 @@ namespace QuizzBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 /**
@@ -45,6 +46,12 @@ class User extends BaseUser
      */
     private $record;
 
+    /**
+     *
+     * @ORM\Column(name="last_record_date", type="date", nullable=true)
+     */
+    private $lastRecordDate;
+
 
     public function __construct()
     {
@@ -53,6 +60,7 @@ class User extends BaseUser
         $this->setEmail("");
         $this->setEmailCanonical("");
         $this->setEnabled(true);
+        $this->setLastRecordDate(new DateTime());
     }
 
     /**
@@ -103,6 +111,19 @@ class User extends BaseUser
         $this->id = $id;
     }
 
+    /**
+     * @return DateTime
+     */
+    public function getLastRecordDate()
+    {
+        return $this->lastRecordDate;
+    }
 
-
+    /**
+     * @param DateTime $lastRecordDate
+     */
+    public function setLastRecordDate($lastRecordDate)
+    {
+        $this->lastRecordDate = $lastRecordDate;
+    }
 }

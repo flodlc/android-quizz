@@ -14,6 +14,7 @@ use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\User;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class UserManager
 {
@@ -45,6 +46,10 @@ class UserManager
         if (!$currentUser) {
             throw new Exception("no user", 2);
         }
+        if ($user->getRecord() > $currentUser->getRecord()) {
+            $currentUser->setLastRecordDate(new DateTime());
+        }
+
         $currentUser->setRecord($user->getRecord());
         $this->em->persist($currentUser);
         $this->em->flush();

@@ -17,6 +17,7 @@
       <excludeFolder url="file://$MODULE_DIR$/symfony-quizz/vendor/doctrine/lexer" />
       <excludeFolder url="file://$MODULE_DIR$/symfony-quizz/vendor/doctrine/orm" />
       <excludeFolder url="file://$MODULE_DIR$/symfony-quizz/vendor/fig/link-util" />
+      <excludeFolder url="file://$MODULE_DIR$/symfony-quizz/vendor/friendsofsymfony/user-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/symfony-quizz/vendor/incenteev/composer-parameter-handler" />
       <excludeFolder url="file://$MODULE_DIR$/symfony-quizz/vendor/jdorn/sql-formatter" />
       <excludeFolder url="file://$MODULE_DIR$/symfony-quizz/vendor/monolog/monolog" />
@@ -61,6 +62,7 @@
           <root url="file://$MODULE_DIR$/symfony-quizz/vendor/doctrine/lexer" />
           <root url="file://$MODULE_DIR$/symfony-quizz/vendor/doctrine/orm" />
           <root url="file://$MODULE_DIR$/symfony-quizz/vendor/fig/link-util" />
+          <root url="file://$MODULE_DIR$/symfony-quizz/vendor/friendsofsymfony/user-bundle" />
           <root url="file://$MODULE_DIR$/symfony-quizz/vendor/incenteev/composer-parameter-handler" />
           <root url="file://$MODULE_DIR$/symfony-quizz/vendor/jdorn/sql-formatter" />
           <root url="file://$MODULE_DIR$/symfony-quizz/vendor/monolog/monolog" />
@@ -101,6 +103,7 @@
           <root url="file://$MODULE_DIR$/symfony-quizz/vendor/doctrine/lexer" />
           <root url="file://$MODULE_DIR$/symfony-quizz/vendor/doctrine/orm" />
           <root url="file://$MODULE_DIR$/symfony-quizz/vendor/fig/link-util" />
+          <root url="file://$MODULE_DIR$/symfony-quizz/vendor/friendsofsymfony/user-bundle" />
           <root url="file://$MODULE_DIR$/symfony-quizz/vendor/incenteev/composer-parameter-handler" />
           <root url="file://$MODULE_DIR$/symfony-quizz/vendor/jdorn/sql-formatter" />
           <root url="file://$MODULE_DIR$/symfony-quizz/vendor/monolog/monolog" />

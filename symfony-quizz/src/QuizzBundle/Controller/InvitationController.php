@@ -41,7 +41,25 @@ class InvitationController extends Controller
 
     /**
      * Send a invitation request to a user, in order to play against him
-     * @Route("/", name="invitation")
+     * @Route("/all", name="invitation_get")
+     * @Method({"GET"})
+     */
+    public function getInvitationsAction(Request $request)
+    {
+        /**
+         * @var InvitationManager $invitationManager
+         */
+        $invitationManager = $this->container->get("quizz.invitation");
+
+
+        $invitation = $invitationManager->getInvitationsOfUser($this->getUser());
+
+        return new Response($this->serializer->serialize($invitation, "json", ["groups" => ["invit"]]));
+    }
+
+    /**
+     * Send a invitation request to a user, in order to play against him
+     * @Route("/", name="invitation_request")
      * @Method({"POST"})
      */
     public function postRequestAction(Request $request)

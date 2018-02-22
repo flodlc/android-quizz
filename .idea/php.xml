@@ -40,6 +40,7 @@
       <path value="$PROJECT_DIR$/symfony-quizz/vendor/symfony/phpunit-bridge" />
       <path value="$PROJECT_DIR$/symfony-quizz/vendor/symfony/polyfill-php70" />
       <path value="$PROJECT_DIR$/symfony-quizz/vendor/incenteev/composer-parameter-handler" />
+      <path value="$PROJECT_DIR$/symfony-quizz/vendor/friendsofsymfony/user-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.5.0" />

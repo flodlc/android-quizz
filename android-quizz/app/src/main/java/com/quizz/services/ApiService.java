@@ -47,7 +47,7 @@ public class ApiService {
 
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://207.154.219.236/")
+                .baseUrl("http://10.0.2.2/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

@@ -38,11 +38,19 @@ class Invitation
     private $userTo;
 
     /**
+     * @Groups({"invit"})
      * @var bool
      *
      * @ORM\Column(name="played", type="boolean", options={"default": false})
      */
     private $played;
+
+    /**
+     * @Groups({"invit"})
+     * @var User
+     *
+     */
+    private $adv;
 
 
     /**
@@ -101,5 +109,21 @@ class Invitation
     public function setPlayed($played)
     {
         $this->played = $played;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAdv()
+    {
+        return $this->adv;
+    }
+
+    /**
+     * @param User $adv
+     */
+    public function setAdv(User $adv)
+    {
+        $this->adv = $adv;
     }
 }

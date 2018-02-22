@@ -13,47 +13,87 @@
         android:text="@string/online"
         android:textSize="30sp" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:gravity="end">
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".40"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/onlineButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_shape"
+                android:text="1 vs 1"
+                android:textColor="@color/colorRed"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/onlineButtonNotif"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignEnd="@+id/onlineButton"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/notif_shape"
+                android:text="1"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                android:visibility="gone" />
+        </RelativeLayout>
 
         <Button
-            android:id="@+id/onlineButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
+            android:id="@+id/diplayGames"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".60"
+
             android:background="@drawable/button_shape"
-            android:text="1 vs 1"
-            android:textColor="@color/colorRed"
+            android:text="@string/seeGames"
+            android:textColor="@color/colorWhite"
             android:textSize="18dp"
             android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".40"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/invitationButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_shape"
+                android:text="@string/sendInvitation"
+                android:textColor="@color/colorRed"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
         <Button
-            android:id="@+id/onlineButtonNotif"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignEnd="@+id/onlineButton"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/notif_shape"
-            android:text="1"
+            android:id="@+id/diplayInvitations"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".60"
+            android:background="@drawable/button_shape"
             android:textColor="@color/colorWhite"
-            android:textSize="18sp"
-            android:visibility="gone" />
-    </RelativeLayout>
-    <Button
-        android:id="@+id/diplayGames"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_shape"
-        android:text="@string/seeGames"
-        android:textColor="@color/colorRed"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+            android:text="@string/seeInvitations"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </LinearLayout>

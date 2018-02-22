@@ -32,4 +32,7 @@
     <string name="notSamePassword">Mots de passe non identiques</string>
     <string name="badCredentials">Identifiants incorrects</string>
     <string name="noGames">Pas de parties pour l\'instant !</string>
+    <string name="seeInvitations">Voir mes invitations</string>
+    <string name="noInvitations">Pas d\'invitations pour l\'instant !</string>
+    <string name="sendInvitation">Envoyer</string>
 </resources>

@@ -33,4 +33,7 @@
     <string name="notSamePassword">Not same passwords</string>
     <string name="badCredentials">Bad credentials</string>
     <string name="noGames">No games yet !</string>
+    <string name="seeInvitations">Display my invitations</string>
+    <string name="noInvitations">No invitations yet !</string>
+    <string name="sendInvitation">Send</string>
 </resources>

@@ -28,6 +28,21 @@ class InvitationManager
         $this->userManager = $userManager;
     }
 
+    public function getInvitationsOfUser(User $user)
+    {
+        $invitRepo = $this->em->getRepository(Invitation::class);
+        $invitsFrom = $invitRepo->findBy(["userFrom" => $user]);
+        foreach ($invitsFrom as $invit) {
+            $invit->setAdv($invit->getUserTo());
+        }
+        $invitsTo = $invitRepo->findBy(["userTo" => $user]);
+        foreach ($invitsTo as $invit) {
+            $invit->setAdv($invit->getUserFrom());
+        }
+        $invitations = array_merge($invitsFrom, $invitsTo);
+        return $invitations;
+    }
+
     /**
      * Send an invitation from user A ($idFrom) to user B ($usernameTo).
      * @param User $me

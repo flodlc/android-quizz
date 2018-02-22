@@ -56,6 +56,7 @@
             android:launchMode="singleInstance"
             android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".online.DisplayInvitationsActivity" />
     </application>
 
 </manifest>

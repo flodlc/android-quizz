@@ -50,11 +50,11 @@ class GameManager
             if ($user == $game->getUserA()) {
                 $game->setAdv($game->getUserB());
                 if (null === $game->getPointsA())
-                    unset($games[$ind]);
+                    array_splice($games, $ind, 1);
             } else {
                 $game->setAdv($game->getUserA());
                 if (null === $game->getPointsB())
-                    unset($games[$ind]);
+                    array_splice($games, $ind, 1);
             }
         }
         return $games;

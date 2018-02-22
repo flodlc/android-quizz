@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\User;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserManager
@@ -59,9 +60,10 @@ class UserManager
      * Persist a User.
      *
      * @param User $user with prenom, nom, email, username, plainPassword and plainPasswordVerif.
+     * @param string $ip
      * @return User
      */
-    public function createUser(User $user)
+    public function createUser(User $user, $ip)
     {
         if (!$user->getUsername() || $this->userManager->findUserByUsername($user->getUsername())) {
             throw new HttpException(400, "username");
@@ -72,8 +74,8 @@ class UserManager
             throw new HttpException(400, "password");
         }
 
-        $user->setRoles(["ROLE_USER"]);
         $this->userManager->updatePassword($user);
+        $user->setCreationIp($ip);
         $user->setRoles(["ROLE_USER"]);
         $this->userManager->updateUser($user);
         return $user;
@@ -122,7 +124,12 @@ class UserManager
         throw new HttpException("Joueur non présent dans la partie", 500);
     }
 
-    public function visitUser(User $user) {
+    /**
+     * @param User $user
+     * @param string $ip
+     */
+    public function visitUser(User $user, $ip) {
+        $user->setLastIp($ip);
         $user->setLastVisit(new \DateTime());
         $this->em->flush();
     }

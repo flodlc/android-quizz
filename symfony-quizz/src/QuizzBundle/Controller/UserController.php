@@ -60,7 +60,7 @@ class UserController extends Controller
 
         /**@var $userManager UserManager */
         $userManager = $this->container->get("quizz.user");
-        $userManager->createUser($user);
+        $userManager->createUser($user, $request->getClientIp());
         return new Response("true");
     }
 
@@ -103,13 +103,15 @@ class UserController extends Controller
      * @Route("/user", name="user")
      * @Method({"GET"})
      *
+     * @param Request $request
      * @return Response
      */
-    public function getMeAction()
+    public function getMeAction(Request $request)
     {
+        /** @var User $user */
         $user = $this->getUser();
         $userManager = $this->container->get("quizz.user");
-        $userManager->visitUser($user);
+        $userManager->visitUser($user, $request->getClientIp());
         return new Response($this->serializer->serialize($user, "json", ["groups" => ["user"]]));
     }
 }

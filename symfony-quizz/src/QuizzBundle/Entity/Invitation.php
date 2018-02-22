@@ -24,6 +24,13 @@ class Invitation
     private $id;
 
     /**
+     *
+     * @ORM\ManyToOne(targetEntity="Game", cascade={"persist"})
+     * @ORM\Column(nullable=true)
+     */
+    private $game;
+
+    /**
      * @Groups({"invit"})
      * @var User $userFrom
      * @ORM\ManyToOne(targetEntity="User", cascade={"persist"})
@@ -61,6 +68,22 @@ class Invitation
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return Game
+     */
+    public function getGame()
+    {
+        return $this->game;
+    }
+
+    /**
+     * @param Game $game
+     */
+    public function setGame(Game $game)
+    {
+        $this->game = $game;
     }
 
     /**

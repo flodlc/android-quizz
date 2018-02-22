@@ -133,6 +133,7 @@ class InvitationManager
                 break;
         }
         $invitation->setPlayed(true);
+        $invitation->setGame($gameRounds["game"]);
         $this->em->merge($invitation);
         $this->em->flush();
         return $gameRounds;

@@ -16,7 +16,7 @@ class Game
 {
     /**
      * @var int
-     * @Groups({"game", "mygames"})
+     * @Groups({"game", "mygames", "invit"})
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -31,13 +31,6 @@ class Game
      * @ORM\Column(name="state", type="integer")
      */
     private $state;
-
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="Invitation", cascade={"persist"})
-     * @ORM\Column(nullable=true)
-     */
-    private $invitation;
 
     /**
      *

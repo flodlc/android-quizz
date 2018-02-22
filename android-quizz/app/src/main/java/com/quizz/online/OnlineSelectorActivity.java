@@ -52,7 +52,7 @@ public class OnlineSelectorActivity extends Fragment {
         });
         (view.findViewById(R.id.diplayInvitations)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                RouterService.goDisplayGames(getActivity(), user);
+                RouterService.goDisplayInvitations(getActivity(), user);
             }
         });
         return view;

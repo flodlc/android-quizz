@@ -10,6 +10,7 @@ import com.quizz.MainActivity;
 import com.quizz.offline.OffLineQuizzActivity;
 import com.quizz.offline.OffLineResultActivity;
 import com.quizz.online.DisplayGamesActivity;
+import com.quizz.online.DisplayInvitationsActivity;
 import com.quizz.online.OnLineQuizzActivity;
 import com.quizz.online.ResultActivity;
 
@@ -67,6 +68,14 @@ public class RouterService {
 
     public static void goDisplayGames(Activity activity, User user) {
         Intent intent = new Intent(activity, DisplayGamesActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelable("user", user);
+        intent.putExtras(b);
+        activity.startActivity(intent);
+    }
+
+    public static void goDisplayInvitations(Activity activity, User user) {
+        Intent intent = new Intent(activity, DisplayInvitationsActivity.class);
         Bundle b = new Bundle();
         b.putParcelable("user", user);
         intent.putExtras(b);

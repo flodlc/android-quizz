@@ -69,17 +69,17 @@ public class DisplayInvitationsActivity extends AppCompatActivity {
         }
 
         if (invitations == null || invitations.size() == 0) {
-            findViewById(R.id.noGames).setVisibility(View.VISIBLE);
+            findViewById(R.id.noInvitations).setVisibility(View.VISIBLE);
             return;
         }
         this.findViewById(R.id.scrollContent).setVisibility(View.VISIBLE);
-        findViewById(R.id.noGames).setVisibility(View.GONE);
+        findViewById(R.id.noInvitations).setVisibility(View.GONE);
 
         for (Invitation invitation : invitations) {
             Bundle b = new Bundle();
             b.putParcelable("user", user);
             b.putParcelable("invitation", invitation);
-            Fragment fragment = GameLineActivity.newInstance(b);
+            Fragment fragment = InvitationLineActivity.newInstance(b);
             getSupportFragmentManager().beginTransaction().add(R.id.content, fragment, "INVITATION").commit();
         }
     }

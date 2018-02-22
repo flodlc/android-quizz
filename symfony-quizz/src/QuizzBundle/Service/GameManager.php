@@ -174,6 +174,7 @@ class GameManager
         $game = new Game();
         $game->setState(0);
         $game->setUserA($me);
+        $game->setCreationDate(new \DateTime());
         $this->em->persist($game);
         $this->em->flush();
         if ($flush) {
@@ -190,6 +191,7 @@ class GameManager
      */
     public function startOnlineGame(User $user, Game $game, $flush = true)
     {
+        $game->setBeginDate(new \DateTime());
         $game->setUserB($user);
         $game->setState(1);
         $this->em->persist($game);

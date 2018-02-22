@@ -198,12 +198,8 @@ class GameManager
      */
     public function setUserB(User $userB, Game $game, $flush = true)
     {
-<<<<<<< HEAD
-        $game->setUserB($userB);
-=======
         $game->setBeginDate(new \DateTime());
-        $game->setUserB($user);
->>>>>>> origin/master
+        $game->setUserB($userB);
         $game->setState(1);
         $this->em->persist($game);
         if ($flush) {

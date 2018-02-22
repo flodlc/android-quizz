@@ -14,8 +14,8 @@
         android:textSize="30sp" />
 
     <LinearLayout
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -57,14 +57,13 @@
 
             android:background="@drawable/button_shape"
             android:text="@string/seeGames"
-            android:textColor="@color/colorWhite"
             android:textSize="18dp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
@@ -91,7 +90,6 @@
             android:layout_height="wrap_content"
             android:layout_weight=".60"
             android:background="@drawable/button_shape"
-            android:textColor="@color/colorWhite"
             android:text="@string/seeInvitations"
             android:textSize="17dp"
             android:textStyle="bold" />

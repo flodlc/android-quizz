@@ -50,11 +50,11 @@ class GameManager
             if ($user == $game->getUserA()) {
                 $game->setAdv($game->getUserB());
                 if (null === $game->getPointsA())
-                    unset($games[$ind]);
+                    array_splice($games, $ind, 1);
             } else {
                 $game->setAdv($game->getUserA());
                 if (null === $game->getPointsB())
-                    unset($games[$ind]);
+                    array_splice($games, $ind, 1);
             }
         }
         return $games;
@@ -183,6 +183,7 @@ class GameManager
         $game = new Game();
         $game->setState(0);
         $game->setUserA($me);
+        $game->setCreationDate(new \DateTime());
         $this->em->persist($game);
         $this->em->flush();
         return $game;
@@ -197,7 +198,12 @@ class GameManager
      */
     public function setUserB(User $userB, Game $game, $flush = true)
     {
+<<<<<<< HEAD
         $game->setUserB($userB);
+=======
+        $game->setBeginDate(new \DateTime());
+        $game->setUserB($user);
+>>>>>>> origin/master
         $game->setState(1);
         $this->em->persist($game);
         if ($flush) {

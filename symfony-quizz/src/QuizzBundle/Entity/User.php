@@ -45,6 +45,19 @@ class User extends BaseUser
      */
     private $record;
 
+    /**
+     *
+     * @ORM\Column(name="last_record_date", type="datetime", nullable=true)
+     */
+    private $lastRecordDate;
+
+
+    /**
+     *
+     * @ORM\Column(name="last_visit", type="datetime", nullable=true)
+     */
+    private $lastVisit;
+
 
     public function __construct()
     {
@@ -53,6 +66,7 @@ class User extends BaseUser
         $this->setEmail("");
         $this->setEmailCanonical("");
         $this->setEnabled(true);
+        $this->setLastRecordDate(new \DateTime());
     }
 
     /**
@@ -103,6 +117,35 @@ class User extends BaseUser
         $this->id = $id;
     }
 
+    /**
+     * @return
+     */
+    public function getLastRecordDate()
+    {
+        return $this->lastRecordDate;
+    }
 
+    /**
+     * @param $lastRecordDate
+     */
+    public function setLastRecordDate($lastRecordDate)
+    {
+        $this->lastRecordDate = $lastRecordDate;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getLastVisit()
+    {
+        return $this->lastVisit;
+    }
+
+    /**
+     * @param mixed $lastVisit
+     */
+    public function setLastVisit($lastVisit)
+    {
+        $this->lastVisit = $lastVisit;
+    }
 }

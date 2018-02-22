@@ -45,7 +45,10 @@ class ResponseManager
         $user = $userRepo->find($idUser);
         if (!$user)
             throw new HttpException("Pas d'utilisateur", 404);
+
+        /** @var Game $game */
         $game = $gameRepo->find($idGame);
+
         if (!$game)
             throw new HttpException("Pas de partie liée", 404);
         $myRole = $this->userManager->whoIAm($user, $game);
@@ -113,6 +116,7 @@ class ResponseManager
                 default:
                     break;
             }
+            $game->setEndDate(new \DateTime());
             $game->setState(2);
         }
         $this->em->merge($game);

@@ -107,6 +107,9 @@ class UserController extends Controller
      */
     public function getMeAction()
     {
-        return new Response($this->serializer->serialize($this->getUser(), "json", ["groups" => ["user"]]));
+        $user = $this->getUser();
+        $userManager = $this->container->get("quizz.user");
+        $userManager->visitUser($user);
+        return new Response($this->serializer->serialize($user, "json", ["groups" => ["user"]]));
     }
 }

@@ -2,23 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6cdc01cf-da8a-4725-be8b-b78fb84e7f6e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/android-quizz.iml" afterPath="$PROJECT_DIR$/.idea/android-quizz.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/drawable/ic_launcher.png" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/.gitignore" afterPath="$PROJECT_DIR$/android-quizz/.gitignore" />
       <change beforePath="$PROJECT_DIR$/android-quizz/.idea/misc.xml" afterPath="$PROJECT_DIR$/android-quizz/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/app-release.apk" afterPath="$PROJECT_DIR$/android-quizz/app/app-release.apk" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/build.gradle" afterPath="$PROJECT_DIR$/android-quizz/app/build.gradle" />
       <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/AndroidManifest.xml" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/online/OnlineSelectorActivity.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/online/OnlineSelectorActivity.java" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/services/ApiService.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/services/ApiService.java" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/services/ApiServiceInterface.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/services/ApiServiceInterface.java" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/QuestionActivity.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/QuestionActivity.java" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/entities/Invitation.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/entities/Invitation.java" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/drawable/logo.png" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/drawable/logo.png" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/drawable/logo_small.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activit_offline_result.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activit_offline_result.xml" />
       <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activity_home.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activity_home.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activity_main.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activity_result.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activity_result.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/fragment_question.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/fragment_question.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/offline_selector.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/offline_selector.xml" />
       <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/online_selector.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/online_selector.xml" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/values-fr/strings.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/values-fr/strings.xml" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/values/strings.xml" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/build.gradle" afterPath="$PROJECT_DIR$/android-quizz/build.gradle" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/android-quizz/gradle/wrapper/gradle-wrapper.properties" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/InvitationController.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/InvitationController.php" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Invitation.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Invitation.php" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/InvitationManager.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/InvitationManager.php" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" />
+      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/UserController.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/UserController.php" />
+      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php" />
+      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/User.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/User.php" />
+      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/GameManager.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/GameManager.php" />
+      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/ResponseManager.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/ResponseManager.php" />
+      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/UserManager.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/UserManager.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -60,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/QuestionController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1023">
-              <caret line="60" column="9" lean-forward="true" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
+              <caret line="60" column="9" lean-forward="false" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -78,11 +95,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Invitation.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Invitation.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Invitation.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="605">
-              <caret line="36" column="7" lean-forward="true" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
+              <caret line="36" column="7" lean-forward="false" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/android-quizz/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -94,7 +121,10 @@
             <state relative-caret-position="181">
               <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="47" selection-end-column="33" />
               <folding>
-                <marker date="1519235017033" expanded="true" signature="934:1142" ph="SELECT * FRO... game" />
+                <marker date="1519317172533" expanded="true" signature="934:1142" ph="SELECT * FRO... game" />
+                <marker date="1519317172533" expanded="true" signature="6401:6442" ph="..." />
+                <marker date="1519317172533" expanded="true" signature="6480:6638" ph=" Remove a game when its state is at 0. Return true if the game is remove, otherwise throw error 500. ..." />
+                <marker date="1519317172533" expanded="true" signature="6683:6878" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -379,12 +409,12 @@
       <workItem from="1518539514081" duration="1930000" />
       <workItem from="1518601582295" duration="2171000" />
       <workItem from="1518605066222" duration="272000" />
-      <workItem from="1519309003573" duration="3369000" />
+      <workItem from="1519309003573" duration="4011000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67436000" />
+    <option name="totallyTimeSpent" value="68078000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="3226" height="1746" extended-state="6" />
@@ -421,16 +451,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="4224">
-            <caret line="128" column="34" lean-forward="false" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Round.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2145">
@@ -776,7 +796,10 @@
         <state relative-caret-position="181">
           <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="47" selection-end-column="33" />
           <folding>
-            <marker date="1519235017033" expanded="true" signature="934:1142" ph="SELECT * FRO... game" />
+            <marker date="1519317172533" expanded="true" signature="934:1142" ph="SELECT * FRO... game" />
+            <marker date="1519317172533" expanded="true" signature="6401:6442" ph="..." />
+            <marker date="1519317172533" expanded="true" signature="6480:6638" ph=" Remove a game when its state is at 0. Return true if the game is remove, otherwise throw error 500. ..." />
+            <marker date="1519317172533" expanded="true" signature="6683:6878" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -804,7 +827,7 @@
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/QuestionController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1023">
-          <caret line="60" column="9" lean-forward="true" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
+          <caret line="60" column="9" lean-forward="false" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -812,7 +835,15 @@
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Invitation.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="605">
-          <caret line="36" column="7" lean-forward="true" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
+          <caret line="36" column="7" lean-forward="false" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-quizz/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>

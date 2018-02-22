@@ -45,6 +45,10 @@ class UserManager
         if (!$currentUser) {
             throw new Exception("no user", 2);
         }
+        if ($user->getRecord() > $currentUser->getRecord()) {
+            $currentUser->setLastRecordDate(new \DateTime());
+        }
+
         $currentUser->setRecord($user->getRecord());
         $this->em->persist($currentUser);
         $this->em->flush();
@@ -116,5 +120,10 @@ class UserManager
         elseif ($user === $game->getUserB())
             return "B";
         throw new HttpException("Joueur non présent dans la partie", 500);
+    }
+
+    public function visitUser(User $user) {
+        $user->setLastVisit(new \DateTime());
+        $this->em->flush();
     }
 }

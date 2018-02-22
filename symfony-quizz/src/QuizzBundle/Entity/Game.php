@@ -88,6 +88,24 @@ class Game
      */
     private $pointsB;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="creation_date", type="datetime", nullable=true)
+     */
+    private $creationDate;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="begin_date", type="datetime", nullable=true)
+     */
+    private $beginDate;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="end_date", type="datetime", nullable=true)
+     */
+    private $endDate;
+
 
     /**
      * Get id
@@ -217,6 +235,54 @@ class Game
     public function setPointsB($pointsB)
     {
         $this->pointsB = $pointsB;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getBeginDate()
+    {
+        return $this->beginDate;
+    }
+
+    /**
+     * @param \DateTime $beginDate
+     */
+    public function setBeginDate($beginDate)
+    {
+        $this->beginDate = $beginDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param \DateTime $endDate
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param \DateTime $creationDate
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
     }
 }
 

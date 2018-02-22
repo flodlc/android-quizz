@@ -49,7 +49,28 @@ public class Invitation implements Parcelable
         this.adv = ((User) in.readValue((User.class.getClassLoader())));
     }
 
+    /**
+     * No args constructor for use in serialization
+     *
+     */
     public Invitation() {
+    }
+
+    /**
+     *
+     * @param id
+     * @param userFrom
+     * @param played
+     * @param userTo
+     * @param adv
+     */
+    public Invitation(Integer id, User userFrom, User userTo, Boolean played, User adv) {
+        super();
+        this.id = id;
+        this.userFrom = userFrom;
+        this.userTo = userTo;
+        this.played = played;
+        this.adv = adv;
     }
 
     public Integer getId() {

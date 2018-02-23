@@ -1,18 +1,18 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <layer-list>
-            <item android:right="5dp" android:top="5dp">
+            <item android:right="2dp" android:top="2dp">
                 <shape>
-                    <corners android:radius="8dp" />
+                    <corners android:radius="2dp" />
                     <solid android:color="#8c8b8b" />
                 </shape>
             </item>
-            <item android:bottom="3dp" android:left="3dp">
+            <item android:bottom="2dp" android:left="2dp">
                 <shape>
                     <gradient android:angle="270"
                         android:endColor="#69d868" android:startColor="#72d45d" />
                     <stroke android:width="2dp" android:color="#aeaeae" />
-                    <corners android:radius="7dp" />
+                    <corners android:radius="2dp" />
                     <padding android:bottom="10dp" android:left="10dp"
                         android:right="10dp" android:top="10dp" />
                 </shape>

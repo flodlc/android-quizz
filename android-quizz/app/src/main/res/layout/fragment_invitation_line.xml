@@ -3,20 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="110dp"
     android:padding="5dp"
+    android:background="@drawable/customborder"
     android:orientation="horizontal">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@color/colorGrey"
         android:layout_weight="1">
         <TextView
+            android:id="@+id/typeUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/colorBlack"
-            android:text="@string/adv"
+            android:text="@string/invit_from"
             android:textSize="25sp"/>
         <TextView
             android:id="@+id/advName"
@@ -28,11 +29,17 @@
             android:textStyle="bold"/>
     </LinearLayout>
     <ImageView
-        android:id="@+id/state"
+        android:id="@+id/invit1"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_weight="2"
         android:padding="10dp"
-        android:background="@color/colorGreen"
-        android:src="@drawable/thumb_up" />
+        android:src="@drawable/ic_refuse" />
+    <ImageView
+        android:id="@+id/invit2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="2"
+        android:padding="10dp"
+        android:src="@drawable/ic_accept" />
 </LinearLayout>

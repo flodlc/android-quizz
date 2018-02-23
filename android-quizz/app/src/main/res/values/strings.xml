@@ -20,7 +20,7 @@
     <string name="win">You win !</string>
     <string name="lost">You lost !</string>
     <string name="waitPlayer">Waiting for a player</string>
-    <string name="adv">opponent : \u0020</string>
+    <string name="adv">"Opponent :  "</string>
     <string name="seeGames">Display my games</string>
     <string name="internetIssue">Network issue !</string>
     <string name="playAgain">Play again !</string>
@@ -36,4 +36,7 @@
     <string name="seeInvitations">Display my invitations</string>
     <string name="noInvitations">No invitations yet !</string>
     <string name="sendInvitation">Send</string>
+    <string name="invitation">Invitation</string>
+    <string name="invit_from">"From : "</string>
+    <string name="invit_to">To :</string>
 </resources>

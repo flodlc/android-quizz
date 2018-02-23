@@ -75,14 +75,6 @@ public class InvitationLineActivity extends Fragment {
         });
     }
 
-    private void setBakgroundColor(View view, int color) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            view.setBackgroundColor(getActivity().getColor(color));
-        } else {
-            view.setBackgroundColor(getResources().getColor(color));
-        }
-    }
-
     private void setImage(ImageView imageView, int imageId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             imageView.setImageDrawable(getActivity().getDrawable(imageId));
@@ -91,34 +83,31 @@ public class InvitationLineActivity extends Fragment {
         }
     }
 
-    private void setCorrect(ImageView view, String winStatus) {
-        if (winStatus.equals("WIN")) {
-            setImage(view, R.drawable.thumb_up);
-            setBakgroundColor(view, R.color.colorGreen);
-        } else if (winStatus.equals("LOSE")) {
-            setImage(view, R.drawable.thumb_down);
-            setBakgroundColor(view, R.color.colorRed);
-        } else {
-            setImage(view, R.drawable.equal);
-        }
-    }
-
-    private void setAnimation(ImageView imageView) {
-        if (invitation.getPlayed()) {
-            /**
-             * DOIT JOUER
-             */
-            setCorrect(imageView, "WIN");
-        } else {
-            /**
-             * ATTENTE DE L'ADVERSAIRE
-             */
-            setCorrect(imageView, "LOSE");
-        }
-    }
 
     private void displayTexts(View view) {
+        boolean hasChoice = (invitation.getUserFrom().getUsername().equals(invitation.getAdv().getUsername()));
+        TextView typeUser = view.findViewById(R.id.typeUser);
+        ImageView invit1 = view.findViewById(R.id.invit1);
+        ImageView invit2 = view.findViewById(R.id.invit2);
+        if (hasChoice) {
+            typeUser.setText(getResources().getString(R.string.invit_from));
+        } else {
+            typeUser.setText(getResources().getString(R.string.invit_to));
+        }
         ((TextView) view.findViewById(R.id.advName)).setText(invitation.getAdv().getUsername());
-        setAnimation((ImageView) view.findViewById(R.id.state));
+
+
+        if (invitation.getPlayed()) {
+            invit1.setVisibility(View.GONE);
+            setImage(invit2, R.drawable.ic_accept);
+        } else {
+            if (hasChoice) {
+                setImage(invit1, R.drawable.ic_refuse);
+                setImage(invit2, R.drawable.ic_accept);
+            } else {
+                invit1.setVisibility(View.GONE);
+                invit2.setVisibility(View.GONE);
+            }
+        }
     }
 }

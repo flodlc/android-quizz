@@ -35,4 +35,7 @@
     <string name="seeInvitations">Voir mes invitations</string>
     <string name="noInvitations">Pas d\'invitations pour l\'instant !</string>
     <string name="sendInvitation">Envoyer</string>
+    <string name="invitation">Invitation</string>
+    <string name="invit_from">"Reçu de : "</string>
+    <string name="invit_to">"Pour : "</string>
 </resources>

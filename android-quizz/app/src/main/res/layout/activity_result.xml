@@ -25,7 +25,7 @@
             android:id="@+id/result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="@string/result"
             android:textAlignment="center"
             android:textSize="38sp"
@@ -35,8 +35,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:gravity="top"
-            android:orientation="horizontal">
+            android:background="@drawable/header_bar"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="2dp">
 
             <TextView
                 android:id="@+id/playerA"
@@ -49,7 +51,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:gravity="center"
                 android:text="@string/question"
@@ -61,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="20"
+                android:lineSpacingExtra="-7dp"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -90,7 +93,7 @@
             android:layout_marginStart="3dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/button_shape"
-            android:padding="20dp"
+            android:padding="15dp"
             android:text="@string/backHome"
             android:textSize="20sp" />
     </LinearLayout>

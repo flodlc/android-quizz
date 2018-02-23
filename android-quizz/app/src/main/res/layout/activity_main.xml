@@ -74,7 +74,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="50dp"
                 android:layout_marginStart="50dp"
-                android:hint="@string/username" />
+                android:hint="@string/username"
+                android:maxLines="1"
+                android:singleLine="true" />
 
 
             <EditText
@@ -102,21 +104,23 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="15"
-            android:gravity="center_horizontal|top"
-            android:layout_height="match_parent">
+            android:gravity="center_horizontal|top">
+
             <Button
                 android:id="@+id/validUser"
-                android:layout_marginTop="50dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
                 android:background="@drawable/button_shape"
                 android:paddingBottom="20dp"
                 android:paddingLeft="60dp"
                 android:paddingRight="60dp"
                 android:paddingTop="20dp"
                 android:text="@string/valid"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
+
             <ProgressBar
                 android:id="@+id/loader"
                 android:layout_width="match_parent"

@@ -28,21 +28,6 @@
                 android:layout_margin="25dp"
                 android:src="@drawable/logo" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:gravity="bottom">
-
-            <ImageView
-                android:id="@+id/logout"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/logout" />
-        </LinearLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

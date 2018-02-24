@@ -10,6 +10,8 @@ import com.quizz.QuizzActivityInterface;
 import com.quizz.R;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.quizz.entities.Answer;
 import com.quizz.entities.Question;
@@ -29,7 +31,8 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
     private QuestionActivity questionActivity;
     private ActivityOfflineInfo activityOfflineInfo;
     private Question currentQuestion;
-    AlertDialog alertDialog;
+    private List<Integer> lastQuestions;
+    private int lastListMaxSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,8 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
 
         this.user = getIntent().getExtras().getParcelable("user");
         this.score = 0;
+        this.lastQuestions = new ArrayList<>();
+        this.lastListMaxSize = getResources().getInteger(R.integer.nbQuestionsCheckIfSame);
         this.displayScore();
         this.displayQuestion();
     }
@@ -48,23 +53,55 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
     }
 
     public void displayQuestion() {
-        Bundle b = new Bundle();
+        currentQuestion = getRandomQuestion();
 
+        Bundle b = new Bundle();
+        b.putParcelable("round", new Round(currentQuestion));
+        this.questionActivity = QuestionActivity.newInstance(b);
+        getSupportFragmentManager().beginTransaction().add(R.id.content, this.questionActivity, "QUESTION").commit();
+    }
+
+    private Question getRandomQuestion() {
+        Question newQuestion = null;
         try {
-            currentQuestion = QuestionManager.getRandomQuestion();
+            newQuestion = QuestionManager.getRandomQuestion();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (currentQuestion != null) {
-            b.putParcelable("round", new Round(currentQuestion));
-            this.questionActivity = QuestionActivity.newInstance(b);
-            getSupportFragmentManager().beginTransaction().add(R.id.content, this.questionActivity, "QUESTION").commit();
-        } else {
-            alertDialog = makeAlertDilogue();
+
+        if (newQuestion == null) {
+            makeAlertDilogue();
             QuestionManager.getOfflineQuestions();
+        } else {
+            while (isInLastQuestions(newQuestion)) {
+                try {
+                    newQuestion = QuestionManager.getRandomQuestion();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
+        addToQuestionToLastQuestions(newQuestion);
+
+        return newQuestion;
     }
 
+    private void addToQuestionToLastQuestions(Question question) {
+        if (lastQuestions.size() >= lastListMaxSize) {
+            lastQuestions.remove(0);
+        }
+        lastQuestions.add(question.getId());
+    }
+
+    private boolean isInLastQuestions(Question question) {
+        for (int lastQuestionId : lastQuestions) {
+            if (question.getId() == lastQuestionId) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private AlertDialog makeAlertDilogue() {
         AlertDialog.Builder builder = new AlertDialog.Builder(OffLineQuizzActivity.this);
@@ -86,11 +123,7 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
     @Override
     public void saveAnswer(Answer answer) {
         if (answer.getAnswer().equals(currentQuestion.getAnswer())) {
-            try {
-                currentQuestion = QuestionManager.getRandomQuestion();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            currentQuestion = getRandomQuestion();
             score++;
             this.questionActivity.update(new Round(currentQuestion));
             this.activityOfflineInfo.update(score);

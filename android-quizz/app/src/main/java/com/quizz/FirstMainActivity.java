@@ -46,7 +46,9 @@ public class FirstMainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
                     if (ApiService.checkCode(FirstMainActivity.this, response) && response.body() != null) {
-                        RouterService.goHome(FirstMainActivity.this, response.body());
+                        User user = response.body();
+                        UserManager.checkDistantRecord(user);
+                        RouterService.goHome(FirstMainActivity.this, user);
                         FirstMainActivity.this.finish();
                     }
                 }

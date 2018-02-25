@@ -12,6 +12,7 @@ namespace QuizzBundle\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\Invitation;
+use QuizzBundle\Entity\Response;
 use QuizzBundle\Entity\User;
 use SensioLabs\Security\Exception\HttpException;
 
@@ -122,8 +123,14 @@ class InvitationManager
         $userB = $invitation->getUserTo();
 
         $gameRounds = $this->gameManager->createOnlineGame($userA, $userB);
+        $idGame = $gameRounds["game"]->getId();
+        $invitation->setPlayed(true);
+        $invitation->setGame($idGame);
+        $this->em->merge($invitation);
+        $this->em->flush();
 
         $role = $this->userManager->whoIAm($me, $gameRounds["game"]);
+
         switch ($role) {
             case "A":
                 $gameRounds["game"]->setAdv($gameRounds["game"]->getUserB());
@@ -132,10 +139,6 @@ class InvitationManager
                 $gameRounds["game"]->setAdv($gameRounds["game"]->getUserA());
                 break;
         }
-        $invitation->setPlayed(true);
-        $invitation->setGame($gameRounds["game"]);
-        $this->em->merge($invitation);
-        $this->em->flush();
         return $gameRounds;
     }
 

@@ -24,6 +24,7 @@ class Invitation
     private $id;
 
     /**
+     * @var Game $game
      *
      * @ORM\ManyToOne(targetEntity="Game", cascade={"persist"})
      * @ORM\Column(nullable=true)
@@ -81,7 +82,7 @@ class Invitation
     /**
      * @param Game $game
      */
-    public function setGame(Game $game)
+    public function setGame($game)
     {
         $this->game = $game;
     }

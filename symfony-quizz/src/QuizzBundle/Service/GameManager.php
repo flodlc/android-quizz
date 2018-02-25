@@ -168,7 +168,7 @@ class GameManager
     public function createOnlineGame(User $userA, User $userB)
     {
         $game = $this->createGameUserA($userA);
-        $game = $this->setUserB($userB, $game, true);
+        $game = $this->setUserB($userB, $game);
         $rounds = $this->roundManager->generateRounds($game);
         return ["game" => $game, "rounds" => $rounds];
     }

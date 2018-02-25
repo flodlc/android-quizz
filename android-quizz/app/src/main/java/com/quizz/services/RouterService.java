@@ -17,6 +17,7 @@ import com.quizz.entities.GameData;
 import com.quizz.entities.GameResult;
 import com.quizz.entities.Question;
 import com.quizz.entities.User;
+import com.quizz.stat.StatisticActivity;
 
 /**
  * Created by Florian on 11/02/2018.
@@ -74,7 +75,7 @@ public class RouterService {
     }
 
     public static void goOfflineQuizz(Activity activity, User user) {
-        Intent intent = new Intent(activity, OffLineQuizzActivity.class);
+        Intent intent = new Intent(activity, StatisticActivity.class);
         Bundle b = new Bundle();
         b.putParcelable("user", user);
         intent.putExtras(b);

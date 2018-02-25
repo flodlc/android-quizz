@@ -8,4 +8,5 @@
     <color name="colorRed">#c13e3e</color>
     <color name="colorGrey">#c8c7c7</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorButton">#72d45d</color>
 </resources>

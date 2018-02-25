@@ -56,6 +56,11 @@
             android:launchMode="singleInstance"
             android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".stat.StatisticActivity"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

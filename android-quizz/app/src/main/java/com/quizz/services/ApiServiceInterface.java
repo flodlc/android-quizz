@@ -63,4 +63,10 @@ public interface ApiServiceInterface {
 
     @GET("invitation/all")
     Call<List<Invitation>> getMyInvitations();
+
+    @GET("invitation/accept")
+    Call<GameData> acceptInvitation(@QueryMap Map<String, String> param);
+
+    @GET("invitation/refuse")
+    Call<Boolean> refuseInvitation(@QueryMap Map<String, String> param);
 }

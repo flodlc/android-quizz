@@ -10,7 +10,6 @@ import com.quizz.R;
 
 import java.util.List;
 
-import com.quizz.entities.Game;
 import com.quizz.entities.Invitation;
 import com.quizz.entities.User;
 import retrofit2.Call;
@@ -45,7 +44,7 @@ public class DisplayInvitationsActivity extends AppCompatActivity {
             public void onResponse(Call<List<Invitation>> call, Response<List<Invitation>> response) {
                 if (ApiService.checkCode(DisplayInvitationsActivity.this, response)) {
                     invitations = response.body();
-                    displayGames();
+                    displayInvitations();
                 }
                 hideLoader();
             }
@@ -63,7 +62,7 @@ public class DisplayInvitationsActivity extends AppCompatActivity {
     }
 
 
-    private void displayGames() {
+    private void displayInvitations() {
         for (Fragment fragment : getSupportFragmentManager().getFragments()) {
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         }

@@ -38,4 +38,5 @@
     <string name="invitation">Invitation</string>
     <string name="invit_from">"Reçu de : "</string>
     <string name="invit_to">"Pour : "</string>
+    <string name="waitState">En attente</string>
 </resources>

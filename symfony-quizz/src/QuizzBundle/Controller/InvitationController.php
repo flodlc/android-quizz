@@ -78,17 +78,17 @@ class InvitationController extends Controller
     /**
      * Route for accept an invitation. Return Game and rounds
      * @Route("/accept", name="invitation_accept")
-     * @Method({"POST"})
+     * @Method({"GET"})
      */
-    public function postAcceptAction(Request $request)
+    public function getAcceptAction(Request $request)
     {
         /**
          * @var InvitationManager $invitationManager
          */
         $invitationManager = $this->container->get("quizz.invitation");
 
-        $data = json_decode($request->getContent(), true);
-        $invitation = $invitationManager->acceptInvitation($this->getUser(), $data["invit"]);
+        $invitationId = $request->get("invitation");
+        $invitation = $invitationManager->acceptInvitation($this->getUser(), $invitationId);
 
         $gameSeria = $this->serializer->normalize($invitation["game"], "json", ["groups" => ["game"]]);
         $roundsSeria = $this->serializer->normalize($invitation["rounds"], "json", ["groups" => ["game"]]);
@@ -98,19 +98,20 @@ class InvitationController extends Controller
     /**
      * Route for accept an invitation. Return Game and rounds
      * @Route("/refuse", name="invitation_refuse")
-     * @Method({"POST"})
+     * @Method({"GET"})
      */
-    public function postRefuseAction(Request $request)
+    public function getRefuseAction(Request $request)
     {
         /**
          * @var InvitationManager $invitationManager
          */
         $invitationManager = $this->container->get("quizz.invitation");
 
-        $data = json_decode($request->getContent(), true);
-        $invitationManager->refuseInvitation($data["invit"]);
+        $invitationId = $request->get("invitation");
 
-        return true;
+        $invitationManager->refuseInvitation($invitationId);
+
+        return new Response(json_encode(true));
     }
 
     /**

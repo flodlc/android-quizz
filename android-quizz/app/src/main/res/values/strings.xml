@@ -38,5 +38,6 @@
     <string name="sendInvitation">Send</string>
     <string name="invitation">Invitation</string>
     <string name="invit_from">"From : "</string>
-    <string name="invit_to">To :</string>
+    <string name="invit_to">"To : "</string>
+    <string name="waitState">waiting</string>
 </resources>

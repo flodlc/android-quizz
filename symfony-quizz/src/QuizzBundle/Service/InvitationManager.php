@@ -10,6 +10,7 @@ namespace QuizzBundle\Service;
 
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\Invitation;
 use QuizzBundle\Entity\Response;
@@ -31,14 +32,37 @@ class InvitationManager
 
     public function getInvitationsOfUser(User $user)
     {
+
+        $sqlQuery = "SELECT * 
+                    FROM `invitation` i
+                    WHERE (i.user_from_id = " . $user->getId() . " and i.played = false) 
+                    OR (i.user_to_id = " . $user->getId() . " and i.played = false) 
+                    ORDER BY id DESC LIMIT 30;";
+        $rsm = new ResultSetMappingBuilder($this->em);
+        $rsm->addRootEntityFromClassMetadata(Invitation::class, 'invitation');
+        $q = $this->em->createNativeQuery($sqlQuery, $rsm);
+        $invitations = $q->getResult();
+        foreach ($invitations as $ind => $invitation) {
+            /**
+             * @var Invitation $invitation
+             */
+            if ($user === $invitation->getUserTo()) {
+                $invitation->setAdv($invitation->getUserFrom());
+            } else {
+                $invitation->setAdv($invitation->getUserTo());
+            }
+        }
+        return $invitations;
+
         $invitRepo = $this->em->getRepository(Invitation::class);
         $invitsFrom = $invitRepo->findBy(["userFrom" => $user]);
         foreach ($invitsFrom as $invit) {
             $invit->setAdv($invit->getUserTo());
         }
-        $invitsTo = $invitRepo->findBy(["userTo" => $user]);
+        $invitsTo = $invitRepo->findBy(["userTo" => $user, "played" => false]);
         foreach ($invitsTo as $invit) {
             $invit->setAdv($invit->getUserFrom());
+
         }
         $invitations = array_merge($invitsFrom, $invitsTo);
         return $invitations;
@@ -142,6 +166,11 @@ class InvitationManager
         return $gameRounds;
     }
 
+    /**
+     * @param User $me
+     * @param $idInvit
+     * @return array|null
+     */
     public function getStateInvitation(User $me, $idInvit)
     {
         $invitRepo = $this->em->getRepository(Invitation::class);

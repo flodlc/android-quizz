@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.quizz.R;
 import com.google.common.collect.ImmutableMap;
+import com.quizz.R;
 
 import com.quizz.entities.GameData;
 import com.quizz.entities.GameResult;
@@ -23,6 +23,9 @@ import retrofit2.Callback;
 import com.quizz.services.ApiService;
 import com.quizz.services.ApiServiceInterface;
 import com.quizz.services.RouterService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Lucas on 22/02/2018.
@@ -49,25 +52,57 @@ public class InvitationLineActivity extends Fragment {
         return view;
     }
 
-    private void setListener(View view) {
+    public View onStartView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_invitation_line, container, false);
+        Bundle b = getArguments();
+        this.invitation = b.getParcelable("invitation");
+        this.user = b.getParcelable("user");
+        this.displayTexts(view);
+        return view;
+    }
+
+    private void setAcceptListener(ImageView view) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ApiServiceInterface apiService = ApiService.getService();
-                Call<GameData> call = apiService.checkNewGame(ImmutableMap.of("invitation", String.valueOf(invitation.getId())));
+                Call<GameData> call = apiService.acceptInvitation(ImmutableMap.of("invitation", String.valueOf(invitation.getId())));
+
                 call.enqueue(new Callback<GameData>() {
                     @Override
                     public void onResponse(Call<GameData> call, retrofit2.Response<GameData> response) {
                         if (ApiService.checkCode(getActivity(), response)) {
                             GameData gamedata = response.body();
-                            RouterService.goResult(getActivity(), user,
-                                    new GameResult(gamedata.getGame(), gamedata.getRounds()));
+                            RouterService.goOnlineQuizz(getActivity(), user, gamedata);
                         }
-
                     }
 
                     @Override
                     public void onFailure(Call<GameData> call, Throwable t) {
+                        ApiService.showErrorMessage(InvitationLineActivity.this.getActivity());
+                    }
+                });
+            }
+        });
+    }
+
+    private void setRefuseListener(ImageView view) {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApiServiceInterface apiService = ApiService.getService();
+                Call<Boolean> call = apiService.refuseInvitation(ImmutableMap.of("invitation", String.valueOf(invitation.getId())));
+                call.enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, retrofit2.Response<Boolean> response) {
+                        if (ApiService.checkCode(getActivity(), response)) {
+                            getActivity().finish();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
                         ApiService.showErrorMessage(InvitationLineActivity.this.getActivity());
                     }
                 });
@@ -87,26 +122,32 @@ public class InvitationLineActivity extends Fragment {
     private void displayTexts(View view) {
         boolean hasChoice = (invitation.getUserFrom().getUsername().equals(invitation.getAdv().getUsername()));
         TextView typeUser = view.findViewById(R.id.typeUser);
-        ImageView invit1 = view.findViewById(R.id.invit1);
-        ImageView invit2 = view.findViewById(R.id.invit2);
+        ImageView refuse = view.findViewById(R.id.refuse);
+        ImageView accept = view.findViewById(R.id.accept);
+        TextView stateWait = view.findViewById(R.id.stateWait);
         if (hasChoice) {
             typeUser.setText(getResources().getString(R.string.invit_from));
         } else {
             typeUser.setText(getResources().getString(R.string.invit_to));
         }
         ((TextView) view.findViewById(R.id.advName)).setText(invitation.getAdv().getUsername());
+        stateWait.setVisibility(View.GONE);
 
 
         if (invitation.getPlayed()) {
-            invit1.setVisibility(View.GONE);
-            setImage(invit2, R.drawable.ic_accept);
+            this.setAcceptListener(accept);
+            refuse.setVisibility(View.GONE);
+            setImage(accept, R.drawable.ic_accept);
         } else {
             if (hasChoice) {
-                setImage(invit1, R.drawable.ic_refuse);
-                setImage(invit2, R.drawable.ic_accept);
+                this.setRefuseListener(refuse);
+                this.setAcceptListener(accept);
+                setImage(refuse, R.drawable.ic_refuse);
+                setImage(accept, R.drawable.ic_accept);
             } else {
-                invit1.setVisibility(View.GONE);
-                invit2.setVisibility(View.GONE);
+                stateWait.setVisibility(View.VISIBLE);
+                refuse.setVisibility(View.GONE);
+                accept.setVisibility(View.GONE);
             }
         }
     }

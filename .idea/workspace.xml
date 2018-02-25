@@ -2,17 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6cdc01cf-da8a-4725-be8b-b78fb84e7f6e" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/drawable/bottom_stroke.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/drawable/header_bar.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/drawable/stroke.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/values/parameters.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/online/InvitationLineActivity.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/online/InvitationLineActivity.java" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/drawable/web_hi_res_512.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/fragment_invitation_line.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/fragment_invitation_line.xml" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/offline_selector.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/offline_selector.xml" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/online_selector.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/online_selector.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/.idea/misc.xml" afterPath="$PROJECT_DIR$/android-quizz/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/app-release.apk" afterPath="$PROJECT_DIR$/android-quizz/app/app-release.apk" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/build.gradle" afterPath="$PROJECT_DIR$/android-quizz/app/build.gradle" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/FirstMainActivity.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/FirstMainActivity.java" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/HomeActivity.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/HomeActivity.java" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/QuestionActivity.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/QuestionActivity.java" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/offline/OffLineQuizzActivity.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/offline/OffLineQuizzActivity.java" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/services/ApiService.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/services/ApiService.java" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/services/UserManager.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/services/UserManager.java" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/drawable/button_off_shape.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/drawable/button_off_shape.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/drawable/button_shape.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/drawable/button_shape.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activity_home.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activity_home.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activity_main.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activity_result.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/activity_result.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/fragment_answer_line.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/fragment_answer_line.xml" />
+      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/fragment_game_line.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/fragment_game_line.xml" />
       <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/values-fr/strings.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/values-fr/strings.xml" />
       <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/values/strings.xml" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Invitation.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Invitation.php" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/GameManager.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/GameManager.php" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/InvitationManager.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/InvitationManager.php" />
+      <change beforePath="$PROJECT_DIR$/symfony-quizz/app/config/security.yml" afterPath="$PROJECT_DIR$/symfony-quizz/app/config/security.yml" />
+      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/UserController.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/UserController.php" />
+      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/User.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/User.php" />
+      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/UserManager.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/UserManager.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,7 +45,7 @@
       <file leaf-file-name="GameController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/GameController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="3135">
               <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
               <folding>
                 <element signature="e#124#152#0#PHP" expanded="true" />
@@ -41,7 +57,7 @@
       <file leaf-file-name="InvitationController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/InvitationController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="891">
+            <state relative-caret-position="2376">
               <caret line="90" column="48" lean-forward="false" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
               <folding>
                 <element signature="e#124#166#0#PHP" expanded="true" />
@@ -50,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Game.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Game.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state relative-caret-position="660">
+              <caret line="37" column="63" lean-forward="false" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -63,7 +79,7 @@
       <file leaf-file-name="QuestionController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/QuestionController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1023">
+            <state relative-caret-position="1221">
               <caret line="60" column="9" lean-forward="false" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
               <folding />
             </state>
@@ -73,8 +89,8 @@
       <file leaf-file-name="InvitationManager.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/InvitationManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="704">
-              <caret line="130" column="0" lean-forward="true" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+            <state relative-caret-position="3960">
+              <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
               <folding>
                 <element signature="e#122#162#0#PHP" expanded="true" />
               </folding>
@@ -85,18 +101,21 @@
       <file leaf-file-name="UserManager.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/UserManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="116" column="5" lean-forward="false" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
-              <folding />
+            <state relative-caret-position="3597">
+              <caret line="118" column="5" lean-forward="false" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
+              <folding>
+                <marker date="1519557273731" expanded="true" signature="3417:3496" ph="..." />
+                <marker date="1519557273731" expanded="true" signature="3417:3499" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Invitation.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Invitation.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Invitation.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="87" column="5" lean-forward="false" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
+            <state relative-caret-position="1108">
+              <caret line="108" column="30" lean-forward="false" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -115,7 +134,7 @@
       <file leaf-file-name="prod.log" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/var/logs/prod.log">
           <provider selected="true" editor-type-id="LogFileEditorProvider">
-            <state relative-caret-position="-519">
+            <state relative-caret-position="924">
               <caret line="28" column="107" lean-forward="false" selection-start-line="28" selection-start-column="107" selection-end-line="28" selection-end-column="107" />
             </state>
           </provider>
@@ -124,7 +143,7 @@
       <file leaf-file-name="GameManager.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/GameManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
+            <state relative-caret-position="5247">
               <caret line="170" column="45" lean-forward="false" selection-start-line="170" selection-start-column="45" selection-end-line="170" selection-end-column="45" />
               <folding>
                 <marker date="1519385219920" expanded="true" signature="934:1142" ph="SELECT * FRO... game" />
@@ -402,16 +421,18 @@
       <workItem from="1518605066222" duration="272000" />
       <workItem from="1519309003573" duration="6884000" />
       <workItem from="1519380440561" duration="2795000" />
+      <workItem from="1519552763900" duration="624000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73746000" />
+    <option name="totallyTimeSpent" value="74370000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="3226" height="1746" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30205655" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30623394" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -667,7 +688,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1551">
           <caret line="63" column="56" lean-forward="false" selection-start-line="63" selection-start-column="56" selection-end-line="63" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -731,7 +751,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="441" column="23" lean-forward="false" selection-start-line="441" selection-start-column="23" selection-end-line="441" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -745,7 +764,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/GameController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="3135">
           <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
           <folding>
             <element signature="e#124#152#0#PHP" expanded="true" />
@@ -755,7 +774,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/InvitationController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="891">
+        <state relative-caret-position="2376">
           <caret line="90" column="48" lean-forward="false" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
           <folding>
             <element signature="e#124#166#0#PHP" expanded="true" />
@@ -773,7 +792,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/GameManager.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
+        <state relative-caret-position="5247">
           <caret line="170" column="45" lean-forward="false" selection-start-line="170" selection-start-column="45" selection-end-line="170" selection-end-column="45" />
           <folding>
             <marker date="1519385219920" expanded="true" signature="934:1142" ph="SELECT * FRO... game" />
@@ -783,31 +802,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/var/logs/prod.log">
       <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-519">
+        <state relative-caret-position="924">
           <caret line="28" column="107" lean-forward="false" selection-start-line="28" selection-start-column="107" selection-end-line="28" selection-end-column="107" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/UserManager.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="116" column="5" lean-forward="false" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Invitation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="87" column="5" lean-forward="false" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
-          <folding />
+        <state relative-caret-position="3597">
+          <caret line="118" column="5" lean-forward="false" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
+          <folding>
+            <marker date="1519557273731" expanded="true" signature="3417:3496" ph="..." />
+            <marker date="1519557273731" expanded="true" signature="3417:3499" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/InvitationManager.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="130" column="0" lean-forward="true" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+        <state relative-caret-position="3960">
+          <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
           <folding>
             <element signature="e#122#162#0#PHP" expanded="true" />
           </folding>
@@ -816,7 +830,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Controller/QuestionController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1023">
+        <state relative-caret-position="1221">
           <caret line="60" column="9" lean-forward="false" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
           <folding />
         </state>
@@ -824,8 +838,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Game.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state relative-caret-position="660">
+          <caret line="37" column="63" lean-forward="false" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Invitation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1108">
+          <caret line="108" column="30" lean-forward="false" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
           <folding />
         </state>
       </provider>

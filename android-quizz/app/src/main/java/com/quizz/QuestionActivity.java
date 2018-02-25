@@ -21,8 +21,7 @@ import com.quizz.entities.Round;
 
 public class QuestionActivity extends Fragment {
 
-    private final int RESPONSE_TIME = 6000;
-
+    private int RESPONSE_TIME = 6000;
     private Round round;
     private Handler handler;
     private Runnable runnable;
@@ -38,6 +37,7 @@ public class QuestionActivity extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_question, container, false);
         Bundle b = getArguments();
+        this.time = MyApp.getContext().getResources().getInteger(R.integer.questionTime);
         this.round = b.getParcelable("round");
         this.displayTexts(view);
         this.setListenners(view);

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import com.quizz.entities.User;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -184,5 +185,13 @@ public class UserManager {
 
             }
         });
+    }
+
+    public static void checkDistantRecord(User user) {
+        String record = UserManager.getData("record");
+        if (!user.getRecord().equals(Integer.valueOf(record.equals("") ? "0" : record))) {
+            user.setRecord(Integer.valueOf(record.equals("") ? "0" : record));
+            saveRecord(user);
+        }
     }
 }

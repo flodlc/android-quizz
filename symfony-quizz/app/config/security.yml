@@ -25,6 +25,7 @@ security:
                 path: /logout
                 target: /success
             form_login:
+                require_previous_session: false
                 login_path: fail
                 check_path: /login_check
                 default_target_path: success

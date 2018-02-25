@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="baseUrl" translatable="false">http://207.154.219.236/</string>
+    <integer name="questionTime">10000</integer>
+    <integer name="nbQuestionsCheckIfSame">15</integer>
+</resources>

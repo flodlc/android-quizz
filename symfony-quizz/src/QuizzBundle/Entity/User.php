@@ -58,6 +58,20 @@ class User extends BaseUser
      */
     private $lastVisit;
 
+    /**
+     *
+     * @ORM\Column(name="create_ip", type="string", nullable=true)
+     */
+    private $creationIp;
+
+
+    /**
+     *
+     * @ORM\Column(name="last_ip", type="string", nullable=true)
+     */
+    private $lastIp;
+
+
 
     public function __construct()
     {
@@ -148,4 +162,38 @@ class User extends BaseUser
     {
         $this->lastVisit = $lastVisit;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCreationIp()
+    {
+        return $this->creationIp;
+    }
+
+    /**
+     * @param mixed $creationIp
+     */
+    public function setCreationIp($creationIp)
+    {
+        $this->creationIp = $creationIp;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastIp()
+    {
+        return $this->lastIp;
+    }
+
+    /**
+     * @param mixed $lastIp
+     */
+    public function setLastIp($lastIp)
+    {
+        $this->lastIp = $lastIp;
+    }
+
+
 }

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
-    android:padding="5dp"
+    android:layout_height="80dp"
+    android:padding="2dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginEnd="2dp"
+    android:background="@drawable/stroke"
     android:orientation="horizontal">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:gravity="center"
         android:background="@color/colorGrey"
@@ -15,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginStart="5dp"
             android:textColor="@color/colorBlack"
             android:text="@string/adv"
             android:textSize="25sp"/>
@@ -23,6 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
+            android:lineSpacingExtra="-7sp"
+            android:layout_marginEnd="5dp"
             android:textColor="@color/colorBlack"
             android:gravity="center"
             android:textStyle="bold"/>
@@ -30,7 +37,7 @@
     <ImageView
         android:id="@+id/state"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
         android:layout_weight="2"
         android:padding="10dp"
         android:background="@color/colorGreen"

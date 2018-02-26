@@ -27,7 +27,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Bundle b = new Bundle();
-        User user = getIntent().getExtras().getParcelable("user");
+        final User user = getIntent().getExtras().getParcelable("user");
         b.putParcelable("user", user);
 
         OnlineSelectorActivity on = OnlineSelectorActivity.newInstance(b);
@@ -35,5 +35,12 @@ public class HomeActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().add(R.id.content, on, "ONLINE").commit();
         getSupportFragmentManager().beginTransaction().add(R.id.content, off, "OFFLINE").commit();
+
+        findViewById(R.id.statButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RouterService.goStatistics(HomeActivity.this, user);
+            }
+        });
     }
 }

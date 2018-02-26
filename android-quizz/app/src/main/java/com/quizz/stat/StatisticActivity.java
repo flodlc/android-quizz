@@ -123,7 +123,6 @@ public class StatisticActivity extends AppCompatActivity {
         chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chart.getXAxis().setTextSize(16);
 
-        chart.setAutoScaleMinMaxEnabled(false);
         chart.getAxisLeft().setAxisMinimum(0);
         chart.setXAxisRenderer(new CustomXAxisRenderer(chart.getViewPortHandler(),
                 chart.getXAxis(), chart.getTransformer(YAxis.AxisDependency.LEFT)));
@@ -131,7 +130,11 @@ public class StatisticActivity extends AppCompatActivity {
         chart.getXAxis().setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return UtilFunctions.makeMultilineString(makeLabels(users).get((int) value), 8);
+                if (value % 1 == 0) {
+                    return UtilFunctions.makeMultilineString(makeLabels(users).get((int) value), 8);
+                } else {
+                    return "";
+                }
             }
         });
 

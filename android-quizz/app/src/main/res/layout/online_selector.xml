@@ -16,7 +16,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -52,9 +52,10 @@
         <ImageView
             android:id="@+id/diplayGames"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="59dp"
             android:layout_weight=".10"
             android:contentDescription="@string/seeGames"
+            android:layout_marginTop="-6dp"
             android:src="@drawable/list" />
     </LinearLayout>
 
@@ -92,9 +93,10 @@
         <ImageView
             android:id="@+id/diplayInvitations"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="59dp"
             android:layout_weight=".10"
             android:contentDescription="@string/seeInvitations"
+            android:layout_marginTop="-6dp"
             android:src="@drawable/list" />
     </LinearLayout>
 </LinearLayout>

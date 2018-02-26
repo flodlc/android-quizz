@@ -39,9 +39,6 @@ public interface ApiServiceInterface {
     @POST("response/")
     Call<GameResult> postAnswers(@Body PostAnswers postAnswers);
 
-    @GET("game/current")
-    Call<GameData> getCurrentGame();
-
     @GET("game/nbCurrent")
     Call<Integer> getnbCurrentGame();
 

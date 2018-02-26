@@ -178,7 +178,20 @@ public class UserManager {
         String record = UserManager.getData("record");
         if (!user.getRecord().equals(Integer.valueOf(record.equals("") ? "0" : record))) {
             user.setRecord(Integer.valueOf(record.equals("") ? "0" : record));
-            saveRecord(user);
+
+            ApiServiceInterface apiService = ApiService.getService();
+            Call<User> call = apiService.editUser(user);
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+
+                }
+            });
         }
     }
 }

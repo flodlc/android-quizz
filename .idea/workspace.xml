@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6cdc01cf-da8a-4725-be8b-b78fb84e7f6e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/AndroidManifest.xml" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/online/DisplayInvitationsActivity.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/online/DisplayInvitationsActivity.java" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/online/OnlineSelectorActivity.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/online/OnlineSelectorActivity.java" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/services/ApiServiceInterface.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/services/ApiServiceInterface.java" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/services/RouterService.java" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/java/com/quizz/services/RouterService.java" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/online_selector.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/layout/online_selector.xml" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/values-fr/strings.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/values-fr/strings.xml" />
-      <change beforePath="$PROJECT_DIR$/android-quizz/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/android-quizz/app/src/main/res/values/strings.xml" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Invitation.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Entity/Invitation.php" />
-      <change beforePath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/InvitationManager.php" afterPath="$PROJECT_DIR$/symfony-quizz/src/QuizzBundle/Service/InvitationManager.php" />
-    </list>
+    <list default="true" id="6cdc01cf-da8a-4725-be8b-b78fb84e7f6e" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +66,7 @@
       <file leaf-file-name="prod.log" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/symfony-quizz/var/logs/prod.log">
           <provider selected="true" editor-type-id="LogFileEditorProvider">
-            <state relative-caret-position="-931">
+            <state relative-caret-position="-500">
               <caret line="293" column="0" lean-forward="false" selection-start-line="293" selection-start-column="0" selection-end-line="293" selection-end-column="0" />
             </state>
           </provider>
@@ -240,92 +228,6 @@
               <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
               <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="QuizzBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="QuizzBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="QuizzBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="QuizzBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="QuizzBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="QuizzBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Security" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="QuizzBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Service" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="var" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="var" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="logs" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="android-quizz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony-quizz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -378,12 +280,12 @@
       <workItem from="1519309003573" duration="6884000" />
       <workItem from="1519380440561" duration="2795000" />
       <workItem from="1519552763900" duration="7645000" />
-      <workItem from="1519636552415" duration="5508000" />
+      <workItem from="1519636552415" duration="5633000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86899000" />
+    <option name="totallyTimeSpent" value="87024000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="3226" height="1746" extended-state="6" />
@@ -393,10 +295,11 @@
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3283884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29130143" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29130143" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -404,7 +307,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -804,7 +706,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony-quizz/var/logs/prod.log">
       <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-931">
+        <state relative-caret-position="-500">
           <caret line="293" column="0" lean-forward="false" selection-start-line="293" selection-start-column="0" selection-end-line="293" selection-end-column="0" />
         </state>
       </provider>

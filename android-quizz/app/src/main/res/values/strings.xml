@@ -40,4 +40,7 @@
     <string name="invit_from">"From : "</string>
     <string name="invit_to">"To : "</string>
     <string name="waitState">waiting</string>
+    <string name="unknownUser">This user doesn\'t exist</string>
+    <string name="notMe">You can\'t play against yourself.</string>
+    <string name="invitationIsset">This invitation has been already sent.</string>
 </resources>

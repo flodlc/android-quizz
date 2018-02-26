@@ -57,6 +57,7 @@
             android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".online.DisplayInvitationsActivity" />
+        <activity android:name=".online.InvitationActivity" />
     </application>
 
 </manifest>

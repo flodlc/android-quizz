@@ -60,6 +60,18 @@ class Invitation
      */
     private $adv;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="creation_date", type="datetime", nullable=true)
+     */
+    private $creationDate;
+
+    public function __construct()
+    {
+        // Par défaut, la date de l'annonce est la date d'aujourd'hui
+        $this->creationDate = new \Datetime();
+    }
+
 
     /**
      * Get id.
@@ -149,5 +161,21 @@ class Invitation
     public function setAdv(User $adv)
     {
         $this->adv = $adv;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param \DateTime $creationDate
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
     }
 }

@@ -1,0 +1,93 @@
+package com.quizz.online;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.common.collect.ImmutableMap;
+import com.quizz.R;
+
+import java.util.List;
+
+import com.quizz.entities.GameData;
+import com.quizz.entities.Invitation;
+import com.quizz.entities.InvitationSend;
+import com.quizz.entities.User;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import com.quizz.services.ApiService;
+import com.quizz.services.ApiServiceInterface;
+import com.quizz.services.RouterService;
+
+import org.w3c.dom.Text;
+
+/**
+ * Created by Lucas on 22/02/2018.
+ */
+
+public class InvitationActivity extends AppCompatActivity {
+
+    private User user;
+    private List<Invitation> invitations;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_invitation);
+        this.user = getIntent().getExtras().getParcelable("user");
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setListener();
+    }
+
+
+    private void setListener() {
+        (findViewById(R.id.sendInvit)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView errorMsg = (TextView) findViewById(R.id.errorMsg);
+                errorMsg.setVisibility(View.GONE);
+                ApiServiceInterface apiService = ApiService.getService();
+                Call<Invitation> call = apiService.sendInvitation(new InvitationSend(((EditText) findViewById(R.id.username)).getText().toString()));
+
+                call.enqueue(new Callback<Invitation>() {
+                    @Override
+                    public void onResponse(Call<Invitation> call, retrofit2.Response<Invitation> response) {
+                        TextView errorMsg = (TextView) findViewById(R.id.errorMsg);
+                        if (response.code() == 200) {
+                            RouterService.goDisplayInvitations(InvitationActivity.this, user);
+                        } else if (response.code() == 500) {
+                            errorMsg.setVisibility(View.VISIBLE);
+                            errorMsg.setText(R.string.notMe);
+                        } else if (response.code() == 404) {
+                            errorMsg.setVisibility(View.VISIBLE);
+                            errorMsg.setText(R.string.unknownUser);
+                        }  else if (response.code() == 409) {
+                            errorMsg.setVisibility(View.VISIBLE);
+                            errorMsg.setText(R.string.invitationIsset);
+                        } else {
+                            ApiService.showErrorMessage(InvitationActivity.this);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Invitation> call, Throwable t) {
+                        ApiService.showErrorMessage(InvitationActivity.this);
+                    }
+                });
+            }
+        });
+    }
+}

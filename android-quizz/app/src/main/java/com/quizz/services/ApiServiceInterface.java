@@ -7,6 +7,7 @@ import com.quizz.entities.Game;
 import com.quizz.entities.GameData;
 import com.quizz.entities.GameResult;
 import com.quizz.entities.Invitation;
+import com.quizz.entities.InvitationSend;
 import com.quizz.entities.PostAnswers;
 import com.quizz.entities.Question;
 import com.quizz.entities.User;
@@ -69,4 +70,7 @@ public interface ApiServiceInterface {
 
     @GET("invitation/refuse")
     Call<Boolean> refuseInvitation(@QueryMap Map<String, String> param);
+
+    @POST("invitation/")
+    Call<Invitation> sendInvitation(@Body InvitationSend invitationSend);
 }

@@ -15,7 +15,7 @@ use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\Invitation;
 use QuizzBundle\Entity\Response;
 use QuizzBundle\Entity\User;
-use SensioLabs\Security\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class InvitationManager
 {
@@ -53,19 +53,6 @@ class InvitationManager
             }
         }
         return $invitations;
-
-        $invitRepo = $this->em->getRepository(Invitation::class);
-        $invitsFrom = $invitRepo->findBy(["userFrom" => $user]);
-        foreach ($invitsFrom as $invit) {
-            $invit->setAdv($invit->getUserTo());
-        }
-        $invitsTo = $invitRepo->findBy(["userTo" => $user, "played" => false]);
-        foreach ($invitsTo as $invit) {
-            $invit->setAdv($invit->getUserFrom());
-
-        }
-        $invitations = array_merge($invitsFrom, $invitsTo);
-        return $invitations;
     }
 
     /**
@@ -81,14 +68,14 @@ class InvitationManager
 
         $userTo = $userRepo->findBy(["username" => $usernameTo]);
         if (count($userTo) < 1)
-            throw new HttpException("This user (" . $usernameTo . ") is unknown.", 404);
+            throw new HttpException(404,"This user (" . $usernameTo . ") is unknown.");
         /**
          * @var User $userTo
          */
         $userTo = $userTo[0];
 
         if ($me === $userTo)
-            throw new HttpException("You can't play against yourself.", 500);
+            throw new HttpException(500, "You can't play against yourself.");
 
         $invitation_old = $invitRepo->findBy(["userFrom" => $me, "userTo" => $userTo]);
         if (count($invitation_old) > 0) {
@@ -97,13 +84,14 @@ class InvitationManager
                  * @var Invitation $inv
                  */
                 if (!$inv->isPlayed())
-                    throw new HttpException("Invitation already send.", 404);
+                    throw new HttpException(409,"Invitation already send.");
             }
         }
 
         $invitation = new Invitation();
         $invitation->setUserFrom($me);
         $invitation->setUserTo($userTo);
+        $invitation->setPlayed(false);
         $this->em->persist($invitation);
         $this->em->flush();
         return $invitation;
@@ -121,7 +109,7 @@ class InvitationManager
          */
         $invitation = $invitRepo->find($idInvit);
         if ($invitation->isPlayed())
-            throw new HttpException("A game has been already created for this invitation.", 404);
+            throw new HttpException(404, "A game has been already created for this invitation.");
         $this->em->remove($invitation);
         $this->em->flush();
     }
@@ -141,7 +129,7 @@ class InvitationManager
          */
         $invitation = $invitRepo->find($idInvit);
         if (!$invitation)
-            throw new HttpException("Pas d'invitation", 500);
+            throw new HttpException(404, "Pas d'invitation");
 
         $userA = $invitation->getUserFrom();
         $userB = $invitation->getUserTo();
@@ -180,7 +168,7 @@ class InvitationManager
          */
         $invitation = $invitRepo->find($idInvit);
         if (!$invitation)
-            throw new HttpException("Invitation remove", 500);
+            throw new HttpException(500, "Invitation remove");
         if (!$invitation->isPlayed())
             return null;
         $game = $gameRepo->findBy(["invitation" => $invitation]);

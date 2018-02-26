@@ -6,45 +6,62 @@
     android:layout_marginEnd="2dp"
     android:layout_marginStart="2dp"
     android:background="@drawable/customborder"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="2dp">
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_weight="1"
-        android:background="@color/colorGreyLight"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/typeUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
             android:gravity="center_vertical"
-            android:text="@string/adv"
+            android:text="@string/invit_from"
             android:textColor="@color/colorBlack"
             android:textSize="24sp" />
 
         <TextView
             android:id="@+id/advName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
             android:gravity="center"
-            android:lineSpacingExtra="-7sp"
+            android:layout_height="wrap_content"
             android:textColor="@color/colorBlack"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/stateWait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
+        android:text="@string/waitState"
+        android:textColor="@color/colorBlack"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
     <ImageView
-        android:id="@+id/state"
+        android:id="@+id/refuse"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginEnd="10dp"
         android:layout_weight="2"
-        android:background="@color/colorGreen"
-        android:padding="10dp"
-        android:src="@drawable/thumb_up" />
+        android:src="@drawable/ic_refuse" />
+
+    <ImageView
+        android:id="@+id/accept"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="2"
+        android:src="@drawable/ic_accept" />
 </LinearLayout>

@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.quizz.R;
 import com.google.common.collect.ImmutableMap;
@@ -29,6 +30,7 @@ public class OnlineSelectorActivity extends Fragment {
     private AlertDialog alertDialog;
     private ApiServiceInterface apiService;
     private GameData currentGameData;
+    private Integer nbInvitations;
     private boolean searchingGame;
 
     public static OnlineSelectorActivity newInstance(Bundle args) {
@@ -47,7 +49,17 @@ public class OnlineSelectorActivity extends Fragment {
 
         (view.findViewById(R.id.diplayGames)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                RouterService.goStatistics(getActivity(), user);
+                RouterService.goDisplayGames(getActivity(), user);
+            }
+        });
+        (view.findViewById(R.id.sendInvit)).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RouterService.goSendInvitation(getActivity(), user);
+            }
+        });
+        (view.findViewById(R.id.diplayInvitations)).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RouterService.goDisplayInvitations(getActivity(), user);
             }
         });
         return view;
@@ -74,6 +86,36 @@ public class OnlineSelectorActivity extends Fragment {
             @Override
             public void onFailure(Call<GameData> call, Throwable t) {
                 getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
+            }
+        });
+
+        Call<Integer> call2 = apiService.getNbInvitations();
+        call2.enqueue(new Callback<Integer>() {
+            Button invitNotif = getView().findViewById(R.id.invitButtonNotif);
+            @Override
+            public void onResponse(@NonNull Call<Integer> call,
+                                   @NonNull Response<Integer> response) {
+                if (ApiService.checkCode(getActivity(), response)) {
+                    nbInvitations = response.body();
+                    if (nbInvitations > 0) {
+                        invitNotif.setVisibility(View.VISIBLE);
+                        invitNotif.setText(String.valueOf(nbInvitations));
+
+                        invitNotif.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
+                                RouterService.goDisplayInvitations(getActivity(), user);
+                            }
+                        });
+                    }
+                    else {
+                        invitNotif.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                invitNotif.setVisibility(View.GONE);
             }
         });
     }

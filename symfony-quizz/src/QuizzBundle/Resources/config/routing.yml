@@ -17,6 +17,11 @@ question:
     type:     annotation
     prefix:   /question
 
+invitation:
+    resource: '@QuizzBundle/Controller/InvitationController.php'
+    type:     annotation
+    prefix:   /invitation
+
 offline_game:
     resource: '@QuizzBundle/Controller/OfflineGameController.php'
     type:     annotation

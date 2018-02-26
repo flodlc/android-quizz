@@ -42,4 +42,5 @@
     <string name="unknownUser">Cet utilisateur n\'existe pas.</string>
     <string name="notMe">Vous ne pouvez pas jouer contre vous même.</string>
     <string name="invitationIsset">Cette invitation a déjà été envoyée.</string>
+    <string name="invit_removed">Cette invitatio a été supprimé</string>
 </resources>

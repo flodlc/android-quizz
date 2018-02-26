@@ -1,34 +1,24 @@
 package com.quizz.online;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.common.collect.ImmutableMap;
 import com.quizz.R;
 
-import java.util.List;
-
-import com.quizz.entities.GameData;
 import com.quizz.entities.Invitation;
 import com.quizz.entities.InvitationSend;
 import com.quizz.entities.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 import com.quizz.services.ApiService;
 import com.quizz.services.ApiServiceInterface;
 import com.quizz.services.RouterService;
 
-import org.w3c.dom.Text;
 
 /**
  * Created by Lucas on 22/02/2018.
@@ -37,7 +27,6 @@ import org.w3c.dom.Text;
 public class InvitationActivity extends AppCompatActivity {
 
     private User user;
-    private List<Invitation> invitations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +67,7 @@ public class InvitationActivity extends AppCompatActivity {
                         } else if (response.code() == 404) {
                             errorMsg.setVisibility(View.VISIBLE);
                             errorMsg.setText(R.string.unknownUser);
-                        }  else if (response.code() == 409) {
+                        } else if (response.code() == 409) {
                             errorMsg.setVisibility(View.VISIBLE);
                             errorMsg.setText(R.string.invitationIsset);
                         } else {

@@ -1,8 +1,10 @@
 package com.quizz.online;
 
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,7 @@ public class InvitationLineActivity extends Fragment {
 
     private Invitation invitation;
     private User user;
+    private AlertDialog alertDialog;
 
     public static InvitationLineActivity newInstance(Bundle args) {
         InvitationLineActivity f = new InvitationLineActivity();
@@ -59,6 +62,21 @@ public class InvitationLineActivity extends Fragment {
         return view;
     }
 
+    private void makeAlertDilogue() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getResources().getString(R.string.invit_removed));
+        builder.setIcon(R.drawable.sablier);
+        builder.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog = builder.show();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+    }
+
     private void setAcceptListener(ImageView view) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,9 +87,15 @@ public class InvitationLineActivity extends Fragment {
                 call.enqueue(new Callback<GameData>() {
                     @Override
                     public void onResponse(Call<GameData> call, retrofit2.Response<GameData> response) {
-                        if (ApiService.checkCode(getActivity(), response)) {
+                        if (response.code() == 200) {
                             GameData gamedata = response.body();
                             RouterService.goOnlineQuizz(getActivity(), user, gamedata);
+                        } else if (response.code() == 404) {
+                            makeAlertDilogue();
+                            getFragmentManager().beginTransaction()
+                                    .remove(InvitationLineActivity.this).commit();
+                        } else {
+                            ApiService.showErrorMessage(InvitationLineActivity.this.getActivity());
                         }
                     }
 

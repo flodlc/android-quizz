@@ -43,4 +43,5 @@
     <string name="unknownUser">This user doesn\'t exist</string>
     <string name="notMe">You can\'t play against yourself.</string>
     <string name="invitationIsset">This invitation has been already sent.</string>
+    <string name="invit_removed">This invitation has been removed</string>
 </resources>

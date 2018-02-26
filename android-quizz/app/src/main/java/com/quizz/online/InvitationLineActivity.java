@@ -13,7 +13,6 @@ import com.google.common.collect.ImmutableMap;
 import com.quizz.R;
 
 import com.quizz.entities.GameData;
-import com.quizz.entities.GameResult;
 import com.quizz.entities.Invitation;
 import com.quizz.entities.User;
 
@@ -24,8 +23,6 @@ import com.quizz.services.ApiService;
 import com.quizz.services.ApiServiceInterface;
 import com.quizz.services.RouterService;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Lucas on 22/02/2018.
@@ -97,7 +94,8 @@ public class InvitationLineActivity extends Fragment {
                     @Override
                     public void onResponse(Call<Boolean> call, retrofit2.Response<Boolean> response) {
                         if (ApiService.checkCode(getActivity(), response)) {
-                            getActivity().finish();
+                            getFragmentManager().beginTransaction()
+                                    .remove(InvitationLineActivity.this).commit();
                         }
                     }
 

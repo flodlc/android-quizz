@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
     android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="20dp"
     android:orientation="vertical">
 
     <TextView
@@ -22,7 +22,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".40"
+            android:layout_weight=".60"
             android:gravity="end">
 
             <Button
@@ -49,14 +49,22 @@
                 android:visibility="gone" />
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/diplayGames"
+
+        <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="59dp"
-            android:layout_weight=".10"
-            android:contentDescription="@string/seeGames"
-            android:layout_marginTop="-6dp"
-            android:src="@drawable/list" />
+            android:layout_height="wrap_content"
+            android:layout_weight=".15"
+            android:layout_marginEnd="-5dp"
+            android:gravity="end">
+
+            <ImageView
+                android:id="@+id/diplayGames"
+                android:layout_width="60dp"
+                android:layout_height="59dp"
+                android:layout_marginTop="-6dp"
+                android:contentDescription="@string/seeGames"
+                android:src="@drawable/list" />
+        </RelativeLayout>
     </LinearLayout>
 
     <TextView
@@ -76,7 +84,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".40"
+            android:layout_weight=".60"
             android:gravity="end">
 
             <Button
@@ -90,13 +98,33 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/diplayInvitations"
+        <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="59dp"
-            android:layout_weight=".10"
-            android:contentDescription="@string/seeInvitations"
-            android:layout_marginTop="-6dp"
-            android:src="@drawable/list" />
+            android:layout_height="wrap_content"
+            android:layout_weight=".15"
+            android:layout_marginEnd="-5dp"
+            android:gravity="end">
+
+            <ImageView
+                android:id="@+id/diplayInvitations"
+                android:layout_width="60dp"
+                android:layout_height="59dp"
+                android:layout_marginTop="-6dp"
+                android:contentDescription="@string/seeInvitations"
+                android:src="@drawable/list" />
+
+            <Button
+                android:id="@+id/invitButtonNotif"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignEnd="@+id/diplayInvitations"
+                android:layout_marginEnd="18dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/notif_shape"
+                android:text=""
+                android:textColor="@color/colorWhite"
+                android:textSize="13sp"
+                android:visibility="gone" />
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

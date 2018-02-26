@@ -2,6 +2,9 @@
 
 namespace QuizzBundle\Repository;
 
+use Doctrine\ORM\NonUniqueResultException;
+use QuizzBundle\Entity\User;
+
 /**
  * InvitationRepository
  *
@@ -10,4 +13,19 @@ namespace QuizzBundle\Repository;
  */
 class InvitationRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getNbInvitationsToMe(User $user)
+    {
+        $qb = $this
+            ->createQueryBuilder('a')
+            ->addSelect('count(a.id)')
+            ->where('a.played = 0')
+            ->andWhere('a.userTo = :id')
+            ->setParameter('id', $user)
+            ->getQuery();
+
+        $count = $qb->execute()[0][1];
+        return $count;
+
+    }
 }

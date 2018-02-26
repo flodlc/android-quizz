@@ -50,7 +50,7 @@ public class InvitationLineActivity extends Fragment {
     }
 
     public View onStartView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                            Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_invitation_line, container, false);
         Bundle b = getArguments();
         this.invitation = b.getParcelable("invitation");
@@ -137,14 +137,13 @@ public class InvitationLineActivity extends Fragment {
             refuse.setVisibility(View.GONE);
             setImage(accept, R.drawable.ic_accept);
         } else {
+            this.setRefuseListener(refuse);
+            setImage(refuse, R.drawable.ic_refuse);
             if (hasChoice) {
-                this.setRefuseListener(refuse);
                 this.setAcceptListener(accept);
-                setImage(refuse, R.drawable.ic_refuse);
                 setImage(accept, R.drawable.ic_accept);
             } else {
                 stateWait.setVisibility(View.VISIBLE);
-                refuse.setVisibility(View.GONE);
                 accept.setVisibility(View.GONE);
             }
         }

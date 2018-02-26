@@ -40,11 +40,11 @@ class InvitationController extends Controller
     }
 
     /**
-     * Send a invitation request to a user, in order to play against him
+     * Get the list of invitations
      * @Route("/all", name="invitation_get")
      * @Method({"GET"})
      */
-    public function getInvitationsAction(Request $request)
+    public function getInvitationsAction()
     {
         /**
          * @var InvitationManager $invitationManager
@@ -55,6 +55,24 @@ class InvitationController extends Controller
         $invitation = $invitationManager->getInvitationsOfUser($this->getUser());
 
         return new Response($this->serializer->serialize($invitation, "json", ["groups" => ["invit"]]));
+    }
+
+    /**
+     * Get the number of invitation received by you
+     * @Route("/me", name="invitation_get_to_me")
+     * @Method({"GET"})
+     */
+    public function getNumberInvitationsToMeAction()
+    {
+        /**
+         * @var InvitationManager $invitationManager
+         */
+        $invitationManager = $this->container->get("quizz.invitation");
+
+
+        $nb_invitations = $invitationManager->getNbInvitationsToUser($this->getUser());
+
+        return new Response(json_encode($nb_invitations));
     }
 
     /**
@@ -109,7 +127,7 @@ class InvitationController extends Controller
 
         $invitationId = $request->get("invitation");
 
-        $invitationManager->refuseInvitation($invitationId);
+        $invitationManager->removeInvitation($invitationId);
 
         return new Response(json_encode(true));
     }

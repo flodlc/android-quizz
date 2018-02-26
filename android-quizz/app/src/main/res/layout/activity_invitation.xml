@@ -61,6 +61,16 @@
             android:paddingTop="20dp"
             android:text="@string/sendInvitation"
             android:textSize="20sp" />
+
+
+        <ProgressBar
+            android:id="@+id/loader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="50dp"
+            android:indeterminate="true"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

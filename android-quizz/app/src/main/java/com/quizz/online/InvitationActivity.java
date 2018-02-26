@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -59,6 +60,8 @@ public class InvitationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 TextView errorMsg = (TextView) findViewById(R.id.errorMsg);
                 errorMsg.setVisibility(View.GONE);
+                (findViewById(R.id.sendInvit)).setVisibility(View.GONE);
+                (findViewById(R.id.loader)).setVisibility(View.VISIBLE);
                 ApiServiceInterface apiService = ApiService.getService();
                 Call<Invitation> call = apiService.sendInvitation(new InvitationSend(((EditText) findViewById(R.id.username)).getText().toString()));
 
@@ -67,6 +70,7 @@ public class InvitationActivity extends AppCompatActivity {
                     public void onResponse(Call<Invitation> call, retrofit2.Response<Invitation> response) {
                         TextView errorMsg = (TextView) findViewById(R.id.errorMsg);
                         if (response.code() == 200) {
+                            InvitationActivity.this.finish();
                             RouterService.goDisplayInvitations(InvitationActivity.this, user);
                         } else if (response.code() == 500) {
                             errorMsg.setVisibility(View.VISIBLE);
@@ -80,6 +84,8 @@ public class InvitationActivity extends AppCompatActivity {
                         } else {
                             ApiService.showErrorMessage(InvitationActivity.this);
                         }
+                        (findViewById(R.id.sendInvit)).setVisibility(View.VISIBLE);
+                        (findViewById(R.id.loader)).setVisibility(View.GONE);
                     }
 
                     @Override

@@ -15,6 +15,7 @@ use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\Invitation;
 use QuizzBundle\Entity\Response;
 use QuizzBundle\Entity\User;
+use QuizzBundle\Repository\InvitationRepository;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class InvitationManager
@@ -55,6 +56,16 @@ class InvitationManager
         return $invitations;
     }
 
+    public function getNbInvitationsToUser(User $user)
+    {
+        /**
+         * @var InvitationRepository $invitRepo
+         */
+        $invitRepo = $this->em->getRepository(Invitation::class);
+
+        return $invitRepo->getNbInvitationsToMe($user);
+    }
+
     /**
      * Send an invitation from user A ($idFrom) to user B ($usernameTo).
      * @param User $me
@@ -68,7 +79,7 @@ class InvitationManager
 
         $userTo = $userRepo->findBy(["username" => $usernameTo]);
         if (count($userTo) < 1)
-            throw new HttpException(404,"This user (" . $usernameTo . ") is unknown.");
+            throw new HttpException(404, "This user (" . $usernameTo . ") is unknown.");
         /**
          * @var User $userTo
          */
@@ -84,7 +95,7 @@ class InvitationManager
                  * @var Invitation $inv
                  */
                 if (!$inv->isPlayed())
-                    throw new HttpException(409,"Invitation already send.");
+                    throw new HttpException(409, "Invitation already send.");
             }
         }
 
@@ -101,7 +112,7 @@ class InvitationManager
      * Refuse an invitation from another player
      * @param $idInvit
      */
-    public function refuseInvitation($idInvit)
+    public function removeInvitation($idInvit)
     {
         $invitRepo = $this->em->getRepository(Invitation::class);
         /**

@@ -18,7 +18,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser
 {
     /**
-     * @Groups({"user"})
+     * @Groups({"user", "stats"})
      *
      * @ORM\Id
      * @ORM\Column(type="integer")

@@ -131,7 +131,7 @@ public class StatisticActivity extends AppCompatActivity {
         chart.getXAxis().setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return UtilFunctions.makeMultilineString(makeLabels(users).get((int) value), 7);
+                return UtilFunctions.makeMultilineString(makeLabels(users).get((int) value), 8);
             }
         });
 
@@ -143,8 +143,12 @@ public class StatisticActivity extends AppCompatActivity {
     }
 
     private void displayRates(Double goodRates, String text, int chartId) {
+        if (goodRates == null) {
+            return;
+        }
         PieChart chart = (PieChart) findViewById(chartId);
         List<PieEntry> entries = new ArrayList<>();
+
         entries.add(new PieEntry(goodRates.floatValue()));
         entries.add(new PieEntry((1f - goodRates.floatValue())));
 
@@ -157,7 +161,7 @@ public class StatisticActivity extends AppCompatActivity {
 
         chart.setDescription(null);
         chart.setTouchEnabled(false);
-        chart.setRotationAngle(300);
+        chart.setRotationAngle(90 + ((1 - goodRates.floatValue()) * 180));
         chart.setData(pieData);
         chart.setCenterText(text);
         chart.setUsePercentValues(true);

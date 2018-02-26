@@ -30,6 +30,9 @@ class StatManager
 
         $sum = $offlineGameRepo->getMyOfflineSumScore($user);
         $nbGame = $offlineGameRepo->getMyNbOfGames($user);
+        if ($nbGame == 0) {
+            return null;
+        }
         return ($sum) / ($sum + $nbGame);
     }
 
@@ -40,6 +43,9 @@ class StatManager
 
         $sum = $offlineGameRepo->getGlobalOfflineSumScore();
         $nbGame = $offlineGameRepo->getGlobalNbOfGames();
+        if ($nbGame == 0) {
+            return null;
+        }
         return ($sum) / ($sum + $nbGame);
     }
 }

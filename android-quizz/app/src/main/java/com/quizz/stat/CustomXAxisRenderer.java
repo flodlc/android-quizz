@@ -23,13 +23,13 @@ public class CustomXAxisRenderer extends XAxisRenderer {
         String line[] = formattedLabel.split("\n");
         Utils.drawXAxisValue(c, line[0], x, y, mAxisLabelPaint, anchor, angleDegrees);
         if (line.length >= 2) {
-            Utils.drawXAxisValue(c, line[1], x/* - 30 + mAxisLabelPaint.getTextSize()*/, y + mAxisLabelPaint.getTextSize(), mAxisLabelPaint, anchor, angleDegrees);
+            Utils.drawXAxisValue(c, line[1], x, y + mAxisLabelPaint.getTextSize(), mAxisLabelPaint, anchor, angleDegrees);
         }
         if (line.length >= 3) {
-            Utils.drawXAxisValue(c, line[2], x/* - 30 + mAxisLabelPaint.getTextSize()*/, y + mAxisLabelPaint.getTextSize() * 2, mAxisLabelPaint, anchor, angleDegrees);
+            Utils.drawXAxisValue(c, line[2], x, y + mAxisLabelPaint.getTextSize() * 2, mAxisLabelPaint, anchor, angleDegrees);
         }
         if (line.length >= 4) {
-            Utils.drawXAxisValue(c, line[3], x/* - 30 + mAxisLabelPaint.getTextSize()*/, y + mAxisLabelPaint.getTextSize() * 3, mAxisLabelPaint, anchor, angleDegrees);
+            Utils.drawXAxisValue(c, line[3], x, y + mAxisLabelPaint.getTextSize() * 3, mAxisLabelPaint, anchor, angleDegrees);
         }
     }
 }

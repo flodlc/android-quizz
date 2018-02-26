@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 
 import com.quizz.HomeActivity;
 import com.quizz.MainActivity;
+import com.quizz.entities.OfflineGame;
 import com.quizz.offline.OffLineQuizzActivity;
 import com.quizz.offline.OffLineResultActivity;
 import com.quizz.online.DisplayGamesActivity;
@@ -56,12 +57,12 @@ public class RouterService {
         activity.startActivity(intent);
     }
 
-    public static void goOfflineResult(Activity activity, User user, int score, Question question) {
+    public static void goOfflineResult(Activity activity, User user, OfflineGame offlineGame, Question question) {
         Intent intent = new Intent(activity, OffLineResultActivity.class);
         Bundle b = new Bundle();
         b.putParcelable("user", user);
         b.putParcelable("question", question);
-        b.putInt("score", score);
+        b.putParcelable("offlineGame", offlineGame);
         intent.putExtras(b);
         activity.startActivity(intent);
     }
@@ -75,6 +76,14 @@ public class RouterService {
     }
 
     public static void goOfflineQuizz(Activity activity, User user) {
+        Intent intent = new Intent(activity, OffLineQuizzActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelable("user", user);
+        intent.putExtras(b);
+        activity.startActivity(intent);
+    }
+
+    public static void goStatistics(Activity activity, User user) {
         Intent intent = new Intent(activity, StatisticActivity.class);
         Bundle b = new Bundle();
         b.putParcelable("user", user);

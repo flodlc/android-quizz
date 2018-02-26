@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:id="@+id/content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -28,28 +28,57 @@
                 android:layout_margin="25dp"
                 android:src="@drawable/logo" />
 
+            <ProgressBar
+                android:id="@+id/loader"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="1"
+                android:indeterminate="true"
+                android:visibility="visible" />
+
+
             <LinearLayout
+                android:id="@+id/chartDisplay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/chart"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/chart2"
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/chart2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/ranking"
+                    android:textAlignment="center"
+                    android:textSize="19sp" />
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/chart3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
             </LinearLayout>
-            <com.github.mikephil.charting.charts.HorizontalBarChart
-                android:id="@+id/chart3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
 

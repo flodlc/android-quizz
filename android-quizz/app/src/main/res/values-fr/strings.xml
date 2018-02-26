@@ -32,4 +32,7 @@
     <string name="notSamePassword">Mots de passe non identiques</string>
     <string name="badCredentials">Identifiants incorrects</string>
     <string name="noGames">Pas de parties pour l\'instant !</string>
+    <string name="myAnswers">Mes réponses</string>
+    <string name="allAnswers">Toutes les réponses</string>
+    <string name="ranking">Classement</string>
 </resources>

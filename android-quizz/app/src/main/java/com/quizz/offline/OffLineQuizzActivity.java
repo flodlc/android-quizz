@@ -2,6 +2,7 @@ package com.quizz.offline;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.quizz.entities.Answer;
+import com.quizz.entities.OfflineGame;
 import com.quizz.entities.Question;
 import com.quizz.entities.Round;
 import com.quizz.entities.User;
@@ -33,6 +35,7 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
     private Question currentQuestion;
     private List<Integer> lastQuestions;
     private int lastListMaxSize;
+    private long beginTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +57,10 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
 
     public void displayQuestion() {
         currentQuestion = getRandomQuestion();
-
         Bundle b = new Bundle();
         b.putParcelable("round", new Round(currentQuestion));
         this.questionActivity = QuestionActivity.newInstance(b);
+        beginTime = SystemClock.elapsedRealtime();
         getSupportFragmentManager().beginTransaction().add(R.id.content, this.questionActivity, "QUESTION").commit();
     }
 
@@ -133,7 +136,8 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
     }
 
     private void displayResult() {
-        RouterService.goOfflineResult(this, user, score, currentQuestion);
+        long gameTime = SystemClock.elapsedRealtime() - beginTime;
+        RouterService.goOfflineResult(this, user, new OfflineGame(score, (int) gameTime), currentQuestion);
         finish();
     }
 }

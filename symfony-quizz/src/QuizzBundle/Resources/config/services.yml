@@ -42,3 +42,11 @@ services:
     quizz.accessDeniedHandler:
         class: QuizzBundle\Security\AccessDeniedHandler
         public: true
+
+    quizz.off_game:
+            class: QuizzBundle\Service\OfflineGameManager
+            public: true
+
+    quizz.stat:
+            class: QuizzBundle\Service\StatManager
+            public: true

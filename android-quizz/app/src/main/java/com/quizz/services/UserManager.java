@@ -167,24 +167,11 @@ public class UserManager {
     }
 
     public static void saveRecord(User user) {
-        ApiServiceInterface apiService = ApiService.getService();
-        Call call = apiService.editUser(user);
         try {
             setData("record", String.valueOf(user.getRecord()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        call.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) {
-
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-
-            }
-        });
     }
 
     public static void checkDistantRecord(User user) {

@@ -33,4 +33,7 @@
     <string name="notSamePassword">Not same passwords</string>
     <string name="badCredentials">Bad credentials</string>
     <string name="noGames">No games yet !</string>
+    <string name="myAnswers">My answers</string>
+    <string name="allAnswers">All the answers</string>
+    <string name="ranking">Ranking</string>
 </resources>

@@ -47,7 +47,7 @@ public class OnlineSelectorActivity extends Fragment {
 
         (view.findViewById(R.id.diplayGames)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                RouterService.goDisplayGames(getActivity(), user);
+                RouterService.goStatistics(getActivity(), user);
             }
         });
         return view;

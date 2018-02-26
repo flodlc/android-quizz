@@ -34,12 +34,12 @@ class User extends BaseUser
     private $plainPasswordVerif;
 
     /**
-     * @Groups({"game", "user", "mygames"})
+     * @Groups({"game", "user", "mygames", "stats"})
      */
     protected $username;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"user", "stats"})
      *
      * @ORM\Column(name="record", type="integer", nullable=true)
      */

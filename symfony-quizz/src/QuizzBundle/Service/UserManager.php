@@ -12,9 +12,11 @@ namespace QuizzBundle\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\User;
+use QuizzBundle\Repository\UserRepository;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UserManager
 {
@@ -25,10 +27,15 @@ class UserManager
 
     private $userManager;
 
-    public function __construct(EntityManagerInterface $entityManager, \FOS\UserBundle\Model\UserManager $userManager)
+    private $tokenStorage;
+
+    public function __construct(TokenStorageInterface $tokenStorage,
+                                EntityManagerInterface $entityManager,
+                                \FOS\UserBundle\Model\UserManager $userManager)
     {
         $this->em = $entityManager;
         $this->userManager = $userManager;
+        $this->tokenStorage = $tokenStorage;
     }
 
 
@@ -132,5 +139,29 @@ class UserManager
         $user->setLastIp($ip);
         $user->setLastVisit(new \DateTime());
         $this->em->flush();
+    }
+
+    /**
+     * update the record off the current user.
+     *
+     * @param $record
+     * @param bool $flush
+     */
+    public function updateMyRecord($record, $flush = true) {
+        /** @var User $user */ $user = $this->tokenStorage->getToken()->getUser();
+        $user->setRecord($record);
+        if ($flush) {
+            $this->em->flush();
+        }
+    }
+
+    /**
+     * @param $nbUsers
+     * @return array
+     */
+    public function getBestUsers($nbUsers) {
+        /** @var UserRepository $userRepo */
+        $userRepo = $this->em->getRepository(User::class);
+        return $userRepo->findBy([], ['record' => 'DESC'], $nbUsers);
     }
 }

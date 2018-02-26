@@ -5,41 +5,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.Chart;
-import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.quizz.R;
-import com.quizz.offline.OfflineSelectorActivity;
-import com.quizz.online.OnlineSelectorActivity;
-
+import com.quizz.entities.Stat;
 import com.quizz.entities.User;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import com.quizz.services.ApiService;
 import com.quizz.services.ApiServiceInterface;
-import com.quizz.services.RouterService;
+import com.quizz.services.UtilFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -56,109 +46,130 @@ public class StatisticActivity extends AppCompatActivity {
         User user = getIntent().getExtras().getParcelable("user");
         b.putParcelable("user", user);
 
-        displayChart();
-        displayBarCHart();
+        getData();
     }
 
-    private void displayBarCHart() {
-        List<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0, 150, "test"));
-        entries.add(new BarEntry(1, 253, "test"));
-        entries.add(new BarEntry(2, 38, "test"));
-        entries.add(new BarEntry(3, 145, "test"));
+    private void getData() {
+        ApiServiceInterface apiService = ApiService.getService();
+        Call<Stat> call = apiService.getStats();
+        call.enqueue(new Callback<Stat>() {
+            @Override
+            public void onResponse(Call<Stat> call, Response<Stat> response) {
+                if (ApiService.checkCode(StatisticActivity.this, response)) {
+                    Stat stat = response.body();
+                    displayRates(stat.getMyStats(), getResources().getString(R.string.myAnswers), R.id.chart);
+                    displayRates(stat.getGlobalStats(), getResources().getString(R.string.allAnswers), R.id.chart2);
+                    displayBarCHart(stat.getUsers());
+                }
+                hideLoader();
+            }
 
+            @Override
+            public void onFailure(Call<Stat> call, Throwable t) {
+                ApiService.showErrorMessage(StatisticActivity.this);
+                hideLoader();
+            }
+        });
+    }
+
+    private List<BarEntry> makeBarEntries(List<User> users) {
+        List<BarEntry> entries = new ArrayList<>();
+
+        int nbEntries = 0;
+        for (User user : users) {
+            if (nbEntries >= getResources().getInteger(R.integer.maxNbOfBestUsers)) {
+                break;
+            }
+            entries.add(new BarEntry(nbEntries, user.getRecord()));
+            nbEntries++;
+        }
+        return entries;
+    }
+
+    private List<String> makeLabels(List<User> users) {
+        List<String> labels = new ArrayList<>();
+
+        int nbEntries = 0;
+        for (User user : users) {
+            if (nbEntries >= getResources().getInteger(R.integer.maxNbOfBestUsers)) {
+                break;
+            }
+            labels.add(user.getUsername());
+            nbEntries++;
+        }
+        return labels;
+    }
+
+    private void displayBarCHart(final List<User> users) {
+        BarChart chart = (BarChart) findViewById(R.id.chart3);
+
+        List<BarEntry> entries = makeBarEntries(users);
         BarDataSet set = new BarDataSet(entries, "BarDataSet");
 
+        set.setDrawValues(true);
+        set.setValueTextSize(16);
+        set.setColors(new int[]{R.color.colorGreen}, getBaseContext());
         BarData data = new BarData(set);
         data.setDrawValues(true);
-
-        data.setBarWidth(0.5f);
-
-        HorizontalBarChart chart = (HorizontalBarChart) findViewById(R.id.chart3);
-
+        data.setBarWidth(0.6f);
         chart.setDescription(null);
-        chart.getXAxis().setDrawGridLines(false);
-        chart.getAxisLeft().setDrawGridLines(false);
-        chart.getAxisRight().setDrawGridLines(false);
-        chart.getAxisRight().setDrawAxisLine(false);
-        chart.getAxisLeft().setDrawAxisLine(true);
-        chart.getXAxis().setDrawAxisLine(false);
 
-        chart.getAxisRight().setDrawLabels(false);
-        chart.getAxisLeft().setDrawLabels(true);
-
-
-        final ArrayList<String> xVals = new ArrayList();
-
-        xVals.add("Tom");
-        xVals.add("Bob");
-        xVals.add("Marc");
-        xVals.add("Flo");
-
+        chart.getAxisLeft().setEnabled(false);
+        chart.getAxisRight().setEnabled(false);
         chart.getXAxis().setDrawLabels(true);
-        chart.getXAxis().setLabelCount(4);
+        chart.getXAxis().setLabelCount(entries.size());
+        chart.getXAxis().setDrawGridLines(false);
+        chart.getXAxis().setDrawAxisLine(false);
+        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        chart.getXAxis().setTextSize(16);
+
+        chart.setAutoScaleMinMaxEnabled(false);
+        chart.getAxisLeft().setAxisMinimum(0);
+        chart.setXAxisRenderer(new CustomXAxisRenderer(chart.getViewPortHandler(),
+                chart.getXAxis(), chart.getTransformer(YAxis.AxisDependency.LEFT)));
 
         chart.getXAxis().setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return xVals.get((int) value);
+                return UtilFunctions.makeMultilineString(makeLabels(users).get((int) value), 7);
             }
-
         });
 
-        chart.getXAxis().setPosition(XAxis.XAxisPosition.TOP_INSIDE);
-        chart.getXAxis().setTextSize(15);
-
+        chart.setExtraBottomOffset(35);
         chart.setData(data);
+        chart.animateY(800);
         chart.getLegend().setEnabled(false);
         chart.invalidate(); // refresh
     }
 
-    private void displayChart() {
-        List<PieEntry> entries = new ArrayList<PieEntry>();
-        entries.add(new PieEntry(30f, "Juste"));
-        entries.add(new PieEntry(22f, "Faux"));
-        PieDataSet dataSet = new PieDataSet(entries, ""); // add entries to dataset
-        dataSet.setColors((new int[] { R.color.colorButton, R.color.colorRed}), getBaseContext());
+    private void displayRates(Double goodRates, String text, int chartId) {
+        PieChart chart = (PieChart) findViewById(chartId);
+        List<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(goodRates.floatValue()));
+        entries.add(new PieEntry((1f - goodRates.floatValue())));
+
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setColors((new int[]{R.color.colorButton, R.color.colorRed}), getBaseContext());
         dataSet.setValueTextSize(16);
-
-        List<PieEntry> entries2 = new ArrayList<PieEntry>();
-        entries2.add(new PieEntry(5f, "Juste"));
-        entries2.add(new PieEntry(2f, "Faux"));
-        PieDataSet dataSet2 = new PieDataSet(entries2, ""); // add entries to dataset
-        dataSet2.setColors((new int[] { R.color.colorButton, R.color.colorRed}), getBaseContext());
-        dataSet2.setValueTextSize(16);
-
 
         PieData pieData = new PieData(dataSet);
         pieData.setValueFormatter(new PercentFormatter());
 
-        PieData pieData2 = new PieData(dataSet2);
-        pieData2.setValueFormatter(new PercentFormatter());
-
-        PieChart chart = (PieChart) findViewById(R.id.chart);
-        PieChart chart2 = (PieChart) findViewById(R.id.chart2);
-
-
         chart.setDescription(null);
+        chart.setTouchEnabled(false);
+        chart.setRotationAngle(300);
         chart.setData(pieData);
-        chart.setCenterText("Mes statistiques");
+        chart.setCenterText(text);
         chart.setUsePercentValues(true);
         chart.setCenterTextSize(16);
         chart.setEntryLabelTextSize(16);
         chart.getLegend().setEnabled(false);
         chart.animateX(800);
-
-        chart2.setData(pieData2);
-        chart2.setDescription(null);
-        chart2.setCenterText("Statistiques générales");
-        chart2.setUsePercentValues(true);
-        chart2.setCenterTextSize(16);
-        chart2.setEntryLabelTextSize(16);
-        chart2.getLegend().setEnabled(false);
-        chart2.animateX(800);
-
         chart.invalidate();
-        chart2.invalidate();
+    }
+
+    private void hideLoader() {
+        findViewById(R.id.loader).setVisibility(View.GONE);
+        findViewById(R.id.chartDisplay).setVisibility(View.VISIBLE);
     }
 }

@@ -6,8 +6,10 @@ import java.util.Map;
 import com.quizz.entities.Game;
 import com.quizz.entities.GameData;
 import com.quizz.entities.GameResult;
+import com.quizz.entities.OfflineGame;
 import com.quizz.entities.PostAnswers;
 import com.quizz.entities.Question;
+import com.quizz.entities.Stat;
 import com.quizz.entities.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -59,4 +61,10 @@ public interface ApiServiceInterface {
 
     @POST("editUser")
     Call<User> editUser(@Body User user);
+
+    @POST("offGame/create")
+    Call<String> createOffGame(@Body OfflineGame offlineGame);
+
+    @GET("stats")
+    Call<Stat> getStats();
 }

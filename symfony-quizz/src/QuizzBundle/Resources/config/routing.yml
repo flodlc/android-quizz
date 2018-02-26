@@ -16,3 +16,13 @@ question:
     resource: '@QuizzBundle/Controller/QuestionController.php'
     type:     annotation
     prefix:   /question
+
+offline_game:
+    resource: '@QuizzBundle/Controller/OfflineGameController.php'
+    type:     annotation
+    prefix:   /offGame
+
+stat:
+    resource: '@QuizzBundle/Controller/StatController.php'
+    type:     annotation
+    prefix:   /stats

@@ -39,7 +39,7 @@
             android:layout_weight="10"
             android:gravity="center"
             android:textAlignment="center"
-            android:textSize="30sp" />
+            android:textSize="28sp" />
 
         <TextView
             android:id="@+id/correctAnswer"
@@ -47,14 +47,14 @@
             android:layout_height="match_parent"
             android:layout_weight="12"
             android:textAlignment="center"
-            android:textSize="40sp"
+            android:textSize="38sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/newRecord"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="10"
+            android:layout_weight="11"
             android:text="@string/newRecord"
             android:textAlignment="center"
             android:textColor="@color/colorRed"

@@ -21,7 +21,7 @@ import com.quizz.entities.Round;
 
 public class QuestionActivity extends Fragment {
 
-    private int RESPONSE_TIME = 6000;
+    private int responseTime;
     private Round round;
     private Handler handler;
     private Runnable runnable;
@@ -36,8 +36,8 @@ public class QuestionActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_question, container, false);
+        responseTime = getActivity().getResources().getInteger(R.integer.questionTime);
         Bundle b = getArguments();
-        this.time = MyApp.getContext().getResources().getInteger(R.integer.questionTime);
         this.round = b.getParcelable("round");
         this.displayTexts(view);
         this.setListenners(view);
@@ -62,8 +62,8 @@ public class QuestionActivity extends Fragment {
                     return;
                 }
                 long elapsedTime = SystemClock.elapsedRealtime() - time;
-                if (elapsedTime <= RESPONSE_TIME) {
-                    ((ProgressBar) view.findViewById(R.id.progressBar)).setProgress((int) elapsedTime / (RESPONSE_TIME / 100));
+                if (elapsedTime <= responseTime) {
+                    ((ProgressBar) view.findViewById(R.id.progressBar)).setProgress((int) elapsedTime / (responseTime / 100));
                     handler.postDelayed(this, 50);
                 } else {
                     handler.removeCallbacks(runnable);

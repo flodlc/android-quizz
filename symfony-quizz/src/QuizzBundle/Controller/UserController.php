@@ -11,6 +11,7 @@ namespace QuizzBundle\Controller;
 use FOS\UserBundle\Form\Factory\FormFactory;
 use FOS\UserBundle\FOSUserBundle;
 use QuizzBundle\Entity\User;
+use QuizzBundle\Service\OfflineGameManager;
 use QuizzBundle\Service\UserManager;
 use SensioLabs\Security\Exception\HttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

@@ -99,6 +99,7 @@ public class GameLineActivity extends Fragment {
             setBakgroundColor(view, R.color.colorRed);
         } else {
             setImage(view, R.drawable.equal);
+            setBakgroundColor(view, R.color.colorGreyLight);
         }
     }
 
@@ -113,7 +114,7 @@ public class GameLineActivity extends Fragment {
             }
         } else {
             setImage(imageView, R.drawable.sablier);
-            setBakgroundColor(imageView, R.color.colorGrey);
+            setBakgroundColor(imageView, R.color.colorGreyLight);
         }
     }
 

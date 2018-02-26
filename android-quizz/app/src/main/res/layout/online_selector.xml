@@ -10,7 +10,6 @@
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:text="@string/online"
         android:textSize="30sp" />
 
@@ -31,9 +30,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_shape"
                 android:text="1 vs 1"
-                android:textColor="@color/colorRed"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/onlineButtonNotif"
@@ -71,7 +68,6 @@
         android:id="@+id/editText4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:text="@string/invitation"
         android:textSize="30sp" />
 
@@ -93,9 +89,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_shape"
                 android:text="@string/sendInvitation"
-                android:textColor="@color/colorRed"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textSize="20dp" />
         </RelativeLayout>
 
         <RelativeLayout

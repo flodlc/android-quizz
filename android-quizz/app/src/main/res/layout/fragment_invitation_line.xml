@@ -2,55 +2,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="110dp"
-    android:padding="5dp"
-    android:gravity="center_vertical"
+    android:layout_marginBottom="5dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginStart="2dp"
     android:background="@drawable/customborder"
-    android:orientation="horizontal">
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
         android:layout_marginStart="20dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/typeUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:text="@string/invit_from"
             android:gravity="center_vertical"
-            android:textSize="25sp"/>
+            android:text="@string/invit_from"
+            android:textColor="@color/colorBlack"
+            android:textSize="25sp" />
+
         <TextView
             android:id="@+id/advName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
             android:textColor="@color/colorBlack"
-            android:textStyle="bold"/>
+            android:textSize="25sp"
+            android:textStyle="bold" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/stateWait"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:gravity="center_vertical"
-        android:textColor="@color/colorBlack"
-        android:text="@string/waitState"
         android:layout_marginEnd="10dp"
-        android:textStyle="bold"/>
+        android:gravity="center_vertical"
+        android:text="@string/waitState"
+        android:textColor="@color/colorBlack"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
     <ImageView
         android:id="@+id/refuse"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_weight="2"
         android:layout_marginEnd="10dp"
+        android:layout_weight="2"
         android:src="@drawable/ic_refuse" />
+
     <ImageView
         android:id="@+id/accept"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_weight="2"
         android:layout_marginEnd="10dp"
+        android:layout_weight="2"
         android:src="@drawable/ic_accept" />
 </LinearLayout>

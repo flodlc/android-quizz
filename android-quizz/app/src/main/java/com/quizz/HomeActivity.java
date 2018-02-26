@@ -30,11 +30,13 @@ public class HomeActivity extends AppCompatActivity {
         final User user = getIntent().getExtras().getParcelable("user");
         b.putParcelable("user", user);
 
-        OnlineSelectorActivity on = OnlineSelectorActivity.newInstance(b);
-        OfflineSelectorActivity off = OfflineSelectorActivity.newInstance(b);
+        if (getSupportFragmentManager().findFragmentByTag("ONLINE") == null) {
+            OnlineSelectorActivity on = OnlineSelectorActivity.newInstance(b);
+            OfflineSelectorActivity off = OfflineSelectorActivity.newInstance(b);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.content, on, "ONLINE").commit();
-        getSupportFragmentManager().beginTransaction().add(R.id.content, off, "OFFLINE").commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.content, on, "ONLINE").commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.content, off, "OFFLINE").commit();
+        }
 
         findViewById(R.id.statButton).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,14 +18,12 @@ class InvitationRepository extends \Doctrine\ORM\EntityRepository
     {
         $qb = $this
             ->createQueryBuilder('a')
-            ->addSelect('count(a.id)')
+            ->select('COUNT(a.id)')
             ->where('a.played = 0')
             ->andWhere('a.userTo = :id')
-            ->setParameter('id', $user)
-            ->getQuery();
+            ->setParameter('id', $user);
 
-        $count = $qb->execute()[0][1];
-        return $count;
+        return $qb->getQuery()->getSingleScalarResult();
 
     }
 }

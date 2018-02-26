@@ -42,6 +42,9 @@ public interface ApiServiceInterface {
     @GET("game/current")
     Call<GameData> getCurrentGame();
 
+    @GET("game/nbCurrent")
+    Call<Integer> getnbCurrentGame();
+
     @DELETE("game/{id}")
     Call<Boolean> deleteGame(@Path("id") String gameId);
 

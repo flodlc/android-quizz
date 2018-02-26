@@ -15,6 +15,7 @@ use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use QuizzBundle\Entity\Game;
 use QuizzBundle\Entity\Round;
 use QuizzBundle\Entity\User;
+use QuizzBundle\Repository\GameRepository;
 use SensioLabs\Security\Exception\HttpException;
 
 class GameManager
@@ -40,7 +41,7 @@ class GameManager
 
         $sqlQuery = "SELECT * 
                     FROM `game` g
-                    WHERE g.user_a_id = " . $user->getId() . " OR g.user_b_id = " . $user->getId() . " and g.state > 0
+                    WHERE g.user_a_id = " . $user->getId() . " OR g.user_b_id = " . $user->getId() . " AND g.state > 0
                     ORDER BY id DESC LIMIT 30;";
         $rsm = new ResultSetMappingBuilder($this->em);
         $rsm->addRootEntityFromClassMetadata(Game::class, 'game');
@@ -63,21 +64,31 @@ class GameManager
     /**
      * Get a game with $user as a player (UserA or UserB in the game) and he have to play
      * @param User $user
-     * @return array
+     * @return Game
      */
     public function getMyGameCurrent(User $user)
     {
+        /** @var GameRepository $gameRepo */
         $gameRepo = $this->em->getRepository(Game::class);
+        $game = $gameRepo->getAvailableGames($user, 1);
 
-        $gamesA = $gameRepo->findBy(["userA" => $user, "state" => 1, "pointsA" => null]);
-        if (count($gamesA) > 0)
-            return ["id" => $gamesA[0]->getId(), "state" => $gamesA[0]->getState()];
-
-        $gamesB = $gameRepo->findBy(["userB" => $user, "state" => 1, "pointsB" => null]);
-        if (count($gamesB) > 0)
-            return ["id" => $gamesB[0]->getId(), "state" => $gamesB[0]->getState()];
+        if (count($game) > 0) {
+            return $gameRepo->getAvailableGames($user, 1)[0];
+        }
 
         return null;
+    }
+
+
+    /**
+     * @param User $user
+     * @return int
+     */
+    public function countMyGameCurrent(User $user)
+    {
+        /** @var GameRepository $gameRepo */
+        $gameRepo = $this->em->getRepository(Game::class);
+        return $gameRepo->countAvailablesGame($user);
     }
 
     /**

@@ -47,4 +47,7 @@
     <string name="notMe">You can\'t play against yourself.</string>
     <string name="invitationIsset">This invitation has been already sent.</string>
     <string name="invit_removed">This invitation has been removed</string>
+    <string name="goodAnswersRate">Good answers rates</string>
+    <string name="gameWillStart">The game is starting !</string>
+    <string name="advOnly">Opponent</string>
 </resources>

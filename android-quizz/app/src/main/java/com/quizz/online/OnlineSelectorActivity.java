@@ -68,14 +68,17 @@ public class OnlineSelectorActivity extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Call<GameData> call = apiService.getCurrentGame();
-        call.enqueue(new Callback<GameData>() {
+        Call<Integer> call = apiService.getnbCurrentGame();
+        call.enqueue(new Callback<Integer>() {
             @Override
-            public void onResponse(@NonNull Call<GameData> call,
-                                   @NonNull Response<GameData> response) {
+            public void onResponse(@NonNull Call<Integer> call,
+                                   @NonNull Response<Integer> response) {
                 if (ApiService.checkCode(getActivity(), response)) {
-                    currentGameData = response.body();
-                    if (currentGameData.getGame() != null) {
+                    int nbCurrentGame = response.body();
+                    if (nbCurrentGame > 0) {
+                        ((Button) getView().findViewById(R.id.onlineButtonNotif))
+                                .setText(String.valueOf(nbCurrentGame));
+
                         getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.VISIBLE);
                     } else {
                         getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
@@ -84,7 +87,7 @@ public class OnlineSelectorActivity extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<GameData> call, Throwable t) {
+            public void onFailure(Call<Integer> call, Throwable t) {
                 getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
             }
         });
@@ -135,7 +138,8 @@ public class OnlineSelectorActivity extends Fragment {
                 if (ApiService.checkCode(getActivity(), response)) {
                     GameData freshGameData = response.body();
                     if (freshGameData != null && freshGameData.getGame().getState() == 1) {
-                        RouterService.goOnlineQuizz(getActivity(), user, freshGameData, alertDialog);
+                        RouterService.goTimer(getActivity(), user, freshGameData);
+                        alertDialog.dismiss();
                     } else if (SystemClock.elapsedRealtime() - time1 < 20000) {
                         try {
                             Thread.sleep(1000);
@@ -203,7 +207,8 @@ public class OnlineSelectorActivity extends Fragment {
                 if (ApiService.checkCode(getActivity(), response)) {
                     currentGameData = response.body();
                     if (currentGameData != null && currentGameData.getGame().getState() == 1) {
-                        RouterService.goOnlineQuizz(getActivity(), user, response.body(), alertDialog);
+                        RouterService.goTimer(getActivity(), user, response.body());
+                        alertDialog.dismiss();
                     } else {
                         searchingGame = true;
                         checkNewGame(time1);

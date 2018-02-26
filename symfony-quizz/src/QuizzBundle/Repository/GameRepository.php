@@ -2,6 +2,8 @@
 
 namespace QuizzBundle\Repository;
 
+use QuizzBundle\Entity\User;
+
 /**
  * GameRepository
  *
@@ -10,4 +12,62 @@ namespace QuizzBundle\Repository;
  */
 class GameRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function countAvailablesGame(User $user)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select('COUNT(g)')
+            ->from('QuizzBundle\Entity\Game', 'g');
+
+        $andModuleA = $qb->expr()->andX();
+        $andModuleA->add($qb->expr()->eq('g.userA', ':user'));
+        $andModuleA->add($qb->expr()->eq('g.state', '1'));
+        $andModuleA->add($qb->expr()->isNull('g.pointsA'));
+
+        $andModuleB = $qb->expr()->andX();
+        $andModuleB->add($qb->expr()->eq('g.userB', ':user'));
+        $andModuleB->add($qb->expr()->eq('g.state', '1'));
+        $andModuleB->add($qb->expr()->isNull('g.pointsB'));
+
+        $qb->where($andModuleA)
+            ->orWhere($andModuleB)
+            ->setParameter('user', $user->getId());
+
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @param User $user
+     * @param $limit
+     * @return array
+     */
+    public function getAvailableGames(User $user, $limit)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select('g')
+            ->from('QuizzBundle\Entity\Game', 'g');
+
+        $andModuleA = $qb->expr()->andX();
+        $andModuleA->add($qb->expr()->eq('g.userA', ':user'));
+        $andModuleA->add($qb->expr()->eq('g.state', '1'));
+        $andModuleA->add($qb->expr()->isNull('g.pointsA'));
+
+        $andModuleB = $qb->expr()->andX();
+        $andModuleB->add($qb->expr()->eq('g.userB', ':user'));
+        $andModuleB->add($qb->expr()->eq('g.state', '1'));
+        $andModuleB->add($qb->expr()->isNull('g.pointsB'));
+
+        $qb->where($andModuleA)
+            ->orWhere($andModuleB)
+            ->setMaxResults($limit)
+            ->setParameter('user', $user->getId());
+
+        return $qb->getQuery()->getArrayResult();
+    }
 }

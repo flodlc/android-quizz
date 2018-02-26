@@ -9,6 +9,7 @@
 namespace QuizzBundle\Controller;
 
 use QuizzBundle\Entity\Game;
+use QuizzBundle\Service\GameManager;
 use SensioLabs\Security\Exception\HttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -61,20 +62,29 @@ class GameController extends Controller
      * @Route("/current", name="games")
      * @Method({"GET"})
      *
-     * @param Request $request
      * @return Response
      */
-    public function getCurrentGameAction(Request $request)
+    public function getCurrentGameAction()
     {
-        $userManager = $this->container->get("quizz.user");
         $gameManager = $this->container->get("quizz.game");
-        $userId = $this->getUser()->getId();
-
-        $user = $userManager->getById($userId);
-        $gameCurrent = $gameManager->getMyGameCurrent($user);
-
+        $gameCurrent = $gameManager->getMyGameCurrent($this->getUser());
         return new Response(json_encode(["game" => $gameCurrent]));
     }
+
+
+    /**
+     * @Route("/nbCurrent", name="nbCurrent")
+     * @Method({"GET"})
+     *
+     * @return Response
+     */
+    public function getnbCurrentGamesAction()
+    {
+        /** @var GameManager $gameManager */
+        $gameManager = $this->container->get("quizz.game");
+        return new Response($gameManager->countMyGameCurrent($this->getUser()));
+    }
+
 
     /**
      * @Route("/", name="search")
@@ -82,15 +92,10 @@ class GameController extends Controller
      *
      * @return Response
      */
-    public function getSearchAction(Request $request)
+    public function getSearchAction()
     {
-        $userManager = $this->container->get("quizz.user");
         $gameManager = $this->container->get("quizz.game");
-
-        $userId = $this->getUser()->getId();
-        $me = $userManager->getById($userId);
-
-        $game_data = $gameManager->getAGameAvailable($me);
+        $game_data = $gameManager->getAGameAvailable($this->getUser());
 
         $gameSeria = $this->serializer->normalize($game_data["game"], "json", ["groups" => ["game"]]);
         $roundsSeria = $this->serializer->normalize($game_data["rounds"], "json", ["groups" => ["game"]]);
@@ -110,9 +115,8 @@ class GameController extends Controller
         $gameRepo = $this->getDoctrine()->getManager()->getRepository(Game::class);
         $gameId = $request->get("game");
         $game = $gameRepo->find($gameId);
-        $user = $this->getUser();
 
-        $data_game = $gameManager->getGameAndRounds($game, $user);
+        $data_game = $gameManager->getGameAndRounds($game, $this->getUser());
 
         $gameSeria = $this->serializer->normalize($data_game["game"], "json", ["groups" => ["game"]]);
         $roundsSeria = $this->serializer->normalize($data_game["rounds"], "json", ["groups" => ["game"]]);

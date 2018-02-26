@@ -20,6 +20,7 @@ import com.quizz.entities.GameData;
 import com.quizz.entities.GameResult;
 import com.quizz.entities.Question;
 import com.quizz.entities.User;
+import com.quizz.online.TimerActivity;
 import com.quizz.stat.StatisticActivity;
 
 /**
@@ -43,6 +44,15 @@ public class RouterService {
 
     public static void goOnlineQuizz(Activity activity, User user, GameData gameData) {
         Intent intent = new Intent(activity, OnLineQuizzActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelable("user", user);
+        b.putParcelable("gameData", gameData);
+        intent.putExtras(b);
+        activity.startActivity(intent);
+    }
+
+    public static void goTimer(Activity activity, User user, GameData gameData) {
+        Intent intent = new Intent(activity, TimerActivity.class);
         Bundle b = new Bundle();
         b.putParcelable("user", user);
         b.putParcelable("gameData", gameData);

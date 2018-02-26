@@ -4,4 +4,5 @@
     <integer name="questionTime">10000</integer>
     <integer name="nbQuestionsCheckIfSame">15</integer>
     <integer name="maxNbOfBestUsers">5</integer>
+    <integer name="timeBeforeQuizz">5000</integer>
 </resources>

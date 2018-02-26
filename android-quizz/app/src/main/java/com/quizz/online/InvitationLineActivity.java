@@ -89,7 +89,7 @@ public class InvitationLineActivity extends Fragment {
                     public void onResponse(Call<GameData> call, retrofit2.Response<GameData> response) {
                         if (response.code() == 200) {
                             GameData gamedata = response.body();
-                            RouterService.goOnlineQuizz(getActivity(), user, gamedata);
+                            RouterService.goTimer(getActivity(), user, gamedata);
                         } else if (response.code() == 404) {
                             makeAlertDilogue();
                             getFragmentManager().beginTransaction()

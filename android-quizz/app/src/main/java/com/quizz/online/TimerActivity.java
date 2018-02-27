@@ -34,6 +34,7 @@ public class TimerActivity extends AppCompatActivity {
         this.gameData = getIntent().getExtras().getParcelable("gameData");
         this.user = getIntent().getExtras().getParcelable("user");
 
+        ((TextView)findViewById(R.id.advName)).setText(gameData.getGame().getAdv().getUsername());
         setProgressBar();
         startTimer();
     }

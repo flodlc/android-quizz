@@ -11,7 +11,10 @@ namespace QuizzBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use QuizzBundle\Entity\OfflineGame;
+use QuizzBundle\Entity\Stat;
+use QuizzBundle\Entity\User;
 use QuizzBundle\Repository\OfflineGameRepository;
+use QuizzBundle\Repository\UserStatRepository;
 
 class StatManager
 {
@@ -22,14 +25,10 @@ class StatManager
         $this->em = $entityManager;
     }
 
-    public function getGoodResponseRate($user)
+    public function getGoodResponseRate(User $user)
     {
-
-        /** @var OfflineGameRepository $offlineGameRepo */
-        $offlineGameRepo = $this->em->getRepository(OfflineGame::class);
-
-        $sum = $offlineGameRepo->getMyOfflineSumScore($user);
-        $nbGame = $offlineGameRepo->getMyNbOfGames($user);
+        $sum = $user->getStat()->getOfflineSumScore();
+        $nbGame = $user->getStat()->getNbOfflineGames();
         if ($nbGame == 0) {
             return null;
         }
@@ -38,14 +37,34 @@ class StatManager
 
     public function getGlobalGoodResponseRate()
     {
-        /** @var OfflineGameRepository $offlineGameRepo */
-        $offlineGameRepo = $this->em->getRepository(OfflineGame::class);
+        /** @var UserStatRepository $statRepo */
+        $statRepo = $this->em->getRepository(Stat::class);
 
-        $sum = $offlineGameRepo->getGlobalOfflineSumScore();
-        $nbGame = $offlineGameRepo->getGlobalNbOfGames();
+        $sum = $statRepo->getGlobalOfflineSumScore();
+        $nbGame = $statRepo->getGlobalNbOfGames();
         if ($nbGame == 0) {
             return null;
         }
         return ($sum) / ($sum + $nbGame);
+    }
+
+    /**
+     * @param User $user
+     * @return Stat
+     */
+    public function makeStatFromOfflineTable(User $user)
+    {
+        $userStat = new Stat();
+
+        /**
+         * @var OfflineGameRepository $offlineGameRepo
+         */
+        $offlineGameRepo = $this->em->getRepository(OfflineGame::class);
+
+        $userStat->setOfflineSumScore($offlineGameRepo->getMyOfflineSumScore($user));
+        $userStat->setNbOfflineGames($offlineGameRepo->getMyNbOfGames($user));
+        $userStat->setOfflineTime($offlineGameRepo->getMyOfflineTime($user));
+
+        return $userStat;
     }
 }

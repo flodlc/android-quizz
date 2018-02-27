@@ -52,6 +52,8 @@ services:
     quizz.off_game:
             class: QuizzBundle\Service\OfflineGameManager
             public: true
+            arguments:
+              $statManager: '@quizz.stat'
 
     quizz.stat:
             class: QuizzBundle\Service\StatManager

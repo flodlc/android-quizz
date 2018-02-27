@@ -77,6 +77,11 @@ class User extends BaseUser
      */
     private $creationDate;
 
+    /**
+     * @var Stat
+     * @ORM\OneToOne(targetEntity="Stat", cascade={"persist"})
+     */
+    private $stat;
 
 
     public function __construct()
@@ -88,6 +93,7 @@ class User extends BaseUser
         $this->setEnabled(true);
         $this->setLastRecordDate(new \DateTime());
         $this->creationDate = new \Datetime();
+        $this->stat = new Stat();
     }
 
     /**
@@ -218,5 +224,19 @@ class User extends BaseUser
         $this->creationDate = $creationDate;
     }
 
+    /**
+     * @return Stat
+     */
+    public function getStat()
+    {
+        return $this->stat;
+    }
 
+    /**
+     * @param Stat $stat
+     */
+    public function setStat($stat)
+    {
+        $this->stat = $stat;
+    }
 }

@@ -16,7 +16,7 @@ class OfflineGameRepository extends EntityRepository
 {
     public function getMyOfflineSumScore(User $user)
     {
-        $dql = "SELECT SUM(og.score) AS balance 
+        $dql = "SELECT SUM(og.score)
                 FROM QuizzBundle\Entity\OfflineGame og 
                 WHERE og.user = ?1";
         $sumScore = $this->getEntityManager()->createQuery($dql)
@@ -28,6 +28,17 @@ class OfflineGameRepository extends EntityRepository
     public function getMyNbOfGames(User $user)
     {
         $dql = "SELECT COUNT(og.id)
+                FROM QuizzBundle\Entity\OfflineGame og
+                WHERE og.user = ?1";
+        $nbGame = $this->getEntityManager()->createQuery($dql)
+            ->setParameter(1, $user)
+            ->getSingleScalarResult();
+        return $nbGame;
+    }
+
+    public function getMyOfflineTime(User $user)
+    {
+        $dql = "SELECT SUM(og.time)
                 FROM QuizzBundle\Entity\OfflineGame og
                 WHERE og.user = ?1";
         $nbGame = $this->getEntityManager()->createQuery($dql)

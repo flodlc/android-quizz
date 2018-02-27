@@ -64,27 +64,4 @@ class StatController extends Controller
         ];
         return new Response(json_encode($responseArray));
     }
-
-    /**
-     * @Route("/up", name="upStats")
-     * @Method({"GET"})
-     *
-     * @return Response
-     */
-    public function upStat()
-    {
-        /** @var StatManager $statManager */
-        $statManager = $this->container->get("quizz.stat");
-
-        $users = $this->getDoctrine()->getManager()->getRepository(User::class)->findAll();
-
-        foreach ($users as $user) {
-            if (!$user->getStat()) {
-                $user->setStat($statManager->makeStatFromOfflineTable($user));
-                $this->getDoctrine()->getManager()->flush();
-            }
-        }
-
-        return new Response("ok");
-    }
 }

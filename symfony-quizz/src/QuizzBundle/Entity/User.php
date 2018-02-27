@@ -71,6 +71,12 @@ class User extends BaseUser
      */
     private $lastIp;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="creation_date", type="datetime", nullable=true)
+     */
+    private $creationDate;
+
 
 
     public function __construct()
@@ -81,6 +87,7 @@ class User extends BaseUser
         $this->setEmailCanonical("");
         $this->setEnabled(true);
         $this->setLastRecordDate(new \DateTime());
+        $this->creationDate = new \Datetime();
     }
 
     /**
@@ -193,6 +200,22 @@ class User extends BaseUser
     public function setLastIp($lastIp)
     {
         $this->lastIp = $lastIp;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param \DateTime $creationDate
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
     }
 
 

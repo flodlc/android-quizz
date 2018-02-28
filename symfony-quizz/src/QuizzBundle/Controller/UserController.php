@@ -115,4 +115,21 @@ class UserController extends Controller
         $userManager->visitUser($user, $request->getClientIp());
         return new Response($this->serializer->serialize($user, "json", ["groups" => ["user"]]));
     }
+
+    /**
+     * @Route("/user/findByText/{text}", name="userByText")
+     * @Method({"GET"})
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function getUsersByTextAction(Request $request, $text)
+    {
+        /** @var UserManager $userManager */
+        $userManager = $this->container->get("quizz.user");
+
+        $users = $userManager->findBytext($text);
+
+        return new Response($this->serializer->serialize($users, "json", ["groups" => ["user"]]));
+    }
 }

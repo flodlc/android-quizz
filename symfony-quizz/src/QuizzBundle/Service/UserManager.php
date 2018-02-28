@@ -97,7 +97,8 @@ class UserManager
     public function getById($userId)
     {
         $userRepo = $this->em->getRepository(User::class);
-        /** @var User $user */$user = $userRepo->find($userId);
+        /** @var User $user */
+        $user = $userRepo->find($userId);
         if (!$user)
             throw new HttpException("Pas d'utilisateur", 404);
         return $user;
@@ -135,7 +136,8 @@ class UserManager
      * @param User $user
      * @param string $ip
      */
-    public function visitUser(User $user, $ip) {
+    public function visitUser(User $user, $ip)
+    {
         $user->setLastIp($ip);
         $user->setLastVisit(new \DateTime());
         $this->em->flush();
@@ -147,8 +149,10 @@ class UserManager
      * @param $record
      * @param bool $flush
      */
-    public function updateMyRecord($record, $flush = true) {
-        /** @var User $user */ $user = $this->tokenStorage->getToken()->getUser();
+    public function updateMyRecord($record, $flush = true)
+    {
+        /** @var User $user */
+        $user = $this->tokenStorage->getToken()->getUser();
         $user->setRecord($record);
         if ($flush) {
             $this->em->flush();
@@ -159,9 +163,17 @@ class UserManager
      * @param $nbUsers
      * @return array
      */
-    public function getBestUsers($nbUsers) {
+    public function getBestUsers($nbUsers)
+    {
         /** @var UserRepository $userRepo */
         $userRepo = $this->em->getRepository(User::class);
         return $userRepo->findBy([], ['record' => 'DESC'], $nbUsers);
+    }
+
+    public function findByText($text)
+    {
+        /** @var UserRepository $userRepo */
+        $userRepo = $this->em->getRepository(User::class);
+        return $userRepo->getUsersByText($text);
     }
 }

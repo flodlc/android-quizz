@@ -55,7 +55,14 @@ public class FirstMainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    ApiService.showErrorMessage(FirstMainActivity.this);
+                    User user = UserManager.getUSer();
+                    if (user != null) {
+                        RouterService.goHome(FirstMainActivity.this, user);
+                        finish();
+                    } else {
+                        RouterService.goConnectPageAndFinish(FirstMainActivity.this);
+                        finish();
+                    }
                 }
             });
         }

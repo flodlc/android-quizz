@@ -8,7 +8,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="QuizzBundle\Repository\UserRepository")
  * @ORM\Table(name="user")
  * @ORM\AttributeOverrides({
  *      @ORM\AttributeOverride(name="email", column=@ORM\Column(type="string", name="email", length=255, nullable=true)),

@@ -66,6 +66,7 @@ class OfflineGameController extends Controller
 
         if ($offlineGame->getScore() > $user->getRecord()) {
             $user->setRecord($offlineGame->getScore());
+            $user->setLastRecordDate(new \DateTime());
         }
 
         $offlineGameManager->saveOfflineGame($offlineGame);

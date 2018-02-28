@@ -10,4 +10,15 @@ namespace QuizzBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getUsersByText($text){
+        $qb = $this->createQueryBuilder('u');
+
+        $qb->where('u.username like :text')
+            ->setParameter('text', $text."%")
+            ->setMaxResults(5);
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
 }

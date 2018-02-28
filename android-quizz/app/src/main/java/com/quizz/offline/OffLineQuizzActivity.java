@@ -57,6 +57,9 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
 
     public void displayQuestion() {
         currentQuestion = getRandomQuestion();
+        if (currentQuestion == null) {
+            return;
+        }
         Bundle b = new Bundle();
         b.putParcelable("round", new Round(currentQuestion));
         this.questionActivity = QuestionActivity.newInstance(b);
@@ -83,9 +86,8 @@ public class OffLineQuizzActivity extends AppCompatActivity implements QuizzActi
                     e.printStackTrace();
                 }
             }
+            addToQuestionToLastQuestions(newQuestion);
         }
-
-        addToQuestionToLastQuestions(newQuestion);
 
         return newQuestion;
     }

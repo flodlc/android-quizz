@@ -84,4 +84,7 @@ public interface ApiServiceInterface {
 
     @POST("invitation/")
     Call<Invitation> sendInvitation(@Body InvitationSend invitationSend);
+
+    @GET("user/findByText/{text}")
+    Call<List<User>> findUsersByText(@Path("text") String text);
 }

@@ -40,6 +40,7 @@ public class OffLineResultActivity extends AppCompatActivity {
         game = b.getParcelable("offlineGame");
 
         postGame(game);
+        checkRecord();
         displayTexts((Question) b.getParcelable("question"));
 
         findViewById(R.id.backHome).setOnClickListener(new View.OnClickListener() {
@@ -101,6 +102,5 @@ public class OffLineResultActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.score)).setText(String.valueOf(game.getScore()));
         ((TextView) findViewById(R.id.questionText)).setText(question.getQuestion());
         ((TextView) findViewById(R.id.correctAnswer)).setText(getAnswerText(question));
-        checkRecord();
     }
 }

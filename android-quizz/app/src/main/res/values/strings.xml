@@ -50,4 +50,6 @@
     <string name="goodAnswersRate">Good answers rates</string>
     <string name="gameWillStart">The game is starting !</string>
     <string name="advOnly">Opponent</string>
+    <string name="create">Create</string>
+    <string name="login">Login</string>
 </resources>

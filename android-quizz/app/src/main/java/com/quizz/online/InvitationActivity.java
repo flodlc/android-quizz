@@ -2,8 +2,15 @@ package com.quizz.online;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.quizz.R;
@@ -14,10 +21,16 @@ import com.quizz.entities.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 import com.quizz.services.ApiService;
 import com.quizz.services.ApiServiceInterface;
 import com.quizz.services.RouterService;
+
+import java.lang.reflect.Array;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 
 /**
@@ -27,12 +40,15 @@ import com.quizz.services.RouterService;
 public class InvitationActivity extends AppCompatActivity {
 
     private User user;
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invitation);
         this.user = getIntent().getExtras().getParcelable("user");
+        adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line);
     }
 
 
@@ -40,6 +56,62 @@ public class InvitationActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         setListener();
+        setTextListener();
+    }
+
+    private void setTextListener() {
+        ((AutoCompleteTextView)findViewById(R.id.username)).setThreshold(1);
+        ((AutoCompleteTextView)findViewById(R.id.username)).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                getUsers(s.toString());
+            }
+        });
+    }
+
+    private void getUsers(final String text) {
+        if (text == null || text.equals("")) {
+            adapter = new ArrayAdapter<String>(InvitationActivity.this,
+                    android.R.layout.simple_dropdown_item_1line);
+            return;
+        }
+        ApiServiceInterface apiService = ApiService.getService();
+        Call<List<User>> call = apiService.findUsersByText(text);
+
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.username);
+                if (response.code() == 200) {
+                    String[] users = new String[response.body().size()];
+
+                    int i = 0;
+                    for (User user : response.body()) {
+                        users[i] = user.getUsername();
+                        i++;
+                    }
+
+                    adapter = new ArrayAdapter<String>(InvitationActivity.this,
+                            android.R.layout.simple_dropdown_item_1line, users);
+                    actv.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+
+            }
+        });
     }
 
 

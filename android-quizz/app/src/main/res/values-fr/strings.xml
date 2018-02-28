@@ -49,4 +49,6 @@
     <string name="goodAnswersRate">Taux de bonnes réponses</string>
     <string name="gameWillStart">La partie va commencer !</string>
     <string name="advOnly">Adversaire</string>
+    <string name="create">Créer</string>
+    <string name="login">Se connecter</string>
 </resources>

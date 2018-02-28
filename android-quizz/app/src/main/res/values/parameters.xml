@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="baseUrl" translatable="false">http://207.154.219.236/</string>
+    <string name="baseUrl" translatable="false">http://10.0.2.2:8000/</string>
     <integer name="questionTime">8500</integer>
     <integer name="nbQuestionsCheckIfSame">15</integer>
     <integer name="maxNbOfBestUsers">5</integer>
-    <integer name="timeBeforeQuizz">5000</integer>
+    <integer name="timeBeforeQuizz">4000</integer>
 </resources>

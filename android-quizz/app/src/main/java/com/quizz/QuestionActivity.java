@@ -15,6 +15,8 @@ import com.quizz.entities.Answer;
 import com.quizz.entities.Question;
 import com.quizz.entities.Round;
 
+import java.util.Random;
+
 /**
  * Created by Florian on 31/01/2018.
  */
@@ -40,7 +42,6 @@ public class QuestionActivity extends Fragment {
         Bundle b = getArguments();
         this.round = b.getParcelable("round");
         this.displayTexts(view);
-        this.setListenners(view);
         this.setTimer(view);
         return view;
     }
@@ -80,14 +81,46 @@ public class QuestionActivity extends Fragment {
         this.displayTexts(getView());
     }
 
+    private Button[] getButtons(View view) {
+        Button[] buttons = new Button[4];
+        buttons[0] = view.findViewById(R.id.response1);
+        buttons[1] = view.findViewById(R.id.response2);
+        buttons[2] = view.findViewById(R.id.response3);
+        buttons[3] = view.findViewById(R.id.response4);
+        return randomizeArray(buttons);
+    }
+
     private void displayTexts(View view) {
         Question question = round.getQuestion();
-        displayText((Button) view.findViewById(R.id.response1), question.getResponseA());
-        displayText((Button) view.findViewById(R.id.response2), question.getResponseB());
-        displayText((Button) view.findViewById(R.id.response3), question.getResponseC());
-        displayText((Button) view.findViewById(R.id.response4), question.getResponseD());
+        Button[] randomButtons = getButtons(view);
+
+        displayText(randomButtons[0], question.getResponseA());
+        setListenner(randomButtons[0], "ResponseA");
+
+        displayText(randomButtons[1], question.getResponseB());
+        setListenner(randomButtons[1], "ResponseB");
+
+        displayText(randomButtons[2], question.getResponseC());
+        setListenner(randomButtons[2], "ResponseC");
+
+        displayText(randomButtons[3], question.getResponseD());
+        setListenner(randomButtons[3], "ResponseD");
+
         displayText((TextView) view.findViewById(R.id.questionText), question.getQuestion());
     }
+
+    private static Button[] randomizeArray(Button[] array) {
+        Random rgen = new Random();  // Random number generator
+
+        for (int i = 0; i < array.length; i++) {
+            int randomPosition = rgen.nextInt(array.length);
+            Button temp = array[i];
+            array[i] = array[randomPosition];
+            array[randomPosition] = temp;
+        }
+        return array;
+    }
+
 
     private void displayText(Button view, String text) {
         view.setVisibility(View.GONE);
@@ -101,12 +134,6 @@ public class QuestionActivity extends Fragment {
         view.setVisibility(View.VISIBLE);
     }
 
-    private void setListenners(View view) {
-        setListenner(view.findViewById(R.id.response1), "ResponseA");
-        setListenner(view.findViewById(R.id.response2), "ResponseB");
-        setListenner(view.findViewById(R.id.response3), "ResponseC");
-        setListenner(view.findViewById(R.id.response4), "ResponseD");
-    }
 
     private void setListenner(View view, final String responseId) {
         view.setOnClickListener(new View.OnClickListener() {

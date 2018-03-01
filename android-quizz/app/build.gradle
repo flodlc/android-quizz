@@ -7,8 +7,8 @@ android {
         applicationId "com.quizzExpress"
         minSdkVersion 18
         targetSdkVersion 26
-        versionCode 13
-        versionName "1.2.3"
+        versionCode 14
+        versionName "1.2.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

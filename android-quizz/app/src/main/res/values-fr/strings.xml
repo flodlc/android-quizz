@@ -57,8 +57,8 @@
     <string name="missBadAnswers">Il manque des mauvaises réponses</string>
     <string name="errorServer">Erreur serveur</string>
     <string name="questionHint">Question (70 lettres max)</string>
-    <string name="goodAnswerHint">Bonne answer (20 lettres max)</string>
-    <string name="badAnswerHint">Mauvaise answer (20 lettres max)</string>
+    <string name="goodAnswerHint">Bonne réponse (20 lettres max)</string>
+    <string name="badAnswerHint">Mauvaise réponse (20 lettres max)</string>
     <string name="addQuestion">Ajouter une question</string>
     <string name="send">Envoyer</string>
 </resources>

@@ -95,6 +95,7 @@
                 android:paddingRight="60dp"
                 android:paddingTop="20dp"
                 android:text="@string/send"
+                android:layout_marginBottom="15dp"
                 android:textSize="20sp" />
 
 
@@ -102,10 +103,10 @@
                 android:id="@+id/loader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginTop="50dp"
                 android:indeterminate="true"
-                android:visibility="gone" />
+                android:visibility="visible" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

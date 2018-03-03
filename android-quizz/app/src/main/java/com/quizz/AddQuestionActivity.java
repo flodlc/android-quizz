@@ -98,9 +98,8 @@ public class AddQuestionActivity extends AppCompatActivity {
                     return;
                 }
 
-                Question[] questions = new Question[]{new Question(questionText, goodAnswer, badAnswer1,
-                        badAnswer2, badAnswer3, "ResponseA")};
-
+                Question[] questions = new Question[]{new Question(questionText.replace("\n", " ")
+                        , goodAnswer, badAnswer1, badAnswer2, badAnswer3, "ResponseA")};
                 sendQuestion(questions);
             }
         });

@@ -78,6 +78,14 @@ class Question
      */
     private $enabled;
 
+    /**
+     * @var User
+     *
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToOne(targetEntity="User", cascade={"persist"})
+     */
+    private $user;
+
 
     /**
      * Get id
@@ -254,6 +262,22 @@ class Question
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }
 

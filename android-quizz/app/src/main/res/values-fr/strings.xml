@@ -51,4 +51,14 @@
     <string name="advOnly">Adversaire</string>
     <string name="create">Créer</string>
     <string name="login">Se connecter</string>
+    <string name="thanksQuestion">Merci pour votre participation !</string>
+    <string name="questionToShort">La question est trop courte</string>
+    <string name="missGoodAnswer">Il manque la bonne réponse</string>
+    <string name="missBadAnswers">Il manque des mauvaises réponses</string>
+    <string name="errorServer">Erreur serveur</string>
+    <string name="questionHint">Question (70 lettres max)</string>
+    <string name="goodAnswerHint">Bonne answer (20 lettres max)</string>
+    <string name="badAnswerHint">Mauvaise answer (20 lettres max)</string>
+    <string name="addQuestion">Ajouter une question</string>
+    <string name="send">Envoyer</string>
 </resources>

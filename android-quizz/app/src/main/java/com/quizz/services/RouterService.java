@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 
+import com.quizz.AddQuestionActivity;
 import com.quizz.HomeActivity;
 import com.quizz.MainActivity;
 import com.quizz.entities.OfflineGame;
@@ -123,5 +124,13 @@ public class RouterService {
         Intent intent = new Intent(activity, MainActivity.class);
         activity.startActivity(intent);
         activity.finish();
+    }
+
+    public static void goAddQuestion(Activity activity, User user) {
+        Intent intent = new Intent(activity, AddQuestionActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelable("user", user);
+        intent.putExtras(b);
+        activity.startActivity(intent);
     }
 }

@@ -88,6 +88,16 @@ public class Question implements Parcelable {
         this.answer = answer;
     }
 
+    public Question(String question, String responseA, String responseB, String responseC, String responseD, String answer) {
+        super();
+        this.question = question;
+        this.responseA = responseA;
+        this.responseB = responseB;
+        this.responseC = responseC;
+        this.responseD = responseD;
+        this.answer = answer;
+    }
+
     public String getQuestion() {
         return question;
     }

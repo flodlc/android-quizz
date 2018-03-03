@@ -87,4 +87,7 @@ public interface ApiServiceInterface {
 
     @GET("user/findByText/{text}")
     Call<List<User>> findUsersByText(@Path("text") String text);
+
+    @POST("question/create")
+    Call<Boolean> createQuestion(@Body Question[] question);
 }

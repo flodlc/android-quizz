@@ -21,13 +21,16 @@ import com.quizz.services.RouterService;
  */
 
 public class HomeActivity extends AppCompatActivity {
+
+    private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         Bundle b = new Bundle();
-        final User user = getIntent().getExtras().getParcelable("user");
+        user = getIntent().getExtras().getParcelable("user");
         b.putParcelable("user", user);
 
         if (getSupportFragmentManager().findFragmentByTag("ONLINE") == null) {
@@ -44,5 +47,20 @@ public class HomeActivity extends AppCompatActivity {
                 RouterService.goStatistics(HomeActivity.this, user);
             }
         });
+
+        findViewById(R.id.createQuestionButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RouterService.goAddQuestion(HomeActivity.this, user);
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (user.getRecord() > 15) {
+            findViewById(R.id.createQuestionButton).setVisibility(View.VISIBLE);
+        }
     }
 }

@@ -52,4 +52,14 @@
     <string name="advOnly">Opponent</string>
     <string name="create">Create</string>
     <string name="login">Login</string>
+    <string name="thanksQuestion">Thank you !</string>
+    <string name="questionToShort">The question is too short</string>
+    <string name="missGoodAnswer">There is no good answer</string>
+    <string name="missBadAnswers">There is not enough bad answers</string>
+    <string name="errorServer">Server error</string>
+    <string name="questionHint">Question (70 letters max)</string>
+    <string name="goodAnswerHint">Good answer (20 letters max)</string>
+    <string name="badAnswerHint">Bad answer (20 letters max)</string>
+    <string name="addQuestion">Add a question</string>
+    <string name="send">Send</string>
 </resources>

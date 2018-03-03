@@ -31,11 +31,12 @@ public class UserManager {
         if (!file.exists()) {
             return "";
         }
-        FileInputStream fis = null;
+        FileInputStream fis;
         try {
             fis = MyApp.getContext().openFileInput(FILENAME);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return "";
         }
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 

@@ -57,9 +57,10 @@ class QuestionManager
      * @param array $questions
      * @return boolean
      */
-    public function saveQuestions(array $questions)
+    public function saveQuestions(array $questions, $user)
     {
         foreach ($questions as $question) {
+            $question->setUser($user);
             $this->saveQuestion($question, false);
         }
         $this->em->flush();

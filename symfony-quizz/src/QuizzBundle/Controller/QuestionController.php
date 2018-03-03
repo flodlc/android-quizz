@@ -78,7 +78,7 @@ class QuestionController extends Controller
         /** @var QuestionManager $questionManager */
         $questionManager = $this->get("quizz.question");
 
-        return new Response($this->serializer->serialize($questionManager->saveQuestions($questions), "json"));
+        return new Response(json_encode($questionManager->saveQuestions($questions, $this->getUser())));
     }
 
     /**

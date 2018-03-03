@@ -38,7 +38,6 @@ public class OffLineResultActivity extends AppCompatActivity {
         assert b != null;
         user = b.getParcelable("user");
         game = b.getParcelable("offlineGame");
-
         postGame(game);
         checkRecord();
         displayTexts((Question) b.getParcelable("question"));
@@ -56,6 +55,12 @@ public class OffLineResultActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        finish();
     }
 
     private String getAnswerText(Question question) {

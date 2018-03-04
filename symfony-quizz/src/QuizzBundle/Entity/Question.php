@@ -82,7 +82,7 @@ class Question
      * @var User
      *
      * @ORM\JoinColumn(nullable=true)
-     * @ORM\OneToOne(targetEntity="User", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="User", cascade={"persist"})
      */
     private $user;
 

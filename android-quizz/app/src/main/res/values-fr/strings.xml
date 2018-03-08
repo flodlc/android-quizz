@@ -61,4 +61,7 @@
     <string name="badAnswerHint">Mauvaise réponse (20 lettres max)</string>
     <string name="addQuestion">Ajouter une question</string>
     <string name="send">Envoyer</string>
+    <string name="waitOpponent">En attente de l\'adversaire</string>
+    <string name="infoAddQuestion">Vous pouvez maintenant ajouter des questions au quizz depuis le logo sur la page d\'accueil.</string>
+    <string name="bravo">Bravo !</string>
 </resources>

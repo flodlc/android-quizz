@@ -14,6 +14,7 @@ import retrofit2.Response;
 import com.quizz.services.ApiService;
 import com.quizz.services.ApiServiceInterface;
 import com.quizz.services.RouterService;
+import com.quizz.services.UserManager;
 
 
 /**
@@ -59,7 +60,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (user.getRecord() > 15) {
+        String record = UserManager.getData("record");
+        user.setRecord(Integer.valueOf(record.equals("") ? "0" : record));
+        if (user.getRecord() >= getResources().getInteger(R.integer.minRecordForAddQuestion)) {
             findViewById(R.id.createQuestionButton).setVisibility(View.VISIBLE);
         }
     }

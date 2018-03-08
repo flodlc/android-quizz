@@ -62,4 +62,7 @@
     <string name="badAnswerHint">Bad answer (20 letters max)</string>
     <string name="addQuestion">Add a question</string>
     <string name="send">Send</string>
+    <string name="waitOpponent">Waiting for the opponent</string>
+    <string name="infoAddQuestion">You can now add questions from the home page.</string>
+    <string name="bravo">Good job !</string>
 </resources>

@@ -119,7 +119,7 @@ public class GameLineActivity extends Fragment {
     }
 
     private void displayTexts(View view) {
-        ((TextView) view.findViewById(R.id.advName)).setText(game.getAdv().getUsername());
+        ((TextView) view.findViewById(R.id.advName)).setText(game.getAdv() != null ? game.getAdv().getUsername() : "");
         setAnimation((ImageView) view.findViewById(R.id.state));
     }
 }

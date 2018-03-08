@@ -1,6 +1,7 @@
 package com.quizz.offline;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -76,6 +77,15 @@ public class OffLineResultActivity extends AppCompatActivity {
         }
     }
 
+    private void showCanAddQuetion() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.bravo);
+        builder.setIcon(R.drawable.check);
+        builder.setMessage(R.string.infoAddQuestion);
+        builder.setPositiveButton("OK", null);
+        builder.show();
+    }
+
     private void checkRecord() {
         String recordString = UserManager.getData("record");
         int record = recordString.equals("") ? 0 : Integer.valueOf(recordString);
@@ -83,6 +93,11 @@ public class OffLineResultActivity extends AppCompatActivity {
             findViewById(R.id.newRecord).setVisibility(View.VISIBLE);
             user.setRecord(game.getScore());
             UserManager.saveRecord(user);
+        }
+
+        if (record < getResources().getInteger(R.integer.minRecordForAddQuestion)
+                && game.getScore() >= getResources().getInteger(R.integer.minRecordForAddQuestion)) {
+            showCanAddQuetion();
         }
     }
 

@@ -76,25 +76,25 @@ public class OnlineSelectorActivity extends Fragment {
                 if (ApiService.checkCode(getActivity(), response)) {
                     int nbCurrentGame = response.body();
                     if (nbCurrentGame > 0) {
-                        ((Button) getView().findViewById(R.id.onlineButtonNotif))
+                        ((Button) getActivity().findViewById(R.id.onlineButtonNotif))
                                 .setText(String.valueOf(nbCurrentGame));
 
-                        getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.VISIBLE);
+                        getActivity().findViewById(R.id.onlineButtonNotif).setVisibility(View.VISIBLE);
                     } else {
-                        getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
+                        getActivity().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-                getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
+                getActivity().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
             }
         });
 
         Call<Integer> call2 = apiService.getNbInvitations();
         call2.enqueue(new Callback<Integer>() {
-            Button invitNotif = getView().findViewById(R.id.invitButtonNotif);
+            Button invitNotif = getActivity().findViewById(R.id.invitButtonNotif);
             @Override
             public void onResponse(@NonNull Call<Integer> call,
                                    @NonNull Response<Integer> response) {

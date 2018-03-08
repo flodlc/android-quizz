@@ -16,8 +16,10 @@ import com.quizz.entities.GameData;
 import com.quizz.entities.GameResult;
 import com.quizz.entities.Round;
 import com.quizz.entities.User;
+
 import retrofit2.Call;
 import retrofit2.Callback;
+
 import com.quizz.services.ApiService;
 import com.quizz.services.ApiServiceInterface;
 import com.quizz.services.RouterService;
@@ -85,22 +87,45 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
 
+    private void showResult() {
+        findViewById(R.id.scoreA).setVisibility(View.VISIBLE);
+        findViewById(R.id.scoreB).setVisibility(View.VISIBLE);
+        findViewById(R.id.scoreSep).setVisibility(View.VISIBLE);
+        findViewById(R.id.result).setVisibility(View.GONE);
+    }
+
+    private void hideResult() {
+        findViewById(R.id.scoreA).setVisibility(View.GONE);
+        findViewById(R.id.scoreB).setVisibility(View.GONE);
+        findViewById(R.id.scoreSep).setVisibility(View.GONE);
+        findViewById(R.id.result).setVisibility(View.VISIBLE);
+    }
+
     private void displayTexts() {
-        String resultText;
 
         if (gameResult.getGame().getState() != 2) {
-            resultText = "En attente de l'adversaire";
-        } else if (gameResult.getGame().getWinner() == null) {
-            resultText = getResources().getString(R.string.matchNul);
+            hideResult();
+        } else if (gameResult.getGame().getWinner() == null){
+            showResult();
         } else if (gameResult.getGame().getWinner().getUsername().equals(user.getUsername())) {
-            resultText = getResources().getString(R.string.win);
-        } else {
-            resultText = getResources().getString(R.string.lost);
+            showResult();
+            setColors(getResources().getColor(R.color.colorGreen));
+        } else if (!gameResult.getGame().getWinner().getUsername().equals(user.getUsername())) {
+            showResult();
+            setColors(getResources().getColor(R.color.colorRed));
         }
 
-        ((TextView) findViewById(R.id.result)).setText(resultText);
+        ((TextView) findViewById(R.id.scoreA)).setText(String.valueOf(gameResult.getGame().getPointsA()));
+        ((TextView) findViewById(R.id.scoreB)).setText(String.valueOf(gameResult.getGame().getPointsB()));
+
         ((TextView) findViewById(R.id.playerA)).setText(gameResult.getGame().getUserA().getUsername());
         ((TextView) findViewById(R.id.playerB)).setText(gameResult.getGame().getUserB().getUsername());
+    }
+
+    private void setColors(int color) {
+        ((TextView) findViewById(R.id.scoreA)).setTextColor(color);
+        ((TextView) findViewById(R.id.scoreSep)).setTextColor(color);
+        ((TextView) findViewById(R.id.scoreB)).setTextColor(color);
     }
 
     private void checkGameResult() {

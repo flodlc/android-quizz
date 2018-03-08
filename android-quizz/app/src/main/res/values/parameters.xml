@@ -5,5 +5,5 @@
     <integer name="nbQuestionsCheckIfSame">15</integer>
     <integer name="maxNbOfBestUsers">5</integer>
     <integer name="timeBeforeQuizz">4000</integer>
-    <integer name="minRecordForAddQuestion">15</integer>
+    <integer name="minRecordForAddQuestion">10</integer>
 </resources>

@@ -76,25 +76,31 @@ public class OnlineSelectorActivity extends Fragment {
                 if (ApiService.checkCode(getActivity(), response)) {
                     int nbCurrentGame = response.body();
                     if (nbCurrentGame > 0) {
-                        ((Button) getActivity().findViewById(R.id.onlineButtonNotif))
-                                .setText(String.valueOf(nbCurrentGame));
+                        if (getView() != null) {
+                            ((Button) getView().findViewById(R.id.onlineButtonNotif))
+                                    .setText(String.valueOf(nbCurrentGame));
 
-                        getActivity().findViewById(R.id.onlineButtonNotif).setVisibility(View.VISIBLE);
+                            getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.VISIBLE);
+                        }
                     } else {
-                        getActivity().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
+                        if (getView() != null) {
+                            getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
+                        }
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-                getActivity().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
+                if (getView() != null) {
+                    getView().findViewById(R.id.onlineButtonNotif).setVisibility(View.GONE);
+                }
             }
         });
 
         Call<Integer> call2 = apiService.getNbInvitations();
         call2.enqueue(new Callback<Integer>() {
-            Button invitNotif = getActivity().findViewById(R.id.invitButtonNotif);
+            Button invitNotif = getView().findViewById(R.id.invitButtonNotif);
             @Override
             public void onResponse(@NonNull Call<Integer> call,
                                    @NonNull Response<Integer> response) {
@@ -159,7 +165,6 @@ public class OnlineSelectorActivity extends Fragment {
 
             @Override
             public void onFailure(Call<GameData> call, Throwable t) {
-                ApiService.showErrorMessage(OnlineSelectorActivity.this.getActivity());
                 alertDialog.dismiss();
                 searchingGame = false;
             }
@@ -196,7 +201,18 @@ public class OnlineSelectorActivity extends Fragment {
         alertDialog.setCancelable(false);
     }
 
+    private void makeBadConnectionAlertDilogue() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getResources().getString(R.string.badConnection));
+        builder.setPositiveButton("OK", null);
+        alertDialog = builder.show();
+    }
+
     private void getNewGame() {
+        if(!ApiService.isConnected()) {
+            makeBadConnectionAlertDilogue();
+            return;
+        }
         makeAlertDilogue();
         Call<GameData> call = apiService.getNewGame();
         final long time1 = SystemClock.elapsedRealtime();

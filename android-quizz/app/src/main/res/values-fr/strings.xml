@@ -9,7 +9,7 @@
     <string name="userNotAvailable">Pseudo non disponible</string>
     <string name="backHome">Accueil</string>
     <string name="points">\u0020 points</string>
-    <string name="recordToBeat">Record à battre : \u0020</string>
+    <string name="recordToBeat">Mon record : \u0020</string>
     <string name="recordAttempt">Jouer</string>
     <string name="question_">Question \u0020</string>
     <string name="score">Score : \u0020</string>
@@ -36,7 +36,7 @@
     <string name="allAnswers">Toutes les réponses</string>
     <string name="ranking">Classement</string>
     <string name="seeInvitations">Voir mes invitations</string>
-    <string name="noInvitations">Pas d\'invitations pour l\'instant !</string>
+    <string name="noInvitations">Pas d\'invitation pour l\'instant !</string>
     <string name="sendInvitation">Envoyer</string>
     <string name="invitation">Invitation</string>
     <string name="invit_from">"Reçu de : "</string>
@@ -45,7 +45,7 @@
     <string name="unknownUser">Cet utilisateur n\'existe pas.</string>
     <string name="notMe">Vous ne pouvez pas jouer contre vous même.</string>
     <string name="invitationIsset">Cette invitation a déjà été envoyée.</string>
-    <string name="invit_removed">Cette invitatio a été supprimé</string>
+    <string name="invit_removed">Cette invitation a été supprimée</string>
     <string name="goodAnswersRate">Taux de bonnes réponses</string>
     <string name="gameWillStart">La partie va commencer !</string>
     <string name="advOnly">Adversaire</string>
@@ -64,4 +64,5 @@
     <string name="waitOpponent">En attente de l\'adversaire</string>
     <string name="infoAddQuestion">Vous pouvez maintenant ajouter des questions au quizz depuis le logo sur la page d\'accueil.</string>
     <string name="bravo">Bravo !</string>
+    <string name="badConnection">Mauvaise connection, réessayez plus tard…</string>
 </resources>

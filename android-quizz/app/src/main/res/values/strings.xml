@@ -65,4 +65,5 @@
     <string name="waitOpponent">Waiting for the opponent</string>
     <string name="infoAddQuestion">You can now add questions from the home page.</string>
     <string name="bravo">Good job !</string>
+    <string name="badConnection">Bad connection, please try later…</string>
 </resources>

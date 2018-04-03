@@ -41,8 +41,8 @@ class GameManager
 
         $sqlQuery = "SELECT * 
                     FROM `game` g
-                    WHERE g.user_a_id = " . $user->getId() . " OR g.user_b_id = " . $user->getId() . " AND g.state > 0
-                    ORDER BY id DESC LIMIT 30;";
+                    WHERE (g.user_a_id = " . $user->getId() . " OR g.user_b_id = " . $user->getId()
+            . ") AND (g.state = 1 AND DATEDIFF(NOW(), g.begin_date) <= 10) OR g.state > 1 ORDER BY id DESC LIMIT 30;";
         $rsm = new ResultSetMappingBuilder($this->em);
         $rsm->addRootEntityFromClassMetadata(Game::class, 'game');
         $q = $this->em->createNativeQuery($sqlQuery, $rsm);
